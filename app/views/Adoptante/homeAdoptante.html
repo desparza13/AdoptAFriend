@@ -1,5 +1,23 @@
 <!doctype html>
 <html lang="en">
+    <style>
+        #main{
+            height:100vh; width:100vw;
+            margin:0;
+        }
+        #filtersSection{
+            background-color: #b6cddd;
+            outline: lightblue;
+            height:100vh;
+        }
+        #cardsSection{
+            height:100vh;
+        }
+        #title{
+            background-color: #1580cd;
+            height:15%;
+        }
+    </style>
   <head>
     <title>Home Adoptante</title>
     <!-- Required meta tags -->
@@ -12,7 +30,7 @@
 </head>
     <!--Navigation bar para adoptantes-->
     <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #669ec6;">
-        <a class="navbar-brand" href="#"> <i class="fa fa-paw" aria-hidden="true"></i> Adopt a Friend</a>
+        <a class="navbar-brand" href="./homeAdoptante.html"> <i class="fa fa-paw" aria-hidden="true"></i> Adopt a Friend</a>
         <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
             aria-expanded="false" aria-label="Toggle navigation"></button>
             <div class="flex-grow-1">
@@ -28,19 +46,39 @@
                     <div class="dropdown-menu" aria-labelledby="dropdownId">
                         <a class="dropdown-item" href="./perfilAdoptante.html">Mi perfil</a>
                         <a class="dropdown-item" href="#">Mi mascota ideal</a>
-                        <a class="dropdown-item" href="#">Mis adopciones</a>
+                        <a class="dropdown-item" href="./adopcionesAdoptante.html">Mis adopciones</a>
                     </div>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fa fa-home"></i></a>
+                    <a class="nav-link" href="./homeAdoptante.html"><i class="fa fa-home"></i></a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#"><i class="fa fa-heart"></i></a>
+                    <a class="nav-link" href="./favoritos.html"><i class="fa fa-heart"></i></a>
                 </li>
             </ul>
         </div>
     </nav>
-    
+    <div class="container-fluid" id="main">
+        <div class="row">
+          <div class="col-3" id="filtersSection">
+            
+          </div>
+          <div class="col-9" id="cardsSection">
+            <div class="row" id="title">
+                <div class="col-6 align-self-center">
+                    <h1 style="color:white;">Mascotas en adopción</h1>
+                </div>
+                <div class="col-6 align-self-center align-items-left">
+                    <div class="d-flex flex-column align-items-end">
+                        <button type="button" id="buscarFiltros" class="btn btn-light"><i class="fa fa-filter" aria-hidden="true"></i> Buscar por filtros</button>
+                        <p></p>
+                        <button type="button" id="buscarIdeal" class="btn btn-light"> <i class="fa fa-paw" aria-hidden="true"></i> Buscar mi mascota ideal</button>
+                      </div>
+                </div>
+            </div>
+          </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
