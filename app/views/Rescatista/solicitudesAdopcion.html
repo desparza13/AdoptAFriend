@@ -66,7 +66,7 @@
                 <a class="nav-link" href="./solicitudesAdopcion.html"><i class="fa fa-bell"></i></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="#"><i class="fa fa-plus"></i></a>
+                <a class="nav-link" data-toggle="modal" data-target="#addPet"><i class="fa fa-plus"></i></a>
             </li>
             <li class="nav-item active">
                 <a class="nav-link" href="./loginRescatista.html"><i class="fa fa-times"></i></a>
@@ -106,6 +106,114 @@
         </div>
         <hr>
       </div>
+      <!-- Modal Add Pet -->
+    <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Añadir mascota</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="row">
+                            <div class="col-5">
+                            
+                                <div class="form-group">
+                                    <label for="nombreToAdd">Nombre</label>
+                                    <input type="text" name="nombre" id="nombreToAdd" class="form-control"
+                                    placeholder="Nombre(s)" aria-describedby="helpId" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="tipoToAdd">Tipo de mascota</label>
+                                    <select class="form-control" name="tipo" id="tipoToAdd" required>
+                                        <option>Perro</option>
+                                        <option>Gatos</option>
+                                    </select>
+                                </div>
+                                
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="imagenToAdd">Subir Imagen</label>
+                                    <input type="file" class="form-control-file" name="imagen" id="imagenToAdd" placeholder="" aria-describedby="fileHelpId" required>
+                                    <small id="fileHelpId" class="form-text text-muted"> </small>
+                                </div>
+                            </div>
+
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="razaToAdd">Raza</label>
+                            <select class="form-control" name="razo" id="razaToAdd" required>
+                                <option>Mestizo/criollo</option>
+                                <option>Dalmata</option>
+                                <option>Pug</option>
+                                <option>Chihuahua</option>
+                                <option>Gran danés</option>
+                                <option>Corgi</option>
+                                <option>Golden retriever</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="edadToAdd">Edad</label>
+                            <select class="form-control" name="edad" id="edadToAdd" required>
+                                <option>Cachorro</option>
+                                <option>Jóven</option>
+                                <option>Adulto</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="generoToAdd">Género</label>
+                            <select class="form-control" name="genero" id="generoToAdd" required>
+                                <option>Mestizo/criollo</option>
+                                <option>Dalmata</option>
+                                <option>Pug</option>
+                                <option>Chihuahua</option>
+                                <option>Gran danés</option>
+                                <option>Corgi</option>
+                                <option>Golden retriever</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="colorToAdd">Color</label>
+                            <input type="text" name="nombre" id="colorToAdd" class="form-control"
+                            placeholder="Color" aria-describedby="helpId" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="tamañoToAdd">Tamaño</label>
+                            <select class="form-control" name="tamaño" id="tamañoToAdd" required>
+                                <option selected>Pequeño</option>
+                                <option>Mediano</option>
+                                <option>Grande</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="perronalidadToAdd">Perronalidad</label>
+                            <select class="form-control" name="perronalidad" id="perronalidadToAdd">
+                              <option selected>Fiestero</option>
+                              <option>Independiente</option>
+                              <option>Dinámico</option>
+                              <option>Divertido</option>
+                              <option>Timido</option>
+                              <option>Juguetón</option>
+                              <option>Faldero</option>
+                              <option>Tapete</option>
+                              <option>Inteligente</option>
+                            </select>
+                          </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" >Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
