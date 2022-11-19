@@ -31,7 +31,7 @@ class Adoptante{
         if(typeof name !== 'string'){
             throw new AdoptanteException("El nombre del adoptante es inválido.");
         }
-        else if(value == ''){
+        else if(name == ''){
             throw new AdoptanteException("El nombre del adoptante no puede estar vacía.");
         }
         this._nombre=name;
@@ -78,13 +78,13 @@ class Adoptante{
 
     static AcreateFromJson(jsonValue){
         let obj = JSON.parse(jsonValue);
-        return Adoptante.createFromObject(obj);
+        return Adoptante.AcreateFromObject(obj);
     }
 
     static AcreateFromObject(obj){
         let newAdoptante = {};
         Object.assign(newAdoptante,obj); //this will clone originak obj, but also handle possible non-object values.
-        Product.cleanObject(newAdoptante);
+        Adoptante.AcleanObject(newAdoptante);
 
         let adoptante = new Adoptante(newAdoptante._nombre,newAdoptante._correo,newAdoptante._usuario, newAdoptante._ciudad);
 

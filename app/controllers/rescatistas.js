@@ -31,7 +31,7 @@ class Rescatista{
         if(typeof name !== 'string'){
             throw new RescatistaException("El nombre del rescatista es inválido.");
         }
-        else if(value == ''){
+        else if(name == ''){
             throw new RescatistaException("El nombre del rescatista no puede estar vacío.");
         }
         this._nombre=name;
@@ -78,15 +78,15 @@ class Rescatista{
 
     static RcreateFromJson(jsonValue){
         let obj = JSON.parse(jsonValue);
-        return Adoptante.createFromObject(obj);
+        return Rescatista.RcreateFromObject(obj);
     }
 
     static RcreateFromObject(obj){
         let newRescatista = {};
         Object.assign(newRescatista,obj); //this will clone originak obj, but also handle possible non-object values.
-        Product.cleanObject(newRescatista);
+        Rescatista.RcleanObject(newRescatista);
 
-        let rescatista = new Adoptante(newRescatista._nombre,newRescatista._correo,newRescatista._usuario, newRescatista._ciudad);
+        let rescatista = new Rescatista(newRescatista._nombre,newRescatista._correo,newRescatista._usuario, newRescatista._ciudad);
 
         if(newRescatista.hasOwnProperty('_uuid')){
             let id = newRescatista._uuid;
