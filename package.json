@@ -1,0 +1,23 @@
+{
+  "name": "adoptafriend",
+  "version": "1.0.0",
+  "description": "Proyecto DASW equipo Danner",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/desparza13/AdoptAFriend.git"
+  },
+  "author": "Jennifer Hernandez, Daniela Esparza",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/desparza13/AdoptAFriend/issues"
+  },
+  "homepage": "https://github.com/desparza13/AdoptAFriend#readme",
+  "dependencies": {
+    "express": "^4.18.2"
+  }
+}
