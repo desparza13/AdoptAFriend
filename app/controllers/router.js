@@ -3,13 +3,15 @@
 const express = require('express');
 const router = express.Router();
 
+//Rutas para mascotas
 const adminPet = require('../routes/admin_pet')
 const pet = require('../routes/pet');
 
+//Rutas para adoptantes
 const adminAdoptante = require('../routes/admin_adoptante')
 const adoptante = require('../routes/adoptante');
 
-
+//Rutas para rescatistas
 const adminRescatista = require('../routes/admin_rescatista')
 const rescatista = require('../routes/rescatista');
 
