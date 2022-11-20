@@ -38,12 +38,12 @@ router.use('/rescatista',rescatista);
 //   });
 
 
-// function validateAdmin(req,res,next){   //Autenticador
-//     let adminToken = req.get('x-auth');
-//     if(adminToken == undefined || adminToken!= 'admin'){
-//         return res.status(403).send("Acceso no autorizado, no se cuenta con privilegios de administrador");
-//     }
-//     next();
-// }
+function validateAdmin(req,res,next){   //Autenticador
+    let adminToken = req.get('x-auth');
+    if(adminToken == undefined || adminToken!= 'admin'){
+        return res.status(403).send("Acceso no autorizado, no se cuenta con privilegios de administrador");
+    }
+    next();
+}
 
 module.exports = router;
