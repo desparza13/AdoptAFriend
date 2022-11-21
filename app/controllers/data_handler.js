@@ -27,6 +27,7 @@ function getRescatistaById(uuid){
 
 //Create
 function createPet(newPet){
+    console.log("a")
     pets.push(Pet.petCreateFromObject(newPet));
 }
 function createAdoptante(newAdoptante){
