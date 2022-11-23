@@ -8,3 +8,5 @@ function generateUUID() {
     return v.toString(16);
     });
    }
+
+exports.generateUUID = generateUUID;

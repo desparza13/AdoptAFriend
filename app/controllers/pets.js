@@ -1,5 +1,7 @@
 "use strict";
 
+const {generateUUID} = require('./utils');
+
 class PetException{
     constructor(errorMessage){
         this.errorMessage = errorMessage;
@@ -187,7 +189,7 @@ class Pet{
             throw new PetException("La perronalidad de una mascota no puede estar vacio");
         }
         else if (perronalidades.includes(value)){
-            this._status=value;
+            this._perronalidad=value;
         }
         else{
             throw new PetException("El género de mascota solo puede ser Macho o Hembra");
@@ -205,7 +207,7 @@ class Pet{
         Object.assign(newPet,obj); 
         Pet.petCleanObject(newPet);
 
-        let pet = new Pet(newPet._tipo, newPet._raza, newPet._status, newPet._edad, newPet._genero, newPet._talla, newPet._nombre, newPet._uuidRescatista, newPet._petImg, newPet._ciudad, newPet._perronalidad);
+        let pet = new Pet(newPet._tipo,newPet._raza,newPet._status,newPet._edad,newPet._genero,newPet._talla,newPet._nombre,newPet._uuidRescatista,newPet._petImg,newPet._ciudad,newPet._perronalidad);
         if(newPet.hasOwnProperty('_uuid')){
             let id = newPet._uuid;
             pet._uuid = id;
@@ -214,7 +216,8 @@ class Pet{
     }
 
     static petCleanObject(obj){
-        let props = ['uuid','tipo','raza','status','edad', 'genero', 'talla', 'nombre', 'uuidRescatista', 'petImg', 'ciudad', 'perronalidad'];
+        let props = ['uuid','tipo','raza','status','edad', 'genero', 'talla', 'nombre', 'uuidRescatista', 'petImg', 'ciudad', 'perronalidad',
+                    '_uuid','_tipo','_raza','_status','_edad', '_genero', '_talla', '_nombre', '_uuidRescatista', '_petImg', '_ciudad', '_perronalidad'];
         for(let prop in props){
             if(!obj.hasOwnProperty(prop)){
                 delete obj[prop];
@@ -223,3 +226,5 @@ class Pet{
         return obj;
     }
 } 
+
+module.exports = Pet;

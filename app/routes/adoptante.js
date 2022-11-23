@@ -11,14 +11,15 @@ router.route('/')
         let adoptantes;
         if(query == undefined){
             try{
-                adoptantes = res.json(dataHandler.getAdoptantes());
+                adoptantes = dataHandler.getAdoptantes();
+                res.status(200).json(adoptantes);    
+
             } catch (e) {
                 res.status(400)
                 .type("text/plain")
                 .send("Error al recuperar objetos")
             }
             //Regresar los adoptantes status 200
-            res.status(200).json(adoptantes);    
         }else{
             //Filtrar adoptantes
             //Query no implementado en Practica 2
@@ -29,17 +30,11 @@ router.route('/')
 router.route('/:id')
     .get((req,res)=>{
         let uuid = req.params.id; //El id se recibe como parametro
-        let adoptante = dataHandler.getProductById(uuid);
+        let adoptante = dataHandler.getAdoptanteById(uuid);
 
         if(adoptante!=undefined){
-            try{
-                //Guardar el producto
-                adoptante = res.json(dataHandler.getAdoptanteById(uuid));
-            } catch (e) {
-                //Error al obtener
-                res.status(400).send("Error");
-            }
-            res.status(200).send(product);
+            //Regresamos adoptante
+            res.status(200).send(adoptante);
         }else{
             //ID no coincide
             res.status(404)

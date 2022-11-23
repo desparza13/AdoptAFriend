@@ -31,11 +31,11 @@ router.use('/adoptante',adoptante);
 router.use('/admin/rescatista',adminRescatista);
 router.use('/rescatista',rescatista);
 
-// const path = require('path');
+const path = require('path');
 
-// router.get('/', function (req, res) {
-//     res.sendFile(path.join(__dirname,'..', 'views', 'home.html'));
-//   });
+router.get('/', function (req, res) {
+    res.sendFile(path.join(__dirname,'..', 'views', 'home.html'));
+  });
 
 
 function validateAdmin(req,res,next){   //Autenticador

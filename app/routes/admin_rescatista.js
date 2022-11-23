@@ -23,7 +23,7 @@ router.route('/')
             }
             res.status(201).send("Se creó el rescatista "+rescatista.usuario);
         }
-        res.status(400).send("El body no puede estar vacio");
+       
     });
 
 //PUT /admin/rescatistas/:uuid
@@ -40,7 +40,7 @@ router.route('/:uuid')
                     let properties = ['nombre','correo','usuario','ciudad'];
                     let missingProperties = [];
                     for (let i=0; i<properties.length; i++){
-                        if(rescatista.hasOwnProperty(properties[i])) continue;
+                        if(newRescatista.hasOwnProperty(properties[i])) continue;
                         else{
                             missingProperties.push(properties[i]);
                         }
@@ -56,17 +56,12 @@ router.route('/:uuid')
     })
     .delete((req,res)=>{
         let uuid = req.params.uuid;
-        let rescatista = dataHandler.getRescatistaById(uuid);
-        if (rescatista!=undefined){
-            try{
-                dataHandler.deleteRescatista(uuid);
-                res.status(200)
-                    .type("application/json")
-                    .send("El rescatista " + rescatista._usuario + " con uuid "+ rescatista.uuid+" se eliminó");
-            }catch(e){
-                res.status(404).send("No existe un rescatista con el id: "+rescatista.uuid);
-            }
-        }else{
+        try{
+            let rescatista = dataHandler.deleteRescatista(uuid);
+            res.status(200)
+                .type("application/json")
+                .send("El rescatista " + rescatista._usuario + " con uuid "+ rescatista.uuid+" se eliminó");
+        }catch(e){
             res.status(404).send("No existe un rescatista con el id: "+uuid);
         }
     })

@@ -1,5 +1,6 @@
 "use strict";
 
+const {generateUUID} = require('./utils');
 class AdoptanteException{
     constructor(errorMessage){
         this.errorMessage = errorMessage;
@@ -92,19 +93,19 @@ class Adoptante{
             let id = newAdoptante._uuid;
             adoptante._uuid = id;
         }
-            
+          
         return adoptante;
     }
 
     static AcleanObject(obj){
         //Verify that we only contain the desired properties
-        let props = ['nombre','correo','usuario','ciudad'];
-        
-        for(let prop in props){
-            //if prop in properties continue, else delete
-            if(!obj.hasOwnProperty(prop)){
-                delete obj[prop];
-            } 
+        let props = ['uuid','nombre','correo','usuario',"ciudad",'_uuid','_nombre','_correo','_usuario',"_ciudad"];
+        for (let prop in obj){
+            if(props.includes(prop)) continue;
+            delete obj[prop];
         }
+        return obj;
+        
     }
 }
+module.exports = Adoptante;

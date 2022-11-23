@@ -1,4 +1,5 @@
 "use strict";
+const {generateUUID} = require('./utils');
 
 class RescatistaException{
     constructor(errorMessage){
@@ -97,14 +98,14 @@ class Rescatista{
     }
 
     static RcleanObject(obj){
-        //Verify that we only contain the desired properties
-        let props = ['nombre','correo','usuario','ciudad'];
-        
-        for(let prop in props){
-            //if prop in properties continue, else delete
-            if(!obj.hasOwnProperty(prop)){
-                delete obj[prop];
-            } 
-        }
+         //Verify that we only contain the desired properties
+         let props = ['uuid','nombre','correo','usuario',"ciudad",'_uuid','_nombre','_correo','_usuario',"_ciudad"];
+         for (let prop in obj){
+             if(props.includes(prop)) continue;
+             delete obj[prop];
+         }
+         return obj;
     }
 }
+
+module.exports = Rescatista;

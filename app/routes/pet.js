@@ -11,14 +11,15 @@ router.route('/')
         let pets;
         if(query == undefined){
             try{
-                pets = res.json(dataHandler.getPets());
+                pets =dataHandler.getPets()
+                res.status(200).json(pets);  
+
             } catch (e) {
                 res.status(400)
-                .type("text/plain")
                 .send("Error al recuperar mascotas")
             }
+              
             //Regresar las mascotas y status 200
-            res.status(200).json(pets);    
         }else{
             //Filtrar mascotas
             //Query no implementado en Practica 2
@@ -32,13 +33,7 @@ router.route('/:id')
         let pet = dataHandler.getPetById(uuid);
 
         if(pet!=undefined){
-            try{
-                //Guardar la mascota
-                pet = res.json(dataHandler.getPetById(uuid));
-            } catch (e) {
-                //Error al obtener
-                res.status(400).send("Error");
-            }
+            //Regresamos mascota
             res.status(200).send(pet);
         }else{
             //ID no coincide
