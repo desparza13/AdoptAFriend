@@ -139,23 +139,23 @@ function deleteRescatista(uuid){
     }
     
 }
-
+//Gets
 exports.getPets = getPets;
 exports.getAdoptantes = getAdoptantes;
 exports.getRescatistas = getRescatistas;
-
+//GetById
 exports.getPetById = getPetById;
 exports.getAdoptanteById = getAdoptanteById;
 exports.getRescatistaById = getRescatistaById;
-
+//Create
 exports.createAdoptante = createAdoptante;
 exports.createPet = createPet;
 exports.createRescatista = createRescatista;
-
+//Update
 exports.updatePet = updatePet;
 exports.updateAdoptante = updateAdoptante;
 exports.updateRescatista = updateRescatista;
-
+//Delete
 exports.deletePet = deletePet;
 exports.deleteAdoptante = deleteAdoptante;
 exports.deleteRescatista = deleteRescatista;
