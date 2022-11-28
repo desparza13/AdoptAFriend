@@ -10,23 +10,29 @@ function getPets(req,res){
         .then(pets => res.status(200).json(pets))
         .catch(err => res.status(400).send(err))
 }
-
-function getAdoptantes(){
-    return adoptantes;
+function getAdoptantes(req,res){
+    Adoptante.find({})
+        .then(adoptantes => res.status(200).json(adoptantes))
+        .catch(err => res.status(400).send(err))
 }
-function getRescatistas(){
-    return rescatistas;
+function getRescatistas(req,res){
+    Rescatista.find({})
+        .then(rescatistas => res.status(200).json(rescatistas))
+        .catch(err => res.status(400).send(err))
 }
 
 //Get by id
-function getPetById(uuid){
-    return pets.find((Pet)=>Pet._uuid==uuid);
+function getPetByNombre(req, res) {
+    let nombre = req.params.nombre;
+    Pet.findOne({ nombre: `${nombre}` }).then(pet => res.status(200).json(pet));
 }
-function getAdoptanteById(uuid){
-    return adoptantes.find((Adoptante)=>Adoptante._uuid==uuid);
+function getAdoptanteByUsuario(req, res) {
+    let usuario = req.params.usuario;
+    Adoptante.findOne({ usuario: `${usuario}` }).then(adoptante => res.status(200).json(adoptante));
 }
-function getRescatistaById(uuid){
-    return rescatistas.find((Rescatista)=>Rescatista._uuid==uuid);
+function getRescatistaByUsuario(req, res) {
+    let usuario = req.params.usuario;
+    Rescatista.findOne({ usuario: `${usuario}` }).then(rescatista => res.status(200).json(rescatista));
 }
 
 //Create
@@ -58,90 +64,75 @@ function createRescatista(req,res){
         })
         .catch(err=> res.status(400).send(err));
 }
-
 //Update
-function updatePet(uuid, newPet){
-    let index = pets.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        Pet.petCleanObject(newPet);   //Se limpia el objeto
-        //Se creo una nueva mascota a partir del recibido
-        //Si no tiene alguna propiedad lanzará una excepción
-        let pet = new Pet(newPet.tipo,newPet.raza,newPet.status,newPet.edad,newPet.genero,newPet.talla,newPet.nombre,newPet.uuidRescatista,newPet.petImg,newPet.ciudad,newPet.perronalidad);
-        let uuid = pets[index]._uuid;//Guardamos el uuid original
-        Object.assign(pets[index],pet);//asignamos los nuevos valores del adoptante
-        pets[index]._uuid = uuid; //Asignamos el uuid correcto
+function updatePet(req, res) {
+    let nombre = req.params.nombre;
+    let updatedPet = req.body;
+    for (let property in updatedPet) {
+        if (['tipo', 'raza', 'status', 'edad', 'genero', 'talla', 'nombre', 'idRescatista', 'petImg', 'ciudad', 'perronalidad'].includes(property)) continue;
+        delete updatedPet[property];
     }
-    fs.writeFileSync('./app/data/pets.json',JSON.stringify(pets));
-    return pets[index];
-   
+    Pet.findOneAndUpdate({ nombre: `${nombre}` }, updatedPet, { new : true }).then(pet => {
+        res.type('text/plain; charset=utf-8');
+        res.send(`Mascota ${pet.nombre} fue actualizada`);
+    });
 }
-function updateAdoptante(uuid, newAdoptante){
-    let index = adoptantes.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        Adoptante.AcleanObject(newAdoptante);   //Se limpia el objeto
-        //Se creo un nuevo adoptante a partir del recibido
-        //Si no tiene alguna propiedad lanzará una excepción
-        let adoptante = new Adoptante(newAdoptante.nombre, newAdoptante.correo,newAdoptante.usuario,newAdoptante.ciudad);
-        let uuid = adoptantes[index]._uuid;//Guardamos el uuid original
-        Object.assign(adoptantes[index],adoptante);//asignamos los nuevos valores del adoptante
-        adoptantes[index]._uuid = uuid; //Asignamos el uuid correcto
+function updateAdoptante(req, res) {
+    let usuario = req.params.usuario;
+    let updatedAdoptante = req.body;
+    for (let property in updatedAdoptante) {
+        if (['nombre','correo','usuario','ciudad'].includes(property)) continue;
+        delete updatedAdoptante[property];
     }
-
-    fs.writeFileSync('./app/data/adoptantes.json',JSON.stringify(adoptantes));
-    return adoptantes[index];
+    Adoptante.findOneAndUpdate({ usuario: `${usuario}` }, updatedAdoptante, { new : true }).then(adoptante => {
+        res.type('text/plain; charset=utf-8');
+        res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
+    });
 }
-function updateRescatista(uuid, newRescatista){
-    let index = rescatistas.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        Rescatista.RcleanObject(newRescatista);   //Se limpia el objeto
-        //Se creo un nuevo rescatista a partir del recibido
-        //Si no tiene alguna propiedad lanzará una excepción
-        let rescatista = new Rescatista(newRescatista.nombre, newRescatista.correo,newRescatista.usuario,newRescatista.ciudad);
-        let uuid = rescatistas[index]._uuid;//Guardamos el uuid original
-        Object.assign(rescatistas[index],rescatista);//asignamos los nuevos valores del adoptante
-        rescatistas[index]._uuid = uuid; //Asignamos el uuid correcto
+function updateAdoptante(req, res) {
+    let usuario = req.params.usuario;
+    let updatedRescatista = req.body;
+    for (let property in updatedRescatista) {
+        if (['nombre','correo','usuario','ciudad'].includes(property)) continue;
+        delete updatedRescatista[property];
     }
-    fs.writeFileSync('./app/data/rescatistas.json',JSON.stringify(rescatistas));
-    return rescatistas[index];
-    
+    Rescatista.findOneAndUpdate({ usuario: `${usuario}` }, updatedRescatista, { new : true }).then(rescatista => {
+        res.type('text/plain; charset=utf-8');
+        res.send(`Rescatista ${rescatista.usuario} fue actualizado!`);
+    });
 }
 
 //Delete
-function deletePet(uuid){
-    let index = pets.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        let pet = pets.splice(index,1)[0];//se elimina de mascotas el elemento
-        fs.writeFileSync('./app/data/pets.json',JSON.stringify(pets));  // Se escribe en el JSON las mascotas actualizadas
-        return pet;
-    }
-   
+function deletePet(req, res) {
+    let nombre = req.params.nombre;
+    Pet.findOneAndDelete({ nombre: `${nombre}` }).then(pet => {
+        res.type('text/plain; charset=utf-8');
+        res.send(nombre != undefined ? `Mascota ${pet.nombre} fue eliminado` : `No hay mascota con el nombre ${nombre} que eliminar`);
+    });
 }
-function deleteAdoptante(uuid){
-    let index = adoptantes.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        let adoptante = adoptantes.splice(index,1)[0];  //Se elimina de adoptantes el elemento
-        fs.writeFileSync('./app/data/adoptantes.json',JSON.stringify(adoptantes));  //Se escribe en el JSON los adoptantes actualizados
-        return adoptante;
-    }
-   
+function deleteAdoptante(req, res) {
+    let usuario = req.params.usuario;
+    Adoptante.findOneAndDelete({ usuario: `${usuario}` }).then(adoptante => {
+        res.type('text/plain; charset=utf-8');
+        res.send(usuario != undefined ? `Adoptante ${adoptante.usuario} fue eliminado` : `No hay adoptante con el usuario ${usuario} que eliminar`);
+    });
 }
-function deleteRescatista(uuid){
-    let index = rescatistas.findIndex(obj=>obj.uuid==uuid);
-    if(index >=0){
-        let rescatista = rescatistas.splice(index,1)[0];    //se elimina de rescatistas el elemento
-        fs.writeFileSync('./app/data/rescatistas.json',JSON.stringify(rescatistas));//Se escribe en el JSON los rescatistas actualizados
-        return rescatista;
-    }
-    
+function deleteRescatista(req, res) {
+    let usuario = req.params.usuario;
+    Rescatista.findOneAndDelete({ usuario: `${usuario}` }).then(rescatista => {
+        res.type('text/plain; charset=utf-8');
+        res.send(usuario != undefined ? `Rescatista ${rescatista.usuario} fue eliminado` : `No hay rescatista con el usuario ${usuario} que eliminar`);
+    });
 }
+//EXPORTS
 //Gets
 exports.getPets = getPets;
 exports.getAdoptantes = getAdoptantes;
 exports.getRescatistas = getRescatistas;
 //GetById
-exports.getPetById = getPetById;
-exports.getAdoptanteById = getAdoptanteById;
-exports.getRescatistaById = getRescatistaById;
+exports.getPetByNombre = getPetByNombre;
+exports.getAdoptanteByUsuario = getAdoptanteByUsuario;
+exports.getRescatistaByUsuario = getRescatistaByUsuario;
 //Create
 exports.createAdoptante = createAdoptante;
 exports.createPet = createPet;

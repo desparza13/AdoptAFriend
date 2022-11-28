@@ -9,9 +9,9 @@ router.route('/')
         dataHandler.createRescatista(req, res);
     });
 
-//PUT GET DELETE /admin/rescatista/:uuid
-router.route('/:uuid')
-  .get((req, res) => dataHandler.getRescatistaById(req, res))
+//PUT GET DELETE /admin/rescatista/:usuario
+router.route('/:usuario')
+  .get((req, res) => dataHandler.getRescatistaByUsuario(req, res))
   .put((req, res) => dataHandler.updateRescatista(req, res))
   .delete((req, res) => dataHandler.deleteRescatista(req, res));
 

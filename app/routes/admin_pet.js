@@ -9,9 +9,9 @@ router.route('/')
         dataHandler.createPet(req, res);
     });
 
-//PUT GET DELETE /admin/pet/:uuid
-router.route('/:uuid')
-  .get((req, res) => dataHandler.getPetById(req, res))
+//PUT GET DELETE /admin/pet/:nombre
+router.route('/:nombre')
+  .get((req, res) => dataHandler.getPetByNombre(req, res))
   .put((req, res) => dataHandler.updatePet(req, res))
   .delete((req, res) => dataHandler.deletePet(req, res));
 

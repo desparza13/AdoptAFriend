@@ -9,9 +9,9 @@ router.route('/')
         dataHandler.createAdoptante(req, res);
     });
 
-//PUT GET DELETE /admin/adoptante/:uuid
-router.route('/:uuid')
-  .get((req, res) => dataHandler.getAdoptanteById(req, res))
+//PUT GET DELETE /admin/adoptante/:usuario
+router.route('/:usuario')
+  .get((req, res) => dataHandler.getAdoptanteByUsuario(req, res))
   .put((req, res) => dataHandler.updateAdoptante(req, res))
   .delete((req, res) => dataHandler.deleteAdoptante(req, res));
 
