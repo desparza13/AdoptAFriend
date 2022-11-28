@@ -9,42 +9,10 @@ router.route('/')
         dataHandler.createPet(req, res);
     });
 
-//PUT /admin/pets/:uuid
+//PUT GET DELETE /admin/pet/:uuid
 router.route('/:uuid')
-    .put((req,res)=>{
-        let uuid = req.params.uuid;
-        let newPet = req.body;
-        let pet = dataHandler.getPetById(uuid);
-        if(pet!=undefined){
-            try{
-                dataHandler.updatePet(uuid,newPet);
-            }catch(e){
-                let properties = ["tipo","raza","status","edad","genero","talla","nombre","uuidRescatista","petImg","ciudad","perronalidad"];
-                let missingProperties = [];
-                for (let i=0; i<properties.length; i++){
-                    if(newPet.hasOwnProperty(properties[i])) continue;
-                    else{
-                        missingProperties.push(properties[i]);
-                    }
-                }
-                res.status(400).send("Faltan las propiedades: "+missingProperties.toString());
-            }
-        
-        }else{
-            res.status(404).send("No existe una mascota con el id: "+uuid);
-        }
-    })
-    .delete((req,res)=>{
-        let uuid = req.params.uuid;
-        
-        try{
-            let pet = dataHandler.deletePet(uuid);
-            res.status(200)
-            .type("application/json")
-            .send("La mascota " + pet._nombre + " con uuid "+ pet.uuid+" se eliminó");
-            }catch(e){
-                res.status(404).send("No existe una mascota con el id: "+uuid);
-            }
-        }
-    )
+  .get((req, res) => dataHandler.getPetById(req, res))
+  .put((req, res) => dataHandler.updatePet(req, res))
+  .delete((req, res) => dataHandler.deletePet(req, res));
+
 module.exports = router;

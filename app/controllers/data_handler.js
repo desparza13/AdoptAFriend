@@ -39,24 +39,24 @@ function createPet(req,res){
             res.status(201).send(`Se creo la mascota ${pet.nombre} `);
         })
         .catch(err=> res.status(400).send(err));
-
-
-
 }
-function createAdoptante(newAdoptante){
-    Adoptante.AcleanObject(newAdoptante);   //Se limpia el nuevo objeto para que no incluya propiedades de mas
-    console.log(newAdoptante);
-    //se realiza un adoptante nuevo con los valores del objeto  recibido
-    let adoptante = new Adoptante(newAdoptante.nombre, newAdoptante.correo,newAdoptante.usuario,newAdoptante.ciudad);
-    adoptantes.push(adoptante); //Se agrega al arreglo de objetos ya existente
-    fs.writeFileSync('./app/data/adoptantes.json', JSON.stringify(adoptantes)); //En el JSON de adoptantes se agrega el arreglo de objetos ya actualizado
+function createAdoptante(req,res){
+    let adoptante= Adoptante(req.body);
+    adoptante.save()
+        .then((adoptante)=>{
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.status(201).send(`Se creo el adoptante ${adoptante.nombre} `);
+        })
+        .catch(err=> res.status(400).send(err));
 }
-function createRescatista(newRescatista){
-    Rescatista.RcleanObject(newRescatista); //Se limpia el nuevo objeto para que no incluya propiedades de mas
-     //se realiza un rescatista nuevo con los valores del objeto  recibido
-    let rescatista = new Rescatista(newRescatista.nombre,newRescatista.correo,newRescatista.usuario, newRescatista.ciudad);
-    rescatistas.push(rescatista);//Se agrega al arreglo de objetos ya existente
-    fs.writeFileSync('./app/data/rescatistas.json', JSON.stringify(rescatistas));//En el JSON de rescatistas se agrega el arreglo de objetos ya actualizado
+function createRescatista(req,res){
+    let rescatista= Rescatista(req.body);
+    rescatista.save()
+        .then((rescatista)=>{
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.status(201).send(`Se creo el rescatista ${rescatista.nombre} `);
+        })
+        .catch(err=> res.status(400).send(err));
 }
 
 //Update
