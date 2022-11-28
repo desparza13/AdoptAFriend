@@ -29,6 +29,28 @@ function petToHTML(pet){
 function petsList(pets){
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
+function filterPets(){
+    let ciudad = document.getElementById('ciudad').value;
+    let tipo = document.getElementById('tipoMascota').value;
+    let raza = document.getElementById('raza').value;
+    let genero = document.getElementById('genero').value;
+    let talla = document.getElementById('size').value;
+    let edad = document.getElementById('edad').value;
+    let perronalidad = document.getElementById('perronalidad').value;
+    console.log(perronalidad)
+    loadPets(petsUrl).then(pets =>{
+        let filteredPets = pets.filter(function (pet) {
+            return pet.ciudad == ciudad &&
+                    (pet.tipo == tipo || tipo=='Todos') &&
+                    (pet.raza == raza || raza=='Todos') &&
+                    (pet.genero == genero || genero=='Todos') &&
+                    (pet.talla == talla || talla=='Todos') &&
+                    (pet.edad == edad || edad=='Todos');
+          });
+        petsList(filteredPets);
+    });
+}
 loadPets(petsUrl).then(pets =>{
     petsList(pets);
 });
+

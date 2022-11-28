@@ -86,88 +86,76 @@
 <body>
     <div class="container-fluid" id="main">
         <div class="row">
-          <div class="col-4" id="filtersSection">
+            <div class="col-4" id="filtersSection">
             <form>
                 <div class="form-group">
-                  <label for="ciudad">Ciudad o municipio:</label>
-                  <input type="text"
+                    <label for="ciudad">Ciudad o municipio:</label>
+                    <input type="text"
                     class="form-control" name="ciudad" id="ciudad" aria-describedby="helpId" placeholder="Ejemplo: Guadalajara">
                 </div>
                 <div class="form-group">
-                  <label for="tipo">Tipo de mascota</label>
-                  <select class="form-control" name="tipo" id="tipoMascota">
-                    <option>Perro</option>
-                    <option>Gato</option>
-                  </select>
+                    <label for="tipo">Tipo de mascota</label>
+                    <select class="form-control" name="tipo" id="tipoMascota">
+                        <option>Todos</option>
+                        <option>Perro</option>
+                        <option>Gato</option>
+                    </select>
                 </div>
                 <div class="form-group">
                     <label for="raza">Raza</label>
                     <select class="form-control" name="raza" id="raza">
-                      <option>Mestizo/criollo</option>
-                      <option>Dalmata</option>
-                      <option>Pug</option>
-                      <option>Chihuahua</option>
-                      <option>Gran danés</option>
-                      <option>Corgi</option>
-                      <option>Golden retriever</option>
+                        <option>Todos</option>
+                        <option>Mestizo/criollo</option>
+                        <option>Dalmata</option>
+                        <option>Pug</option>
+                        <option>Chihuahua</option>
+                        <option>Gran danés</option>
+                        <option>Corgi</option>
+                        <option>Golden retriever</option>
                     </select>
                 </div>
                 <div class="form-group">
                     <label for="genero">Género</label>
                     <select class="form-control" name="genero" id="genero">
-                      <option>Macho</option>
-                      <option>Hembra</option>
+                        <option>Todos</option>
+                        <option>Macho</option>
+                        <option>Hembra</option>
                     </select>
                 </div>
+                <hr>
                 <div class="form-group">
                     <label for="tamaño">Tamaño</label>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                          <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" checked>
-                          Grande
-                        </label><br>
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" >
-                            Mediano
-                        </label><br>
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" >
-                            Pequeño
-                          </label>
-                    </div>
+                    <select class="form-control" name="tamaño" id="size">
+                        <option>Todos</option>
+                        <option>Grande</option>
+                        <option>Mediano</option>
+                        <option>Pequeño</option>
+                    </select>
                 </div>
                 <hr>
                 <div class="form-group">
                     <label for="tamaño">Edad</label>
-                    <div class="form-check">
-                        <label class="form-check-label">
-                          <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" checked>
-                          Cachorro
-                        </label><br>
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" >
-                            Joven
-                        </label><br>
-                        <label class="form-check-label">
-                            <input type="checkbox" class="form-check-input" name="tamaño" id="tamaño" value="checkedValue" >
-                            Adulto
-                          </label>
-                    </div>
+                    <select class="form-control" name="edad" id="edad">
+                        <option>Todos</option>
+                        <option>Cachorro</option>
+                        <option>Joven</option>
+                        <option>Adulto</option>
+                    </select>
                 </div>
                 <hr>
                 <div class="form-group">
-                  <label for="perronalidad">Perronalidad</label>
-                  <select multiple class="form-control" name="perronalidad" id="perronalidad">
-                    <option selected>Fiestero</option>
-                    <option>Independiente</option>
-                    <option>Dinámico</option>
-                    <option>Divertido</option>
-                    <option>Timido</option>
-                    <option>Juguetón</option>
-                    <option>Faldero</option>
-                    <option>Tapete</option>
-                    <option>Inteligente</option>
-                  </select>
+                    <label for="perronalidad">Perronalidad</label>
+                    <select multiple class="form-control" name="perronalidad" id="perronalidad">
+                        <option selected>Fiestero</option>
+                        <option>Independiente</option>
+                        <option>Dinámico</option>
+                        <option>Divertido</option>
+                        <option>Timido</option>
+                        <option>Juguetón</option>
+                        <option>Faldero</option>
+                        <option>Tapete</option>
+                        <option>Inteligente</option>
+                    </select>
                 </div>
             </form>
           </div>
@@ -178,8 +166,8 @@
                 </div>
                 <div class="col-6 align-self-center align-items-left">
                     <div class="d-flex flex-column align-items-end">
-                        <button type="button" id="buscarFiltros" class="btnFilter btn btn-light"><i class="fa fa-filter" aria-hidden="true"></i> Buscar por filtros</button>
-                        <button type="button" id="buscarIdeal" class="btnFilter btn btn-light"> <i class="fa fa-paw" aria-hidden="true"></i> Buscar mi mascota ideal</button>
+                        <button type="button" id="buscarFiltros" class="btnFilter btn btn-light"  onclick="filterPets()"> Buscar por filtros</button>
+                        <button type="button" id="buscarIdeal" class="btnFilter btn btn-light"> Buscar mi mascota ideal</button>
                       </div>
                 </div>
             </div>
