@@ -45,7 +45,8 @@ function filterPets(){
                     (pet.raza == raza || raza=='Todos') &&
                     (pet.genero == genero || genero=='Todos') &&
                     (pet.talla == talla || talla=='Todos') &&
-                    (pet.edad == edad || edad=='Todos');
+                    (pet.edad == edad || edad=='Todos') &&
+                    (pet.perronalidad == perronalidad || perronalidad == 'Todos');
           });
         petsList(filteredPets);
     });
