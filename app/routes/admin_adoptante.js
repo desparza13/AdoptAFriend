@@ -11,7 +11,6 @@ router.route('/')
 
 //PUT GET DELETE /admin/adoptante/:usuario
 router.route('/:usuario')
-  .get((req, res) => dataHandler.getAdoptanteByUsuario(req, res))
   .put((req, res) => dataHandler.updateAdoptante(req, res))
   .delete((req, res) => dataHandler.deleteAdoptante(req, res));
 
