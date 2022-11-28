@@ -89,7 +89,7 @@ function updateAdoptante(req, res) {
         res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
     });
 }
-function updateAdoptante(req, res) {
+function updateRescatista(req, res) {
     let usuario = req.params.usuario;
     let updatedRescatista = req.body;
     for (let property in updatedRescatista) {
