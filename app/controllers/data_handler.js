@@ -1,23 +1,14 @@
 "use strict";
-const fs = require('fs');
-//Clases 
-const Adoptante = require('./adoptantes');
-const Pet = require('./pets');
-const Rescatista = require('./rescatistas');
-
-//Contenido de los JSON
-let contentAdoptantes = fs.readFileSync('./app/data/adoptantes.json');
-let contentPets = fs.readFileSync('./app/data/pets.json');
-let contentRescatistas = fs.readFileSync('./app/data/rescatistas.json');
-
-//Contenido de los JSON convertidos en un arreglo de objetos;
-let adoptantes = JSON.parse(contentAdoptantes).map(Adoptante.AcreateFromObject);
-let pets = JSON.parse(contentPets).map(Pet.petCreateFromObject);
-let rescatistas = JSON.parse(contentRescatistas).map(Rescatista.RcreateFromObject);
+//Schemas 
+const Adoptante = require('../models/adoptantes');
+const Pet = require('../models/pets');
+const Rescatista = require('../models/rescatistas');
 
 //Get array
-function getPets(){
-    return pets;
+function getPets(req,res){
+    Pet.find({})
+        .then(pets => res.status(200).json(pets))
+        .catch(err => res.status(400).send(err))
 }
 
 function getAdoptantes(){
@@ -39,14 +30,18 @@ function getRescatistaById(uuid){
 }
 
 //Create
-function createPet(newPet){
-    Pet.petCleanObject(newPet);//Se limpia el nuevo objeto para que no incluya propiedades de mas
-    console.log(newPet);
-     //se realiza una mascota nuevo con los valores del objeto  recibido
-    let pet = new Pet(newPet.tipo,newPet.raza,newPet.status,newPet.edad,newPet.genero,newPet.talla,newPet.nombre,newPet.uuidRescatista,newPet.petImg,newPet.ciudad,newPet.perronalidad);
-    console.log(pet);
-    pets.push(pet);//Se agrega al arreglo de objetos ya existente
-    fs.writeFileSync('./app/data/pets.json',JSON.stringify(pets));
+function createPet(req,res){
+    let pet= Pet(req.body);
+
+    pet.save()
+        .then((pet)=>{
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.status(201).send(`Se creo la mascota ${pet.nombre} `);
+        })
+        .catch(err=> res.status(400).send(err));
+
+
+
 }
 function createAdoptante(newAdoptante){
     Adoptante.AcleanObject(newAdoptante);   //Se limpia el nuevo objeto para que no incluya propiedades de mas

@@ -9,17 +9,9 @@ router.route('/')
     .get((req,res)=> {
         let query = req.body;
         let isEmpty = Object.entries(query).length === 0;
-        let pets= [];
-        let pets1 = [];
+        
         if(isEmpty){
-            try{
-                pets =dataHandler.getPets()
-                res.status(200).json(pets);  
-            } catch (e) {
-                res.status(400)
-                .send("Error al recuperar mascotas")
-            }
-              
+            dataHandler.getPets(req,res);
             //Regresar las mascotas y status 200
         }else{
             //Filtrar mascotas

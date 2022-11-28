@@ -6,22 +6,7 @@ const dataHandler = require('./../controllers/data_handler');
 //POST /admin/pet
 router.route('/')
     .post((req, res)=>{
-        let pet = req.body;
-        try{
-            dataHandler.createPet(pet);
-            res.status(201).send("Se creó la mascota "+pet.nombre);
-
-        }catch(e){
-            let properties = ["tipo","raza","status","edad","genero","talla","nombre","uuidRescatista","petImg","ciudad","perronalidad"];
-            let missingProperties = [];
-            for (let i=0; i<properties.length; i++){
-                if(pet.hasOwnProperty(properties[i])) continue;
-                else{
-                    missingProperties.push(properties[i]);
-                }
-            }
-            res.status(400).send("Faltan las propiedades: "+missingProperties.toString());
-        }
+        dataHandler.createPet(req, res);
     });
 
 //PUT /admin/pets/:uuid
@@ -33,7 +18,6 @@ router.route('/:uuid')
         if(pet!=undefined){
             try{
                 dataHandler.updatePet(uuid,newPet);
-                res.status(201).send("Se modificó la mascota "+pet._nombre);
             }catch(e){
                 let properties = ["tipo","raza","status","edad","genero","talla","nombre","uuidRescatista","petImg","ciudad","perronalidad"];
                 let missingProperties = [];
