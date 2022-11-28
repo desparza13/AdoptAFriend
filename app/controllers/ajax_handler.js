@@ -6,6 +6,7 @@ async function loadPets(url){
     if(response.status != 200) return [];
     return await response.json();
 }
+
 //Esperar y obtener la respuesta de Xhr
 function getXhrResponse(xhr, onSuccess, onError) {
     if (xhr.status == 200) {

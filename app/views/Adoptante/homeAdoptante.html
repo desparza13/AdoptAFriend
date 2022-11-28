@@ -39,6 +39,13 @@
             max-height: 200px;
             width: auto;
         }
+        #noResults {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            text-align: center;
+            color:#1580cd
+        }
     </style>
   <head>
     <title>Home Adoptante</title>
@@ -172,10 +179,13 @@
                       </div>
                 </div>
             </div>
+            <div class="container" id="noResults">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
+                <h1 id="textNoResults">No hay mascotas que cumplan con los criterios de búsqueda</h1>
+            </div>
             <div class="container" id="cardsSection">
-                
-                    
-                
+
             </div>
           </div>
         </div>

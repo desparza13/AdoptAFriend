@@ -1,6 +1,7 @@
 "use strict";
 
 let petsContainer = document.getElementById('cardsSection');
+let noResultsContainer = document.getElementById('noResults');
 const petsUrl = 'http://localhost:3000/pet'
 
 function petToHTML(pet){
@@ -27,6 +28,11 @@ function petToHTML(pet){
 </div>`
 }
 function petsList(pets){
+    if(pets.length==0){
+        noResultsContainer.removeAttribute('hidden');
+    }else{
+        noResultsContainer.setAttribute('hidden',"");
+    }
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
 function filterPets(){
@@ -37,10 +43,10 @@ function filterPets(){
     let talla = document.getElementById('size').value;
     let edad = document.getElementById('edad').value;
     let perronalidad = document.getElementById('perronalidad').value;
-    console.log(perronalidad)
     loadPets(petsUrl).then(pets =>{
         let filteredPets = pets.filter(function (pet) {
-            return pet.ciudad == ciudad &&
+            return  (pet.status == 'noAdoptado') &&
+                    (pet.ciudad == ciudad || ciudad=='')&&
                     (pet.tipo == tipo || tipo=='Todos') &&
                     (pet.raza == raza || raza=='Todos') &&
                     (pet.genero == genero || genero=='Todos') &&
@@ -51,7 +57,11 @@ function filterPets(){
         petsList(filteredPets);
     });
 }
+//Mostrar todas las mascotas disponibles (noAdoptadas)
 loadPets(petsUrl).then(pets =>{
-    petsList(pets);
+    let availablePets = pets.filter(function (pet) {
+        return (pet.status == 'noAdoptado');
+    });
+    petsList(availablePets);
 });
 
