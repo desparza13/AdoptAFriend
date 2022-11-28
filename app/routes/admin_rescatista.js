@@ -11,7 +11,6 @@ router.route('/')
 
 //PUT GET DELETE /admin/rescatista/:usuario
 router.route('/:usuario')
-  .get((req, res) => dataHandler.getRescatistaByUsuario(req, res))
   .put((req, res) => dataHandler.updateRescatista(req, res))
   .delete((req, res) => dataHandler.deleteRescatista(req, res));
 

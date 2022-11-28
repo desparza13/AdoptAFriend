@@ -69,22 +69,10 @@ router.route('/')
         }
     })
 
-//GET /pets/:id
-router.route('/:id')
+//GET /pets/:nombre
+router.route('/:nombre')
     .get((req,res)=>{
-        let uuid = req.params.id; //El id se recibe como parametro
-        let pet = dataHandler.getPetById(uuid);
-
-        if(pet!=undefined){
-            //Regresamos mascota
-            res.status(200).send(pet);
-        }else{
-            //ID no coincide
-            res.status(404)
-            .type("text/plain")
-            .send("No hay mascota con ID " + uuid)
-        }
-        res.json();
+        dataHandler.getPetByNombre(req, res);
     })
 
 //POST /pet/favorite

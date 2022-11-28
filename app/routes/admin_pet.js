@@ -11,7 +11,6 @@ router.route('/')
 
 //PUT GET DELETE /admin/pet/:nombre
 router.route('/:nombre')
-  .get((req, res) => dataHandler.getPetByNombre(req, res))
   .put((req, res) => dataHandler.updatePet(req, res))
   .delete((req, res) => dataHandler.deletePet(req, res));
 

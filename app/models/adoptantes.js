@@ -23,7 +23,9 @@ let adoptanteSchema = mongoose.Schema({
     ciudad:{
         type: String,
         required: true
-    }
+    },
+    petFavorite: [String]
+    
 })
 
 let Adoptante = mongoose.model('adoptante',adoptanteSchema);
