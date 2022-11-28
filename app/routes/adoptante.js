@@ -10,7 +10,7 @@ router.route('/')
         dataHandler.getAdoptantes(req,res);
     })
 
-//GET /products/:id
+//GET /adoptante/:usuario
 router.route('/:usuario')
     .get((req,res)=>{
         dataHandler.getAdoptanteByUsuario(req, res)

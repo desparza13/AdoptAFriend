@@ -9,4 +9,3 @@ function generateUUID() {
     });
    }
 
-exports.generateUUID = generateUUID;

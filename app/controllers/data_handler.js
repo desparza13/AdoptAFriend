@@ -38,7 +38,6 @@ function getRescatistaByUsuario(req, res) {
 //Create
 function createPet(req,res){
     let pet= Pet(req.body);
-
     pet.save()
         .then((pet)=>{
             res.set('Content-Type', 'text/plain; charset=utf-8');

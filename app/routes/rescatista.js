@@ -10,7 +10,7 @@ router.route('/')
         dataHandler.getRescatistas(req,res);
     })
 
-//GET /rescatistas/:id
+//GET /rescatistas/:usuario
 router.route('/:usuario')
     .get((req,res)=>{
         dataHandler.getRescatistaByUsuario(req, res)
