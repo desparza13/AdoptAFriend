@@ -5,7 +5,6 @@ const petsUrl = 'http://localhost:3000/pet'
 function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
     loadPet(petsUrl+'/'+pet).then(petDetail =>{
-        console.log(JSON.stringify(petDetail));
         writePetDetails(petDetail);
     });
 };
@@ -20,5 +19,14 @@ function writePetDetails(petDetail){
     let tallaDetalles = document.getElementById("tallaDetalles");
     let ciudadDetalles = document.getElementById("ciudadDetalles");
     nombreDetalles.innerText = petDetail.nombre;
-}
+    imgDetalles.src = petDetail.petImg;
+    nombreMascota.innerText = petDetail.nombre;
+    tipoDetalles.innerText = petDetail.tipo;
+    razaDetalles.innerText = petDetail.raza;
+    generoDetalles.innerText = petDetail.genero;
+    edadDetalles.innerText = petDetail.edad;
+    tallaDetalles.innerText = petDetail.talla;
+    ciudadDetalles.innerText = petDetail.ciudad;
 
+}
+loadPetDetails();
