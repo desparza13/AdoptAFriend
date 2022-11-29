@@ -5,6 +5,7 @@ const dataHandler = require('./../controllers/data_handler');
 const tokenUtils = require('../utils/token_utils');
 
 //POST /admin/rescatistas
+router.use('/',tokenUtils.verifyTokenR);
 router.route('/')
     .post((req, res)=>{
         dataHandler.createRescatista(req, res);

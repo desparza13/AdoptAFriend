@@ -83,6 +83,11 @@ function getRescatistas(req,res){
         .then(rescatistas => res.status(200).json(rescatistas))
         .catch(err => res.status(400).send(err))
 }
+function getSolicitud(req,res){
+    Solicitud.find({})
+        .then(solicitudes=> res.status(200).json(solicitudes))
+        .catch(err=> res.status(400).send(err))
+}
 
 //Get by usuario/nombre
 function getPetByNombre(req, res) {
@@ -125,6 +130,17 @@ function createRescatista(req,res){
             res.status(201).send(`Se creo el rescatista ${rescatista.nombre} `);
         })
         .catch(err=> res.status(400).send(err));
+}
+function createSolicitud(req,res){
+    let solicitud = Solicitud(req.body);
+    solicitud.save()
+        .then((solicitud)=>{
+            console.log(solicitud._id);
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.status(201).send(`Se creo la solicitud de ${solicitud.nombreMascota}`);
+        })
+        .catch(err=> res.status(400).send(err));
+
 }
 //Update
 function updatePet(req, res) {
@@ -186,6 +202,22 @@ function deleteRescatista(req, res) {
         res.send(usuario != undefined ? `Rescatista ${rescatista.usuario} fue eliminado` : `No hay rescatista con el usuario ${usuario} que eliminar`);
     });
 }
+function deleteSolicitud(req,res){
+    let usuarioA = req.params.usuarioA;
+    let nombrePet = req.params.nombrePet;
+    
+    console.log(usuarioA);
+    console.log(nombrePet);
+    Solicitud.findOne({usuarioAdoptante: `${usuarioA}`},{nombreMascota: `${nombrePet}`})
+        .then(solicitud=>{
+            console.log(solicitud);
+            Solicitud.findOneAndDelete({_id : `${solicitud._id}`}).then(solicitud=>{
+                res.type('text/plain; charset=utf-8');
+                res.send(solicitud._id != undefined ? `La solicitud de ${nombrePet} fue eliminada` : `No hay solicitud `);
+            })
+        })
+    
+}
 //EXPORTS
 
 //Login
@@ -196,6 +228,7 @@ exports.loginA= loginA;
 exports.getPets = getPets;
 exports.getAdoptantes = getAdoptantes;
 exports.getRescatistas = getRescatistas;
+exports.getSolicitud = getSolicitud;
 //GetById
 exports.getPetByNombre = getPetByNombre;
 exports.getAdoptanteByUsuario = getAdoptanteByUsuario;
@@ -204,6 +237,7 @@ exports.getRescatistaByUsuario = getRescatistaByUsuario;
 exports.createAdoptante = createAdoptante;
 exports.createPet = createPet;
 exports.createRescatista = createRescatista;
+exports.createSolicitud = createSolicitud;
 //Update
 exports.updatePet = updatePet;
 exports.updateAdoptante = updateAdoptante;
@@ -212,3 +246,4 @@ exports.updateRescatista = updateRescatista;
 exports.deletePet = deletePet;
 exports.deleteAdoptante = deleteAdoptante;
 exports.deleteRescatista = deleteRescatista;
+exports.deleteSolicitud = deleteSolicitud;
