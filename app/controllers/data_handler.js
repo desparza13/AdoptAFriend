@@ -4,6 +4,64 @@ const Adoptante = require('../models/adoptantes');
 const Pet = require('../models/pets');
 const Rescatista = require('../models/rescatistas');
 
+//login
+function loginR(req, res) {
+    let correo = req.body.correo;
+    let password = req.body.password;
+    
+    Rescatista.findOne({ correo: `${correo}` })
+        .then(rescatista => {
+            console.log(rescatista);
+            let token = rescatista.generateToken(password);//Se genera un token
+            console.log(token)
+            if (token != undefined) {//Si el token está bien
+                res.status(200)
+                res.set('Content-Type', 'text/plain; charset=utf-8');
+                //Se actualiza en la base de datos el token
+                Rescatista.findOneAndUpdate({ correo: `${correo}` }, rescatista, { new : true }).then();
+                console.log(rescatista);
+                res.send(token);
+            } else { //Si el token está incorrecto significa que no se pudo iniciar sesión
+                res.status(403);            
+                res.set('Content-Type', 'text/plain; charset=utf-8');
+                res.send(`Wrong email or password`);
+            }
+        })
+        .catch(err => {
+            res.status(403);            
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.send(`Wrong email or password`);
+        });
+}
+
+function loginA(req, res) { //Este no está completo
+    let correo = req.body.correo;
+    let password = req.body.password;
+    
+    Rescatista.findOne({ correo: `${correo}` })
+        .then(rescatista => {
+            console.log(rescatista);
+            let token = rescatista.generateToken(password);
+            console.log(token)
+            if (token != undefined) {
+                res.status(200)
+                res.set('Content-Type', 'text/plain; charset=utf-8');
+                Rescatista.findOneAndUpdate({ correo: `${correo}` }, rescatista, { new : true }).then();
+                console.log(rescatista);
+
+                res.send(token);
+            } else {
+                res.status(403);            
+                res.set('Content-Type', 'text/plain; charset=utf-8');
+                res.send(`Wrong email or password`);
+            }
+        })
+        .catch(err => {
+            res.status(403);            
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.send(`Wrong email or password`);
+        });
+}
 //Get array
 function getPets(req,res){
     Pet.find({})
@@ -21,7 +79,7 @@ function getRescatistas(req,res){
         .catch(err => res.status(400).send(err))
 }
 
-//Get by id
+//Get by usuario/nombre
 function getPetByNombre(req, res) {
     let nombre = req.params.nombre;
     Pet.findOne({ nombre: `${nombre}` }).then(pet => res.status(200).json(pet));
@@ -124,6 +182,10 @@ function deleteRescatista(req, res) {
     });
 }
 //EXPORTS
+
+//Login
+exports.loginR = loginR;
+
 //Gets
 exports.getPets = getPets;
 exports.getAdoptantes = getAdoptantes;
