@@ -82,28 +82,28 @@
     <div class="col-12" id="petsSection">
         <div class="row" id="title">
             <div class="col-6 align-self-center">
-                <h1 style="color:white;">Pirata</h1>
+                <h1 id="nombreDetalles" style="color:white;">Pirata</h1>
             </div>
         </div>
         <div class="row">
             <div class="col-sm-6 col-md-4 col-lg-3  align-center">
                 <div class="abs-center">
-                <img class="card-img-top petImg" src="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg" alt="">
+                <img id="imgDetalles" class="card-img-top petImg" src="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg" alt="">
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-5 ">
                <div class="card margenSuperior">
                 <div class="card-body">
-                    <h2 class="card-title">Pirata</h2>
-                    <h5>Perro en adopción</h5>
-                    <h5>Mestizo/Criollo</h5>
+                    <h2 id="nombreMascota" class="card-title">Pirata</h2>
+                    <h5 id="tipoDetalles">Perro en adopción</h5>
+                    <h5 id="razaDetalles">Mestizo/Criollo</h5>
                     <br>
                     <div class="row">
                         <div class="col-6">
                             <b>Género</b>
                         </div>
                         <div class="col-6">
-                            Macho
+                            <p id="generoDetalles">Macho</p>
                         </div>
                     </div>
                     <hr>
@@ -112,7 +112,7 @@
                             <b>Edad</b>
                         </div>
                         <div class="col-6">
-                            Joven
+                            <p id="edadDetalles">Joven</p>
                         </div>
                     </div>
                     <hr>
@@ -121,16 +121,16 @@
                             <b>Tamaño</b>
                         </div>
                         <div class="col-6">
-                            Mediano
+                            <p id="tallaDetalles">Mediano</p>
                         </div>
                     </div>
                     <hr>
                     <div class="row">
                         <div class="col-6">
-                            <b>Localización</b>
+                            <b>Ciudad</b>
                         </div>
                         <div class="col-6">
-                            Guadalajara
+                            <p id="ciudadDetalles">Guadalajara</p>
                         </div>
                     </div>
                 </div>
@@ -188,6 +188,10 @@
         </div>
       </div>
     <!-- Optional JavaScript -->
+    <script src="/AdoptAFriend/app/controllers/utils.js"></script>
+    <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
+    <script src="/AdoptAFriend/app/utils/detalles_utils.js"></script>
+    
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
