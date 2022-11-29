@@ -16,14 +16,15 @@ function uploadRescatista(){
     newRescatista.correo=email;
     newRescatista.password=password;
     newRescatista.ciudad=ciudad;
-    console.log(JSON.stringify(newRescatista))
     loadNewRescatista(rescatistaUrl,newRescatista, rescatista=>{
-        let newLogin = new Object();
-        newLogin.correo = email;
-        newLogin.password = password;
-        loadLoginRescatista(loginRescatistaUrl,newLogin, login=>{
-            console.log(newLogin);
-        },(error)=>console.log(error));
+        console.log(JSON.stringify(newRescatista));
+    },(error)=>console.log(error));
+    let newLogin = new Object();
+    newLogin.correo = email;
+    newLogin.password = password;
+    console.log(JSON.stringify(newLogin));
+    loadLoginRescatista(loginRescatistaUrl,newLogin, login=>{
+        console.log(newLogin);
     },(error)=>console.log(error));
 }
 function loginRescatista(){
