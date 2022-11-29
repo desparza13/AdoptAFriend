@@ -16,13 +16,16 @@ function loginR(req, res) {
             console.log(rescatista);
             let token = rescatista.generateToken(password);//Se genera un token
             console.log(token)
+            let loginUser = new Object();
             if (token != undefined) {//Si el token está bien
                 res.status(200)
                 res.set('Content-Type', 'text/plain; charset=utf-8');
                 //Se actualiza en la base de datos el token
                 Rescatista.findOneAndUpdate({ correo: `${correo}` }, rescatista, { new : true }).then();
-                console.log(rescatista);
-                res.send(token);
+                loginUser.token= token;
+                loginUser.id = `${rescatista._id}`;
+                
+                res.send(loginUser);
             } else { //Si el token está incorrecto significa que no se pudo iniciar sesión
                 res.status(403);            
                 res.set('Content-Type', 'text/plain; charset=utf-8');
@@ -49,12 +52,17 @@ function loginA(req, res) {
             //Generar tokens
             let token = adoptante.generateToken(password);
             console.log(token)
+            let loginUser = new Object();
+
             if (token != undefined) { //Si el token se generó correctamente
                 res.status(200)
                 res.set('Content-Type', 'text/plain; charset=utf-8');
                 Adoptante.findOneAndUpdate({ correo: `${correo}` }, adoptante, { new : true }).then();
                 console.log(adoptante);
-                res.send(token);
+                loginUser.token= token;
+                loginUser.id = `${adoptante._id}`;
+                
+                res.send(loginUser);
             } else {
                 res.status(403);            
                 res.set('Content-Type', 'text/plain; charset=utf-8');

@@ -43,7 +43,7 @@ function uploadMascotaIdeal(){
     newLogin.correo = newAdoptante.correo;
     newLogin.password = newAdoptante.password;
     loadLoginAdoptante(loginAdoptanteUrl,newLogin, login=>{
-        console.log(newLogin);
+        sessionStorage.setItem('loginUser',login);
         window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>console.log(error));
 }
@@ -55,7 +55,8 @@ function loginAdoptante(){
     newLogin.password = loginPassword;
     console.log(JSON.stringify(newLogin));
     loadLoginAdoptante(loginAdoptanteUrl,newLogin, login=>{
-        console.log(newLogin);
+        console.log(login);
+        sessionStorage.setItem('loginUser',login);
         window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>console.log(error));
 }
