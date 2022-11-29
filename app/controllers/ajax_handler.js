@@ -15,7 +15,7 @@ function loadNewPet(url,newPet,onSuccess,onError){
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
 //Actualizar mascota
-function loadNewPet(url,newPet,onSuccess,onError){
+function updatePet(url,newPet,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('PUT',url)
     xhr.setRequestHeader('Content-Type','application/json');
