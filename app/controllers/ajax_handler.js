@@ -1,5 +1,12 @@
 "use strict";
-
+//Carga el rescatista nuevo
+function loadNewRescatista(url,newRescatista,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('POST',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.send(JSON.stringify(newRescatista));
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+}
 //Carga las mascotas
 async function loadPets(url){
     let response = await fetch(url);
