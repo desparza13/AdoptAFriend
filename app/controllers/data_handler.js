@@ -8,7 +8,7 @@ const Rescatista = require('../models/rescatistas');
 function loginR(req, res) {
     let correo = req.body.correo;
     let password = req.body.password;
-    
+
     Rescatista.findOne({ correo: `${correo}` })
         .then(rescatista => {
             console.log(rescatista);
@@ -38,16 +38,16 @@ function loginA(req, res) { //Este no está completo
     let correo = req.body.correo;
     let password = req.body.password;
     
-    Rescatista.findOne({ correo: `${correo}` })
-        .then(rescatista => {
-            console.log(rescatista);
-            let token = rescatista.generateToken(password);
+    Adoptante.findOne({ correo: `${correo}` })
+        .then(adoptante => {
+            console.log(adoptante);
+            let token = adoptante.generateToken(password);
             console.log(token)
             if (token != undefined) {
                 res.status(200)
                 res.set('Content-Type', 'text/plain; charset=utf-8');
-                Rescatista.findOneAndUpdate({ correo: `${correo}` }, rescatista, { new : true }).then();
-                console.log(rescatista);
+                Adoptante.findOneAndUpdate({ correo: `${correo}` }, adoptante, { new : true }).then();
+                console.log(adoptante);
 
                 res.send(token);
             } else {
@@ -185,6 +185,7 @@ function deleteRescatista(req, res) {
 
 //Login
 exports.loginR = loginR;
+exports.loginA= loginA;
 
 //Gets
 exports.getPets = getPets;

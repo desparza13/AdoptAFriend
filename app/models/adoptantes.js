@@ -9,7 +9,7 @@ const jwt = require('jsonwebtoken');
 let mongoDB = 'mongodb+srv://Jenn:Jenn_123@adoptafriend.sszez2p.mongodb.net/AdoptAFriend';
 
 let options = {useNewUrlParser: true, useUnifiedTopology: true};
-
+let privateKey = process.env.TOKEN_KEY_A;
 mongoose.connect(mongoDB,options);
 
 let adoptanteSchema = mongoose.Schema({
@@ -39,7 +39,28 @@ let adoptanteSchema = mongoose.Schema({
     
 })
 
+//Propiedad que genera "trigger"
+adoptanteSchema.pre('save', function(next) {//antes de que se haga un save se encripta la contraseña
+    let adoptante = this;
+    adoptante.password = bcrypt.hashSync(adoptante.password, 10);
+    next();
+})
 
+//Generar token 
+adoptanteSchema.methods.generateToken = function(password) {
+    let adoptante = this;
+    let payload = {_id: adoptante._id, correo: adoptante.correo};
+    // let options = { expiresIn: 60 * 60 }
+    if (bcrypt.compareSync(password, adoptante.password)) { //verificar que la contraseña este bien
+        try {
+            // generar token
+            adoptante.token = jwt.sign(payload, privateKey); //Se actualiza el token del rescatista
+            return adoptante.token;
+        } catch (err) {
+            console.log(err);
+        }
+    }
+}
 let Adoptante = mongoose.model('adoptante',adoptanteSchema);
 
 module.exports = Adoptante;
