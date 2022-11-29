@@ -18,7 +18,12 @@ function uploadRescatista(){
     newRescatista.ciudad=ciudad;
     console.log(JSON.stringify(newRescatista))
     loadNewRescatista(rescatistaUrl,newRescatista, rescatista=>{
-        console.log(rescatista);
+        let newLogin = new Object();
+        newLogin.correo = email;
+        newLogin.password = password;
+        loadLoginRescatista(loginRescatistaUrl,newLogin, login=>{
+            console.log(newLogin);
+        },(error)=>console.log(error));
     },(error)=>console.log(error));
 }
 function loginRescatista(){
