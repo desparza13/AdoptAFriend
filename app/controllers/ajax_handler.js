@@ -7,7 +7,13 @@ async function loadPets(url){
     if(response.status != 200) return [];
     return await response.json();
 }
-
+//! GET mascota nombre
+//* Carga una mascota en específico
+async function loadPet(url){
+    let response = await fetch(url);
+    if(response.status != 200) return [];
+    return await response.json();
+}
 //! POST mascota
 //* Crea la mascota nueva
 function loadNewPet(url,newPet,onSuccess,onError){

@@ -24,7 +24,7 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a href="./detallesAdoptante.html" class="btn stretched-link"></a>
+    <a id="mascotaClick" onclick="showDetails()" class="btn stretched-link"></a>
 </div>`
 }
 function petsList(pets){
@@ -65,3 +65,10 @@ loadPets(petsUrl).then(pets =>{
     petsList(availablePets);
 });
 
+//Mostrar mascota especifica
+function showDetails(){
+    let pet = document.getElementById("mascotaClick");
+    
+    console.log(pet);
+    sessionStorage.setItem('pet',JSON.stringify(pet));
+}
