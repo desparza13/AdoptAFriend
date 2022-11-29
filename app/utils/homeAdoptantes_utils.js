@@ -24,7 +24,7 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a id="${pet.nombre}" onclick="showDetails()" class="mascotaClick btn stretched-link"></a>
+    <a id="mascotaClick" onclick="showDetails('${pet.nombre}')" class="btn stretched-link"></a>
 </div>`
 }
 function petsList(pets){
@@ -65,11 +65,8 @@ loadPets(petsUrl).then(pets =>{
     petsList(availablePets);
 });
 //Mostrar mascota especifica
-function showDetails(){
-    let pet = document.getElementsByClassName("mascotaClick btn stretched-link")
-    //.substring(0,pet.id);
-    console.log(pet)
+function showDetails(nombre){
     sessionStorage.removeItem("petDetails");
-    sessionStorage.setItem("petDetails",mascotaNombre);
-    //window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
+    sessionStorage.setItem("petDetails",nombre);
+    window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
 }

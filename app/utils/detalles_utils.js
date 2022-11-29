@@ -4,11 +4,13 @@ const petsUrl = 'http://localhost:3000/pet'
 //Cargar los detalles de una mascota
 function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
+    console.log(pet);
     loadPet(petsUrl+'/'+pet).then(petDetail =>{
         writePetDetails(petDetail);
     });
 };
 function writePetDetails(petDetail){
+    //Mascota
     let nombreDetalles = document.getElementById("nombreDetalles");
     let imgDetalles = document.getElementById("imgDetalles");
     let nombreMascota = document.getElementById("nombreMascota");
@@ -27,6 +29,14 @@ function writePetDetails(petDetail){
     edadDetalles.innerText = petDetail.edad;
     tallaDetalles.innerText = petDetail.talla;
     ciudadDetalles.innerText = petDetail.ciudad;
+    //---------------------------------------------------------------
+    //Rescatista
+    let nombreRescatista = document.getElementById("nombreRescatista");
+    let correoRescatista = document.getElementById("correoRescatista");
+    let usuarioRescatista = document.getElementById("usuarioRescatista");
+    let perronalidadRescatista = document.getElementById("perronalidadRescatista");
+    
+
 
 }
 loadPetDetails();
