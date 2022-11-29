@@ -23,6 +23,10 @@ let rescatistaSchema = mongoose.Schema({
     ciudad:{
         type: String,
         required: true
+    },
+    password:{
+        type: String,
+        required: true
     }
 })
 

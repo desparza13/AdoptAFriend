@@ -24,7 +24,12 @@ let adoptanteSchema = mongoose.Schema({
         type: String,
         required: true
     },
-    petFavorite: [String]
+    petFavorite: [String],
+    misAdopciones: [String],
+    password:{
+        type: String,
+        required: true
+    }
     
 })
 
