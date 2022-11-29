@@ -5,7 +5,6 @@ const dataHandler = require('./../controllers/data_handler');
 const tokenUtils = require('../utils/token_utils');
 
 //POST /admin/adoptante
-router.use('/',tokenUtils.verifyTokenA);
 router.route('/')
     .post((req, res)=>{
         dataHandler.createAdoptante(req, res);

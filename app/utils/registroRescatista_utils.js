@@ -16,6 +16,8 @@ function uploadRescatista(){
     newRescatista.correo=email;
     newRescatista.password=password;
     newRescatista.ciudad=ciudad;
+    console.log("new");
+    console.log(newRescatista);
     loadNewRescatista(rescatistaUrl,newRescatista, rescatista=>{
         console.log(JSON.stringify(newRescatista));
     },(error)=>console.log(error));
@@ -24,7 +26,7 @@ function uploadRescatista(){
     newLogin.password = password;
     console.log(JSON.stringify(newLogin));
     loadLoginRescatista(loginRescatistaUrl,newLogin, login=>{
-        console.log(newLogin);
+        sessionStorage.setItem('loginUser',login);
         window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
     },(error)=>console.log(error));
 }
@@ -36,6 +38,8 @@ function loginRescatista(){
     newLogin.password = loginPassword;
     console.log(JSON.stringify(newLogin));
     loadLoginRescatista(loginRescatistaUrl,newLogin, login=>{
+        console.log(login);
+        sessionStorage.setItem('loginUser',login);
         window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
         console.log(newLogin);
     },(error)=>console.log(error));
