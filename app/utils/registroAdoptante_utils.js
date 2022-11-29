@@ -17,6 +17,9 @@ function uploadAdoptante(){
     newAdoptante.correo=email;
     newAdoptante.password=password;
     newAdoptante.ciudad=ciudad;
+    console.log(newAdoptante);
+    sessionStorage.setItem('newAdoptante',JSON.stringify(newAdoptante));
+    window.location.href='/AdoptAFriend/app/views/Adoptante/registroMascotaIdeal.html';
 }
 function uploadMascotaIdeal(){
     let tipo = document.getElementById('tipo').value;
@@ -25,12 +28,14 @@ function uploadMascotaIdeal(){
     let genero = document.getElementById('genero').value;
     let talla = document.getElementById('talla').value;
     let perronalidad = document.getElementById('perronalidad').value;
+    newAdoptante=JSON.parse(sessionStorage.getItem('newAdoptante'));
     newAdoptante.tipoIdeal = tipo;
     newAdoptante.razaIdeal = raza;
     newAdoptante.edadIdeal = edad;
     newAdoptante.generoIdeal = genero;
     newAdoptante.tallaIdeal = talla;
     newAdoptante.perronalidadIdeal = perronalidad;
+    console.log(JSON.stringify(newAdoptante));
     loadNewAdoptante(adoptanteUrl,newAdoptante,adoptante=>{
         console.log(JSON.stringify(newAdoptante));
     },(error)=>console.log(error));
@@ -39,6 +44,7 @@ function uploadMascotaIdeal(){
     newLogin.password = newAdoptante.password;
     loadLoginAdoptante(loginAdoptanteUrl,newLogin, login=>{
         console.log(newLogin);
+        window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>console.log(error));
 }
 function loginAdoptante(){
@@ -50,6 +56,7 @@ function loginAdoptante(){
     console.log(JSON.stringify(newLogin));
     loadLoginAdoptante(loginAdoptanteUrl,newLogin, login=>{
         console.log(newLogin);
+        window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>console.log(error));
 }
 
