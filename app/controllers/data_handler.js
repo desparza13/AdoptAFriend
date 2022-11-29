@@ -5,10 +5,12 @@ const Pet = require('../models/pets');
 const Rescatista = require('../models/rescatistas');
 const Solicitud = require('../models/solicitudAdopcion');
 
-//login
+//Permite hacer el inicio de sesión de los rescatistas
 function loginR(req, res) {
+    //Obtener credenciales
     let correo = req.body.correo;
     let password = req.body.password;
+    //Buscar un rescatista existente que tenga ese correo
     Rescatista.findOne({ correo: `${correo}` })
         .then(rescatista => {
             console.log(rescatista);
@@ -27,6 +29,7 @@ function loginR(req, res) {
                 res.send(`Wrong email or password`);
             }
         })
+        //No hay un rescatista con esa cuenta
         .catch(err => {
             res.status(403);            
             res.set('Content-Type', 'text/plain; charset=utf-8');
@@ -34,20 +37,23 @@ function loginR(req, res) {
         });
 }
 
-function loginA(req, res) { //Este no está completo
+//Permite hacer el inicio de sesión de los adoptantes
+function loginA(req, res) { 
+    //Obtener credenciales
     let correo = req.body.correo;
     let password = req.body.password;
+    //Buscar un adoptante con ese correo
     Adoptante.findOne({ correo: `${correo}` })
         .then(adoptante => {
             console.log(adoptante);
+            //Generar tokens
             let token = adoptante.generateToken(password);
             console.log(token)
-            if (token != undefined) {
+            if (token != undefined) { //Si el token se generó correctamente
                 res.status(200)
                 res.set('Content-Type', 'text/plain; charset=utf-8');
                 Adoptante.findOneAndUpdate({ correo: `${correo}` }, adoptante, { new : true }).then();
                 console.log(adoptante);
-
                 res.send(token);
             } else {
                 res.status(403);            

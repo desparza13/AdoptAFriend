@@ -9,7 +9,7 @@ async function loadPets(url){
 }
 
 //! POST mascota
-//* Carga la mascota nueva
+//* Crea la mascota nueva
 function loadNewPet(url,newPet,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('POST',url)
@@ -33,7 +33,7 @@ function updatePet(url,newPet,onSuccess,onError){
 //* Obtener perfil rescatista especifico
 
 //! POST rescatista
-//* Carga el rescatista nuevo
+//* Crea el rescatista nuevo
 function loadNewRescatista(url,newRescatista,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('POST',url)
@@ -55,7 +55,7 @@ function loadLoginRescatista(url,login,onSuccess,onError){
 //-------------------------------------------------------------------------------------
 //? ADOPTANTES
 // !POST adoptante
-//* Carga el adoptante nuevo
+//* Crea el adoptante nuevo
 function loadNewAdoptante(url,newAdoptante,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('POST',url)
