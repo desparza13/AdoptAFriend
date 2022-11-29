@@ -8,7 +8,6 @@ const Rescatista = require('../models/rescatistas');
 function loginR(req, res) {
     let correo = req.body.correo;
     let password = req.body.password;
-
     Rescatista.findOne({ correo: `${correo}` })
         .then(rescatista => {
             console.log(rescatista);
@@ -37,7 +36,6 @@ function loginR(req, res) {
 function loginA(req, res) { //Este no está completo
     let correo = req.body.correo;
     let password = req.body.password;
-    
     Adoptante.findOne({ correo: `${correo}` })
         .then(adoptante => {
             console.log(adoptante);

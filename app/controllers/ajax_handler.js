@@ -7,6 +7,14 @@ function loadNewAdoptante(url,newAdoptante,onSuccess,onError){
     xhr.send(JSON.stringify(newAdoptante));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
+//Hacer login adoptante
+function loadLoginAdoptante(url,login,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('POST',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.send(JSON.stringify(login));
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+}
 //Hacer login rescatista
 function loadLoginRescatista(url,login,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
