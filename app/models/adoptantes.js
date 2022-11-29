@@ -29,6 +29,29 @@ let adoptanteSchema = mongoose.Schema({
         type: String,
         required: true
     },
+    tipoIdeal:{
+        type:String,
+        enum:['Perro','Gato'],
+    },
+    razaIdeal:{
+        type:String,
+    },
+    edadIdeal:{
+        type:String,
+        enum:['Cachorro','Joven','Adulto'],
+    },
+    generoIdeal:{
+        type:String,
+        enum:['Macho','Hembra'],
+    },
+    tallaIdeal:{
+        type:String,
+        enum:['Pequeño','Mediano','Grande'],
+    },
+    perronalidadIdeal:{
+        type:String,
+        enum:['Fiestero','Independiente','Dinámico','Divertido','Tímido','Juguetón','Faldero','Tapete','Inteligente'],
+    },
     petFavorite: [String],
     misAdopciones: [String],
     password:{

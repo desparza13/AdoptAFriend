@@ -3,6 +3,7 @@
 const Adoptante = require('../models/adoptantes');
 const Pet = require('../models/pets');
 const Rescatista = require('../models/rescatistas');
+const Solicitud = require('../models/solicitudAdopcion');
 
 //login
 function loginR(req, res) {
