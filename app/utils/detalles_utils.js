@@ -14,7 +14,6 @@ function loadPetDetails(){
             writeRescatistaDetails(rescatista);
         });
     });
-
 };
 
 function writePetDetails(petDetail){
@@ -85,6 +84,10 @@ function uploadSolicitud(){
     loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
         console.log(solicitud);
     },(error)=>console.log(error))
+}
+
+function editDetails(){
+    window.location.href = "/AdoptAFriend/app/views/Rescatista/edicionDetallesRescatista.html";
 }
 
 loadPetDetails();

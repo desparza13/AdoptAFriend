@@ -75,120 +75,105 @@
     </div>
 </nav>
     <body>
-    <div class="col-12" id="petsSection">
-        <div class="row" id="title">
-            <div class="col-6 align-self-center">
-                <h1 id="nombreDetalles" style="color:white;"></h1>
-            </div>
-            <div class="col-6 align-self-center align-items-end">
-                <div class="d-flex flex-column align-items-end">
-                    <button type="button" id="editar" class="btn" onclick="editDetails()">
-                    <i class="fa fa-edit fa-2x" style="color:white;"></i> 
-                </button>
+        <div class="col-12" id="petsSection">
+            <div class="row" id="title">
+                <div class="col-6 align-self-center">
+                    <h1 id="nombreTitulo" style="color:white;"></h1>
                 </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-sm-6 col-md-4 col-lg-3  align-center">
-                <div class="abs-center">
-                <img id="imgDetalles" class="card-img-top petImg" src="" alt="">
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-5 ">
-                <div class="card margenSuperior">
-                <div class="card-body">
-                    <h2 id="nombreMascota" class="card-title"></h2>
-                    <h5 id="tipoDetalles"></h5>
-                    <h5 id="razaDetalles"></h5>
-                    <br>
-                    <div class="row">
-                        <div class="col-6">
-                            <b>Género</b>
-                        </div>
-                        <div class="col-6">
-                            <p id="generoDetalles"></p>
-                        </div>
+                <div class="col-6 align-self-center align-items-end">
+                    <div class="d-flex flex-column align-items-end">
+                        <button type="button" id="editar" class="btn" onclick="enableEdit()">
+                        <i class="fa fa-edit fa-2x" style="color:white;"></i> 
+                    </button>
                     </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-6">
-                            <b>Edad</b>
-                        </div>
-                        <div class="col-6">
-                            <p id="edadDetalles"></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-6">
-                            <b>Tamaño</b>
-                        </div>
-                        <div class="col-6">
-                            <p id="tallaDetalles"></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-6">
-                            <b>Localización</b>
-                        </div>
-                        <div class="col-6">
-                            <p id="ciudadDetalles"></p>
-                        </div>
-                    </div>
-                </div>
-                </div>
-                <div class="btnCentrado">
-                <button type="button" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Adóptame</button><br>
-                <button type="button" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-heart" aria-hidden="true"></i> Quitar favorito</button>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-4 ">
-                <div class="card margenSuperior">
-                    <div class="card-body">
-                        <h2 class="card-title">Sobre el protector</h2>
-                        <br>
-                        <div class="row">
-                            <div class="col-6">
-                                <b>Nombre</b>
-                            </div>
-                            <div class="col-6">
-                                <p id="nombreRescatista"></p>
-                            </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                            <div class="col-6">
-                                <b>E-mail</b>
-                            </div>
-                            <div class="col-6">
-                                <p id="correoRescatista"></p>
-                            </div>
-                        </div>
-                        <hr>
-                        
-                        
-                        <div class="row">
-                            <div class="col-6">
-                                <b>Usuario</b>
-                            </div>
-                            <div class="col-6">
-                                <p id="usuarioRescatista"></p>
-                            </div>
-                        </div>
-                        <hr><br>
-                    </div>
-                </div>
-                <div class="card margenSuperior">
-                    <div class="card-body">
-                        <h2 id="perronalidad" class="card-title"></h2>
-                        <br>
-                        <p id="perronalidadDetalles"></p>
+                    <div class="d-flex flex-column align-items-end">
+                        <button type="button" id="borrar" class="btn" onclick="enableEdit()">
+                        <i class="fa fa-trash fa-2x" style="color:white;"></i> 
+                    </button>
                     </div>
                 </div>
             </div>
-        </div>
-        </div>
+            <form>
+                <div class="form-group">
+                    <label for="ciudad">Nombre:</label>
+                    <input type="text"
+                    class="form-control" name="nombre" id="nombre" aria-describedby="helpId" disabled>
+                </div>
+                <div class="form-group">
+                    <label for="ciudad">Ciudad o municipio:</label>
+                    <input type="text"
+                    class="form-control" name="ciudad" id="ciudad" aria-describedby="helpId"  disabled>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="tipo">Tipo de mascota</label>
+                    <select class="form-control" name="tipo" id="tipoMascota" disabled>
+                        <option>Perro</option>
+                        <option>Gato</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="raza">Raza</label>
+                    <select class="form-control" name="raza" id="raza" disabled>
+                        <option>Mestizo/Criollo</option>
+                        <option>Dalmata</option>
+                        <option>Pug</option>
+                        <option>Chihuahua</option>
+                        <option>Gran danés</option>
+                        <option>Corgi</option>
+                        <option>Golden retriever</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="genero">Género</label>
+                    <select class="form-control" name="genero" id="genero" disabled>
+                        <option>Todos</option>
+                        <option>Macho</option>
+                        <option>Hembra</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="tamaño">Tamaño</label>
+                    <select class="form-control" name="tamaño" id="size" disabled>
+                        <option>Grande</option>
+                        <option>Mediano</option>
+                        <option>Pequeño</option>
+                    </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="tamaño">Edad</label>
+                        <select class="form-control" name="edad" id="edad" disabled>
+                            <option>Cachorro</option>
+                            <option>Joven</option>
+                            <option>Adulto</option>
+                        </select>
+                </div>
+                <hr>
+                <div class="form-group">
+                    <label for="perronalidad">Perronalidad</label>
+                    <select class="form-control" name="perronalidad" id="perronalidad" disabled>
+                        <option>Fiestero</option>
+                        <option>Independiente</option>
+                        <option>Dinámico</option>
+                        <option>Tímido</option>
+                        <option>Juguetón</option>
+                        <option>Faldero</option>
+                        <option>Tapete</option>
+                        <option>Inteligente</option>
+                    </select>
+                </div>
+            </form>
+            <button type="button" id="confirmar" class="btn btn-success" onclick="saveEdit()" hidden>
+                <i class="fa fa-check"></i> Confirmar
+            </button>
+            <button type="button" id="cancelar" class="btn btn-danger" onclick="cancelEdit()" hidden > 
+                <i class="fa fa-times" aria-hidden="true"></i> Cancelar
+            </button>
+            </div>
 
     <!-- Modal Add Pet -->
     <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -293,7 +278,7 @@
     <script src="/AdoptAFriend/app/controllers/utils.js"></script>
     <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
     <script src="/AdoptAFriend/app/utils/detalles_utils.js"></script>
-    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>   
+    <script src="/AdoptAFriend/app/utils/edicionDetallesRescatista_utils.js"></script>   
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
