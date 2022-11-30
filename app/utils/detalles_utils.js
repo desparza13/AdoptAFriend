@@ -68,6 +68,8 @@ function perronalidadDetails(perronalidad){
         return '¿Te gusta la vida fácil? Entonces yo soy el compañero ideal para ti. Soy de esos perros relajados y despreocupados, que disfruta de largas siestas, ver películas, acurrucarse en el regazo, y caminar distancias muy cortas del sofá al envase de comida y viceversa.';
     }else if(perronalidad=='Inteligente'){
         return 'Yo tengo todo lo que buscas: soy inteligente y peludo, tengo 4 patas, amo aprender y vivo para complacer. Adelante, enséñame lo que quieras. Sentarse, quedarse quieto, balancear tu chequera, yo puedo hacerlo todo. Mantenme entretenido y seré tuyo para siempre.';
+    }else if(perronalidad=='Divertido'){
+        return 'Soy de esos perros divertidos y amorosos, que están felices todo el tiempo y ven el vaso medio lleno. Busco alguien que ame reír y jugar. Debe tener un gran sentido del humor y algo de tiempo para compartir conmigo. Mi misión es complacerte.';
     }
 }
 
