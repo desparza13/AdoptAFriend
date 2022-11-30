@@ -82,12 +82,7 @@
                 </div>
                 <div class="col-6 align-self-center align-items-end">
                     <div class="d-flex flex-column align-items-end">
-                        <button type="button" id="editar" class="btn" onclick="enableEdit()">
-                        <i class="fa fa-edit fa-2x" style="color:white;"></i> 
-                    </button>
-                    </div>
-                    <div class="d-flex flex-column align-items-end">
-                        <button type="button" id="borrar" class="btn" onclick="enableEdit()">
+                        <button type="button" id="borrar" class="btn" onclick="deletePet()">
                         <i class="fa fa-trash fa-2x" style="color:white;"></i> 
                     </button>
                     </div>
@@ -97,17 +92,17 @@
                 <div class="form-group">
                     <label for="ciudad">Nombre:</label>
                     <input type="text"
-                    class="form-control" name="nombre" id="nombre" aria-describedby="helpId" disabled>
+                    class="form-control" name="nombre" id="nombre" aria-describedby="helpId">
                 </div>
                 <div class="form-group">
                     <label for="ciudad">Ciudad o municipio:</label>
                     <input type="text"
-                    class="form-control" name="ciudad" id="ciudad" aria-describedby="helpId"  disabled>
+                    class="form-control" name="ciudad" id="ciudad" aria-describedby="helpId">
                 </div>
                 <hr>
                 <div class="form-group">
                     <label for="tipo">Tipo de mascota</label>
-                    <select class="form-control" name="tipo" id="tipoMascota" disabled>
+                    <select class="form-control" name="tipo" id="tipoMascota">
                         <option>Perro</option>
                         <option>Gato</option>
                     </select>
@@ -115,7 +110,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="raza">Raza</label>
-                    <select class="form-control" name="raza" id="raza" disabled>
+                    <select class="form-control" name="raza" id="raza">
                         <option>Mestizo/Criollo</option>
                         <option>Dalmata</option>
                         <option>Pug</option>
@@ -128,7 +123,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="genero">Género</label>
-                    <select class="form-control" name="genero" id="genero" disabled>
+                    <select class="form-control" name="genero" id="genero">
                         <option>Todos</option>
                         <option>Macho</option>
                         <option>Hembra</option>
@@ -137,7 +132,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="tamaño">Tamaño</label>
-                    <select class="form-control" name="tamaño" id="size" disabled>
+                    <select class="form-control" name="tamaño" id="size">
                         <option>Grande</option>
                         <option>Mediano</option>
                         <option>Pequeño</option>
@@ -146,7 +141,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="tamaño">Edad</label>
-                        <select class="form-control" name="edad" id="edad" disabled>
+                        <select class="form-control" name="edad" id="edad">
                             <option>Cachorro</option>
                             <option>Joven</option>
                             <option>Adulto</option>
@@ -155,7 +150,7 @@
                 <hr>
                 <div class="form-group">
                     <label for="perronalidad">Perronalidad</label>
-                    <select class="form-control" name="perronalidad" id="perronalidad" disabled>
+                    <select class="form-control" name="perronalidad" id="perronalidad">
                         <option>Fiestero</option>
                         <option>Independiente</option>
                         <option>Dinámico</option>
@@ -167,10 +162,10 @@
                     </select>
                 </div>
             </form>
-            <button type="button" id="confirmar" class="btn btn-success" onclick="saveEdit()" hidden>
+            <button type="button" id="confirmar" class="btn btn-success" onclick="saveEdit()">
                 <i class="fa fa-check"></i> Confirmar
             </button>
-            <button type="button" id="cancelar" class="btn btn-danger" onclick="cancelEdit()" hidden > 
+            <button type="button" id="cancelar" class="btn btn-danger" onclick="cancelEdit()" > 
                 <i class="fa fa-times" aria-hidden="true"></i> Cancelar
             </button>
             </div>
@@ -277,7 +272,6 @@
     <!-- Optional JavaScript -->
     <script src="/AdoptAFriend/app/controllers/utils.js"></script>
     <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
-    <script src="/AdoptAFriend/app/utils/detalles_utils.js"></script>
     <script src="/AdoptAFriend/app/utils/edicionDetallesRescatista_utils.js"></script>   
     
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
