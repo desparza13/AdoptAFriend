@@ -199,15 +199,20 @@ function updatePet(req, res) {
 }
 function updateAdoptante(req, res) {
     let id = req.params.id;
-    let updatedAdoptante = req.body;
-    for (let property in updatedAdoptante) {
-        if (['_id','nombre','correo','usuario','ciudad','tipoIdeal','razaIdeal','edadIdeal','generoIdeal','tallaIdeal','perronalidadIdeal','petFavorite','misAdopciones','password','token'].includes(property)) continue;
-        delete updatedAdoptante[property];
+    let newAdoptante = req.body;
+    for (let property in newAdoptante) {
+        if (['nombre','correo','usuario','ciudad','tipoIdeal','razaIdeal','edadIdeal','generoIdeal','tallaIdeal','perronalidadIdeal','petFavorite','misAdopciones','password','token'].includes(property)) continue;
+        delete newAdoptante[property];
     }
-    Adoptante.findOneAndUpdate({ _id: `${id}` }, updatedAdoptante, { new : true }).then(adoptante => {
-        res.type('text/plain; charset=utf-8');
-        res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
-    });
+    console.log(newAdoptante);
+    console.log("Adoptante");
+    console.log(id);
+    Adoptante.findOneAndUpdate({ _id: `${id}` }, newAdoptante, { new : true })
+        .then(adoptante => {
+            res.type('text/plain; charset=utf-8');
+            res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
+         })
+        .catch(err=> res.status(400).send(err));
 }
 function updateRescatista(req, res) {
     let id = req.params.id;

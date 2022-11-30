@@ -11,10 +11,12 @@ router.route('/')
     });
 
 //PUT GET DELETE /admin/adoptante/:usuario
-router.use('/:id',tokenUtils.verifyTokenA);
+router.use('/:id',tokenUtils.verifyToken);
 
 router.route('/:id')
   .put((req, res) => dataHandler.updateAdoptante(req, res))
+
+router.route('/delete/:id')
   .delete((req, res) => dataHandler.deleteAdoptante(req, res));
 
 module.exports = router;

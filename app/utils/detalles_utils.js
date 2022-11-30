@@ -80,10 +80,15 @@ function uploadSolicitud(){
     solicitud.idAdoptante = loginUser.id;
     solicitud.idMascota = idPet;
     console.log(solicitud);
-    
-    loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
-        console.log(solicitud);
-    },(error)=>console.log(error))
+    loadPet(petsUrl+'/'+idPet)
+        .then(pet=>{
+            console.log(solicitud);
+            solicitud.idRescatista = pet.idRescatista;
+            console.log(solicitud);
+            loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
+                console.log(solicitud);
+            },(error)=>console.log(error))
+        })
 }
 
 function editDetails(){

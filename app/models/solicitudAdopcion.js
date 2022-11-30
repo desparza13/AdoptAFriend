@@ -1,8 +1,6 @@
 "use strict";
 
 const mongoose = require('mongoose');
-const Adoptante = require('../models/adoptantes');
-const Pet = require('../models/pets');
 
 let mongoDB = 'mongodb+srv://Jenn:Jenn_123@adoptafriend.sszez2p.mongodb.net/AdoptAFriend';
 
@@ -16,6 +14,10 @@ let solicitudSchema = mongoose.Schema({
         required: true
     },
     idMascota:{
+        type:String,
+        required: true
+    },
+    idRescatista:{
         type:String,
         required: true
     }
