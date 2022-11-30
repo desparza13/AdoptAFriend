@@ -41,7 +41,11 @@ function updatePet(url,newPet,onSuccess,onError){
 //? RESCATISTAS
 //! GET rescatista/:id
 //* Obtener perfil rescatista especifico
-
+async function loadRescatista(url){
+    let response = await fetch(url);
+    if(response.status != 200) return [];
+    return await response.json();
+}
 //! POST rescatista
 //* Crea el rescatista nuevo
 function loadNewRescatista(url,newRescatista,onSuccess,onError){

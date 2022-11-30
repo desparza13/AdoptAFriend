@@ -97,18 +97,18 @@ function getSolicitud(req,res){
         .catch(err=> res.status(400).send(err))
 }
 
-//Get by usuario/nombre
+//Get by usuario/id
 function getPetByNombre(req, res) {
-    let nombre = req.params.nombre;
-    Pet.findOne({ nombre: `${nombre}` }).then(pet => res.status(200).json(pet));
+    let id = req.params.id;
+    Pet.findOne({ id: `${id}` }).then(pet => res.status(200).json(pet));
 }
 function getAdoptanteByUsuario(req, res) {
-    let usuario = req.params.usuario;
-    Adoptante.findOne({ usuario: `${usuario}` }).then(adoptante => res.status(200).json(adoptante));
+    let id = req.params.id;
+    Adoptante.findOne({ id: `${id}` }).then(adoptante => res.status(200).json(adoptante));
 }
 function getRescatistaByUsuario(req, res) {
-    let usuario = req.params.usuario;
-    Rescatista.findOne({ usuario: `${usuario}` }).then(rescatista => res.status(200).json(rescatista));
+    let id = req.params.id;
+    Rescatista.findOne({ id: `${id}` }).then(rescatista => res.status(200).json(rescatista));
 }
 
 //Create

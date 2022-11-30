@@ -6,6 +6,7 @@ function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
     console.log(pet);
     loadPet(petsUrl+'/'+pet).then(petDetail =>{
+        console.log(JSON.stringify(petDetail))
         writePetDetails(petDetail);
     });
 };
