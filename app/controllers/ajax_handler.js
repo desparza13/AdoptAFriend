@@ -110,8 +110,15 @@ function loadLoginAdoptante(url,login,onSuccess,onError){
     xhr.send(JSON.stringify(login));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
-
-
+// !PUT adoptante
+//* Actualizar el adoptante 
+function updateAdoptante(url,newAdoptante,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('PUT',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    xhr.send(JSON.stringify(newAdoptante));
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+}
 //-------------------------------------------------------------------------------------
 //Esperar y obtener la respuesta de Xhr
 function getXhrResponse(xhr, onSuccess, onError) {
