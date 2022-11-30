@@ -30,15 +30,18 @@ function writePetDetails(petDetail){
     edad.value = petDetail.edad;
     perronalidad.value = petDetail.perronalidad;
 }
-function deletePet(){
-
+function erasePet(){
+    let pet = sessionStorage.getItem('petDetails');
+    deletePet('http://localhost:3000/admin/pet/'+pet, mascota =>{
+        console.log(mascota);
+        window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
+    },(error)=>console.log(error));
 }
 function cancelEdit(){
     window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
 }
 function saveEdit(){
     //Obtener formulario
-    let titulo = document.getElementById("nombreTitulo");
     let nombre = document.getElementById("nombre");
     let ciudad = document.getElementById("ciudad");
     let tipo = document.getElementById("tipoMascota");
