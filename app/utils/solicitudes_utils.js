@@ -1,5 +1,6 @@
 "use strict";
 
+
 let solicitudContainer = document.getElementById('Solicitudes');
 const solicitudesUrl = 'http://localhost:3000/solicitud/';
 
@@ -27,7 +28,7 @@ function solicitudToHTML(solicitud) {
                     <div class="media-right ml-3 mr-3 ">
                         <div class="abs-center">
                             <button type="button" class="btn btn-lg btn-success btnCentrado " onclick="aceptarSolicitud('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')"><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
-                            <button type="button" class="btn btn-lg btn-danger btnCentrado"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
+                            <button type="button" class="btn btn-lg btn-danger btnCentrado" onclick="rechazarSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                         </div>
                     </div>
                 </div>
@@ -86,12 +87,19 @@ function aceptarSolicitud(idSolicitud,idPet,idAdoptante){
                 actualizarAdoptante(adoptante,pet._id);
             });
 
-            deleteSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
+            borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
                 console.log("Solicitud eliminada");
                 console.log(solicitud);
             },(error)=>console.log(error));
         });
     
+}
+
+function rechazarSolicitud(idSolicitud){
+    borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
+        console.log(solicitud);
+        window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html';
+    })
 }
 
 function actualizarMascota(pet){

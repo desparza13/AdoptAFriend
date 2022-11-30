@@ -115,15 +115,18 @@ function loadNewSolicitud(url,login,onSuccess,onError){
 
 //! DELETE solicitudes
 //* Crea nueva solicitud de adopción
-function deleteSolicitud(url,onSuccess,onError){
-    let xhr = new XMLHttpRequest(); //Hace el request
-    xhr.open('DELETE',url)
-    xhr.setRequestHeader('Content-Type','application/json');
+async function borrarSolicitud(url){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser);
     console.log(loginUser.token);
-    xhr.setRequestHeader('x-auth',loginUser.token);
-    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+    let response = await fetch(url,{
+        method:'DELETE',
+        headers:{
+            'x-auth':loginUser.token
+        }
+    })
+    if(response.status != 200) return [];
+    return await response.json();
 }
 // !PUT rescatista
 //* Actualizar el rescatista 
