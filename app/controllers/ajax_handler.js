@@ -116,7 +116,19 @@ function deleteSolicitud(url,onSuccess,onError){
     
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
-
+// !PUT rescatista
+//* Actualizar el rescatista 
+function updateRescatista(url,newRescatista,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('PUT',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
+    xhr.send(JSON.stringify(newRescatista));
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+}
 
 //-------------------------------------------------------------------------------------
 //? ADOPTANTES
