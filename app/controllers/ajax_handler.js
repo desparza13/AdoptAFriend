@@ -18,8 +18,12 @@ async function loadPet(url){
 //* Crea la mascota nueva
 function loadNewPet(url,newPet,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
-    xhr.open('POST',url)
+    xhr.open('POST',url);
     xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
     xhr.send(JSON.stringify(newPet));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }

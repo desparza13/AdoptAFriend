@@ -55,8 +55,11 @@ function uploadPet(){
     newPet.talla=talla;
     newPet.perronalidad=perronalidad;
     newPet.status='noAdoptado';
-    newPet.idRescatista="1"; //Modificar cuando este autentificado
     newPet.ciudad=ciudad;
+
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    newPet.idRescatista=loginUser.id; //Modificar cuando este autentificado
+
     console.log(JSON.stringify(newPet))
     loadNewPet('http://localhost:3000/admin/pet',newPet, pets=>{
         console.log(newPet);

@@ -16,12 +16,7 @@ function uploadRescatista(){
     newRescatista.correo=email;
     newRescatista.password=password;
     newRescatista.ciudad=ciudad;
-<<<<<<< HEAD
     console.log(JSON.stringify(newRescatista));
-=======
-    console.log("new");
-    console.log(newRescatista);
->>>>>>> 77b8f2cbcd9e193cdba595f8385eb14d5012f5ab
     loadNewRescatista(rescatistaUrl,newRescatista, rescatista=>{
         console.log(JSON.stringify(newRescatista));
     },(error)=>console.log(error));
