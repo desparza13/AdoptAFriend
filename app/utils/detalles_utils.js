@@ -2,6 +2,7 @@
 
 const petsUrl = 'http://localhost:3000/pet'
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
+const postSolicitudUrl = 'http://localhost:3000/solicitud/post/solicitud'
 //Cargar los detalles de una mascota
 function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
@@ -15,6 +16,7 @@ function loadPetDetails(){
     });
 
 };
+
 function writePetDetails(petDetail){
     //Mascota
     let nombreDetalles = document.getElementById("nombreDetalles");
@@ -68,4 +70,19 @@ function perronalidadDetails(perronalidad){
         return 'Yo tengo todo lo que buscas: soy inteligente y peludo, tengo 4 patas, amo aprender y vivo para complacer. Adelante, enséñame lo que quieras. Sentarse, quedarse quieto, balancear tu chequera, yo puedo hacerlo todo. Mantenme entretenido y seré tuyo para siempre.';
     }
 }
+
+function uploadSolicitud(){
+    console.log("A");
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    let idPet = sessionStorage.getItem('petDetails');
+    let solicitud=new Object();
+    solicitud.idAdoptante = loginUser.id;
+    solicitud.idMascota = idPet;
+    console.log(solicitud);
+    
+    loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
+        console.log(solicitud);
+    },(error)=>console.log(error))
+}
+
 loadPetDetails();

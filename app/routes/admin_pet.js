@@ -12,8 +12,8 @@ router.route('/')
     });
 
 //PUT GET DELETE /admin/pet/:nombre
-router.use('/:nombre',tokenUtils.verifyTokenR);
-router.route('/:nombre')
+router.use('/:id',tokenUtils.verifyTokenR);
+router.route('/:id')
   .put((req, res) => dataHandler.updatePet(req, res))
   .delete((req, res) => dataHandler.deletePet(req, res));
 

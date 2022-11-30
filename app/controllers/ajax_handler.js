@@ -34,6 +34,10 @@ function updatePet(url,newPet,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('PUT',url)
     xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
     xhr.send(JSON.stringify(newPet));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
@@ -66,6 +70,9 @@ function loadLoginRescatista(url,login,onSuccess,onError){
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
 
+//-------------------------------------------------------------------------------------
+//? SOLICITUDES
+
 //! GET solicitudes
 //* Carga todas las solicitudes 
 async function loadSolicitudes(url){
@@ -80,6 +87,34 @@ async function loadSolicitudes(url){
     })
     if(response.status != 200) return [];
     return await response.json();
+}
+
+//! POST solicitudes
+//* Crea nueva solicitud de adopción
+function loadNewSolicitud(url,login,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('POST',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
+    xhr.send(JSON.stringify(login));
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+}
+
+//! DELETE solicitudes
+//* Crea nueva solicitud de adopción
+function deleteSolicitud(url,onSuccess,onError){
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('DELETE',url)
+    xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
+    
+    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
 
 
@@ -116,6 +151,10 @@ function updateAdoptante(url,newAdoptante,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('PUT',url)
     xhr.setRequestHeader('Content-Type','application/json');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    xhr.setRequestHeader('x-auth',loginUser.token);
     xhr.send(JSON.stringify(newAdoptante));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }

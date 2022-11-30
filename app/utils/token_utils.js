@@ -6,6 +6,7 @@ let privateKeyA = process.env.TOKEN_KEY_A;
 
 const verifyTokenR = (req, res, next) => { //Verificar que el token esté correcto
     let token = req.get("x-auth"); 
+
     if (token == undefined) {
         return res.status(403).send("Missing token"); //si no hay token
     }
@@ -20,6 +21,7 @@ const verifyTokenR = (req, res, next) => { //Verificar que el token esté correc
 
 const verifyTokenA = (req, res, next) => { //Verificar que el token esté correcto
     let token = req.get("x-auth"); 
+    console.log(token);
     if (token == undefined) {
         return res.status(403).send("Missing token"); //si no hay token
     }

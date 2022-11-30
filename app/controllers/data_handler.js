@@ -186,37 +186,37 @@ function createSolicitud(req,res){
 }
 //Update
 function updatePet(req, res) {
-    let nombre = req.params.nombre;
+    let id = req.params.id;
     let updatedPet = req.body;
     for (let property in updatedPet) {
-        if (['tipo', 'raza', 'status', 'edad', 'genero', 'talla', 'nombre', 'idRescatista', 'petImg', 'ciudad', 'perronalidad'].includes(property)) continue;
+        if (['_id','tipo', 'raza', 'status', 'edad', 'genero', 'talla', 'nombre', 'idRescatista', 'petImg', 'ciudad', 'perronalidad'].includes(property)) continue;
         delete updatedPet[property];
     }
-    Pet.findOneAndUpdate({ nombre: `${nombre}` }, updatedPet, { new : true }).then(pet => {
+    Pet.findOneAndUpdate({ _id: `${id}` }, updatedPet, { new : true }).then(pet => {
         res.type('text/plain; charset=utf-8');
         res.send(`Mascota ${pet.nombre} fue actualizada`);
     });
 }
 function updateAdoptante(req, res) {
-    let usuario = req.params.usuario;
+    let id = req.params.id;
     let updatedAdoptante = req.body;
     for (let property in updatedAdoptante) {
-        if (['nombre','correo','usuario','ciudad'].includes(property)) continue;
+        if (['_id','nombre','correo','usuario','ciudad','tipoIdeal','razaIdeal','edadIdeal','generoIdeal','tallaIdeal','perronalidadIdeal','petFavorite','misAdopciones','password','token'].includes(property)) continue;
         delete updatedAdoptante[property];
     }
-    Adoptante.findOneAndUpdate({ usuario: `${usuario}` }, updatedAdoptante, { new : true }).then(adoptante => {
+    Adoptante.findOneAndUpdate({ _id: `${id}` }, updatedAdoptante, { new : true }).then(adoptante => {
         res.type('text/plain; charset=utf-8');
         res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
     });
 }
 function updateRescatista(req, res) {
-    let usuario = req.params.usuario;
+    let id = req.params.id;
     let updatedRescatista = req.body;
     for (let property in updatedRescatista) {
-        if (['nombre','correo','usuario','ciudad'].includes(property)) continue;
+        if (['_id','nombre','correo','usuario','ciudad','password','token'].includes(property)) continue;
         delete updatedRescatista[property];
     }
-    Rescatista.findOneAndUpdate({ usuario: `${usuario}` }, updatedRescatista, { new : true }).then(rescatista => {
+    Rescatista.findOneAndUpdate({ _id: `${id}` }, updatedRescatista, { new : true }).then(rescatista => {
         res.type('text/plain; charset=utf-8');
         res.send(`Rescatista ${rescatista.usuario} fue actualizado!`);
     });
@@ -224,24 +224,43 @@ function updateRescatista(req, res) {
 
 //Delete
 function deletePet(req, res) {
-    let nombre = req.params.nombre;
-    Pet.findOneAndDelete({ nombre: `${nombre}` }).then(pet => {
-        res.type('text/plain; charset=utf-8');
-        res.send(nombre != undefined ? `Mascota ${pet.nombre} fue eliminado` : `No hay mascota con el nombre ${nombre} que eliminar`);
+    let id = req.params.id;
+    Pet.findOneAndDelete({ _id: `${id}` }).then(pet => {
+        if(id!=undefined){
+            res.type('text/plain; charset=utf-8');
+            res.status(200).send(`Se elimino la mascota ${pet.nombre}`);
+        }
+        else{
+            res.type('text/plain; charset=utf-8');
+            res.status(404).send( `No hay mascota con el id ${id}` );
+        }
     });
 }
 function deleteAdoptante(req, res) {
-    let usuario = req.params.usuario;
-    Adoptante.findOneAndDelete({ usuario: `${usuario}` }).then(adoptante => {
-        res.type('text/plain; charset=utf-8');
-        res.send(usuario != undefined ? `Adoptante ${adoptante.usuario} fue eliminado` : `No hay adoptante con el usuario ${usuario} que eliminar`);
+    let id = req.params.id;
+    Adoptante.findOneAndDelete({ _id: `${id}` }).then(adoptante => {
+        if(id!=undefined){
+            res.type('text/plain; charset=utf-8');
+            res.status(200).send(`Se elimino el adoptante ${adoptante.usuario}`);
+        }
+        else{
+            res.type('text/plain; charset=utf-8');
+            res.status(404).send( `No hay adoptante con el id ${id}` );
+        }
     });
 }
 function deleteRescatista(req, res) {
-    let usuario = req.params.usuario;
-    Rescatista.findOneAndDelete({ usuario: `${usuario}` }).then(rescatista => {
-        res.type('text/plain; charset=utf-8');
-        res.send(usuario != undefined ? `Rescatista ${rescatista.usuario} fue eliminado` : `No hay rescatista con el usuario ${usuario} que eliminar`);
+    let id = req.params.id;
+    Rescatista.findOneAndDelete({ id: `${id}` }).then(rescatista => {
+        if(id!=undefined){
+            res.type('text/plain; charset=utf-8');
+            res.status(200).send(`Se elimino el rescatista ${rescatista.usuario}`);
+        }
+        else{
+            res.type('text/plain; charset=utf-8');
+            res.status(404).send( `No hay rescatista con el id ${id}` );
+        }
+        
     });
 }
 function deleteSolicitud(req,res){
@@ -250,15 +269,10 @@ function deleteSolicitud(req,res){
     Solicitud.findOne({_id: `${idSolicitud}`})
         .then(solicitud=>{
             if(solicitud!=undefined){
-                Pet.findOne({_id: `${solicitud.idMascota}`})
-                .then(pet=>{
-                    console.log(pet);
-                    console.log(solicitud);
-                    Solicitud.findOneAndDelete({ _id: `${idSolicitud}` }).then(solicitud => {
-                        res.type('text/plain; charset=utf-8');
-                        res.status(200).send( `La solicitud de ${pet.nombre} fue eliminada` );
-                    });
-                })
+                Solicitud.findOneAndDelete({ _id: `${idSolicitud}` }).then(solicitud => {
+                    res.type('text/plain; charset=utf-8');
+                    res.status(200).send(solicitud);
+                });
             }
             else{
                 res.type('text/plain; charset=utf-8');

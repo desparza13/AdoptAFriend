@@ -11,9 +11,9 @@ router.route('/')
     });
 
 //PUT GET DELETE /admin/adoptante/:usuario
-router.use('/:usuario',tokenUtils.verifyTokenA);
+router.use('/:id',tokenUtils.verifyTokenR);
 
-router.route('/:usuario')
+router.route('/:id')
   .put((req, res) => dataHandler.updateAdoptante(req, res))
   .delete((req, res) => dataHandler.deleteAdoptante(req, res));
 
