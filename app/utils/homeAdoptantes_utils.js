@@ -2,7 +2,8 @@
 
 let petsContainer = document.getElementById('cardsSection');
 let noResultsContainer = document.getElementById('noResults');
-const petsUrl = 'http://localhost:3000/pet'
+const petsUrl = 'http://localhost:3000/pet';
+const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
 function petToHTML(pet){
     return `<div class="card col-sm-6 col-md-4 col-lg-3 mascota">
@@ -53,7 +54,37 @@ function filterPets(){
                     (pet.talla == talla || talla=='Todos') &&
                     (pet.edad == edad || edad=='Todos') &&
                     (pet.perronalidad == perronalidad || perronalidad == 'Todos');
-          });
+        });
+        petsList(filteredPets);
+    });
+}
+function getIdealFilters(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser.id);
+    loadAdoptante(adoptanteUrl+loginUser.id).then(adoptante =>{
+        let filters = new Object();
+        filters.ciudad = adoptante.ciudad;
+        filters.tipo = adoptante.tipoIdeal;
+        filters.raza = adoptante.razaIdeal;
+        filters.genero = adoptante.generoIdeal;
+        filters.talla = adoptante.tallaIdeal;
+        filters.edad = adoptante.edadIdeal;
+        filters.perronalidad = adoptante.perronalidadIdeal;
+        filterPetsIdeal(filters);
+    });
+}
+function filterPetsIdeal(filters){
+    loadPets(petsUrl).then(pets =>{
+        let filteredPets = pets.filter(function (pet) {
+            return  (pet.status == 'noAdoptado') &&
+                    (pet.ciudad == filters.ciudad || filters.ciudad=='')&&
+                    (pet.tipo == filters.tipo) &&
+                    (pet.raza == filters.raza) &&
+                    (pet.genero == filters.genero) &&
+                    (pet.talla == filters.talla) &&
+                    (pet.edad == filters.edad) &&
+                    (pet.perronalidad == filters.perronalidad);
+        });
         petsList(filteredPets);
     });
 }

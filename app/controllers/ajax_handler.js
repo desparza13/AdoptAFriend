@@ -68,6 +68,13 @@ function loadLoginRescatista(url,login,onSuccess,onError){
 
 //-------------------------------------------------------------------------------------
 //? ADOPTANTES
+//! GET adoptante/:id
+//* Obtener perfil adoptante especifico
+async function loadAdoptante(url){
+    let response = await fetch(url);
+    if(response.status != 200) return [];
+    return await response.json();
+}
 // !POST adoptante
 //* Crea el adoptante nuevo
 function loadNewAdoptante(url,newAdoptante,onSuccess,onError){
