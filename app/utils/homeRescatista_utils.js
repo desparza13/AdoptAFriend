@@ -68,8 +68,11 @@ function uploadPet(){
 }
 //Mostrar todas las mascotas disponibles (noAdoptadas)
 loadPets(petsUrl).then(pets =>{
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser.id);
     let availablePets = pets.filter(function (pet) {
-        return (pet.status == 'noAdoptado');
+        return (pet.status == 'noAdoptado') &&
+                (pet.idRescatista == loginUser.id);
     });
     petsList(availablePets);
 });
