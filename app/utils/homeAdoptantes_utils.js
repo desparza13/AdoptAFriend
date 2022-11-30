@@ -74,7 +74,9 @@ function getIdealFilters(){
     });
 }
 function filterPetsIdeal(filters){
+    console.log(filters);
     loadPets(petsUrl).then(pets =>{
+        console.log(pets)
         let filteredPets = pets.filter(function (pet) {
             return  (pet.status == 'noAdoptado') &&
                     (pet.ciudad == filters.ciudad || filters.ciudad=='')&&
