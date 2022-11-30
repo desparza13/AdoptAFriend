@@ -9,6 +9,7 @@ const adminAdoptanteUrl = 'http://localhost:3000/admin/adoptante/';
 const adoptanteUrl ='http://localhost:3000/adoptante/';
 
 function solicitudToHTML(solicitud) {
+    console.log(solicitud);
     return `
     <div class="card abs-center">
         <div class="media ml-3 mt-3 mb-3">
@@ -33,14 +34,14 @@ function solicitudToHTML(solicitud) {
             </div>
         </div>
     </div>
+    
     `
 }
 
+
 function preloadSolicitudes(solicitudes){
-    solicitudContainer.innerHTML =solicitudes.map(solicitudToHTML).join("\n");
-    
+    solicitudContainer.innerHTML = solicitudes.map(solicitudToHTML).join("\n");
     for (const key in solicitudes) {
-        console.log(solicitudes[key]);
         loadSolicitudDetails(solicitudes[key]);
     }
 }
@@ -59,8 +60,11 @@ function loadSolicitudDetails(solicitud){
 }
 
 function writePetSolicitud(pet){
+    console.log("pet");
+    console.log(pet);
     let nombrePet = document.getElementById("nombreMascota"+"/"+pet._id);
     let imgPet = document.getElementById("imgPet"+"/"+pet._id);
+    console.log(pet.nombre);
     nombrePet.innerText = pet.nombre;
     imgPet.innerHTML= `<img class="petImg" src="${pet.petImg}" alt="Generic placeholder image">`;
 }
@@ -103,7 +107,9 @@ function actualizarAdoptante(adoptante,petId){
     console.log(adoptante);
     console.log(petId);
     adoptante.misAdopciones.push(petId);
+    console.log("ADOPTANTE")
     console.log(adoptante);
+    console.log(adminAdoptanteUrl+adoptante._id);
     updateAdoptante(adminAdoptanteUrl+adoptante._id,adoptante,adoptante=>{
         console.log("Adoptante actualizado");
         console.log(adoptante);
@@ -112,8 +118,16 @@ function actualizarAdoptante(adoptante,petId){
 
 loadSolicitudes(solicitudesUrl+'get').then(
     solicitudes=>{
-        console.log(solicitudes);
-        preloadSolicitudes(solicitudes);
+        let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+        console.log(loginUser);
+        console.log(loginUser.token);
+        let availableSolicitudes = solicitudes.filter(function (solicitud) {
+            
+            return  (solicitud.idRescatista == loginUser.id);
+        });
+        
+        
+        preloadSolicitudes(availableSolicitudes);
         
     }
 )
