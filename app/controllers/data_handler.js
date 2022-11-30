@@ -97,18 +97,48 @@ function getSolicitud(req,res){
         .catch(err=> res.status(400).send(err))
 }
 
-//Get by usuario/id
-function getPetByNombre(req, res) {
+//Get by id
+function getPetById(req, res) {
     let id = req.params.id;
-    Pet.findOne({ id: `${id}` }).then(pet => res.status(200).json(pet));
+    Pet.findOne({ _id: `${id}` })
+    .then(pet => {
+        if(pet!=null){
+            res.status(200).json(pet)
+
+        }
+        else{
+            res.status(400).send('No hay mascota con ese id');
+        }
+    })
+    .catch(err=> res.status(400).send(`No hay mascota con id ${id}`))
 }
-function getAdoptanteByUsuario(req, res) {
+function getAdoptanteById(req, res) {
     let id = req.params.id;
-    Adoptante.findOne({ id: `${id}` }).then(adoptante => res.status(200).json(adoptante));
+    Adoptante.findOne({ _id: `${id}` })
+    .then(adoptante => {
+        if(adoptante!=null){
+            res.status(200).json(adoptante)
+
+        }
+        else{
+            res.status(400).send(`No hay adoptante con id ${id}`);
+        }
+    })
+    .catch(err=> res.status(400).send(`No hay adoptante con id ${id}`))
 }
-function getRescatistaByUsuario(req, res) {
+function getRescatistaById(req, res) {
     let id = req.params.id;
-    Rescatista.findOne({ id: `${id}` }).then(rescatista => res.status(200).json(rescatista));
+    Rescatista.findOne({ _id: `${id}` })
+    .then(rescatista => {
+        if(rescatista!=null){
+            res.status(200).json(rescatista)
+
+        }
+        else{
+            res.status(400).send(`No hay rescatista con id ${id}`);
+        }
+    })
+    .catch(err=> res.status(400).send(`No hay rescatista con id ${id}`))
 }
 
 //Create
@@ -238,9 +268,9 @@ exports.getAdoptantes = getAdoptantes;
 exports.getRescatistas = getRescatistas;
 exports.getSolicitud = getSolicitud;
 //GetById
-exports.getPetByNombre = getPetByNombre;
-exports.getAdoptanteByUsuario = getAdoptanteByUsuario;
-exports.getRescatistaByUsuario = getRescatistaByUsuario;
+exports.getPetById = getPetById;
+exports.getAdoptanteById = getAdoptanteById;
+exports.getRescatistaById = getRescatistaById;
 //Create
 exports.createAdoptante = createAdoptante;
 exports.createPet = createPet;

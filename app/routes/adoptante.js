@@ -10,10 +10,10 @@ router.route('/')
         dataHandler.getAdoptantes(req,res);
     })
 
-//GET /adoptante/:usuario
-router.route('/:usuario')
+//GET /adoptante/:id
+router.route('/:id')
     .get((req,res)=>{
-        dataHandler.getAdoptanteByUsuario(req, res)
+        dataHandler.getAdoptanteById(req, res)
     })
 
 module.exports = router;

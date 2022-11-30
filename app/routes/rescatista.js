@@ -10,10 +10,10 @@ router.route('/')
         dataHandler.getRescatistas(req,res);
     })
 
-//GET /rescatistas/:usuario
-router.route('/:usuario')
+//GET /rescatistas/:id
+router.route('/:id')
     .get((req,res)=>{
-        dataHandler.getRescatistaByUsuario(req, res)
+        dataHandler.getRescatistaById(req, res)
     })
 
 module.exports = router;

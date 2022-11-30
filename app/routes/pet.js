@@ -69,10 +69,10 @@ router.route('/')
         }
     })
 
-//GET /pets/:nombre
-router.route('/:nombre')
+//GET /pets/:id
+router.route('/:id')
     .get((req,res)=>{
-        dataHandler.getPetByNombre(req, res);
+        dataHandler.getPetById(req, res);
     })
 
 //POST /pet/favorite
