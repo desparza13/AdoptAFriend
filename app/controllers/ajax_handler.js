@@ -66,6 +66,23 @@ function loadLoginRescatista(url,login,onSuccess,onError){
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
 
+//! GET solicitudes
+//* Carga todas las solicitudes 
+async function loadSolicitudes(url){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(loginUser);
+    console.log(loginUser.token);
+    let response = await fetch(url,{
+        method:'GET',
+        headers:{
+            'x-auth':loginUser.token
+        }
+    })
+    if(response.status != 200) return [];
+    return await response.json();
+}
+
+
 //-------------------------------------------------------------------------------------
 //? ADOPTANTES
 //! GET adoptante/:id
@@ -93,6 +110,7 @@ function loadLoginAdoptante(url,login,onSuccess,onError){
     xhr.send(JSON.stringify(login));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
 }
+
 
 //-------------------------------------------------------------------------------------
 //Esperar y obtener la respuesta de Xhr

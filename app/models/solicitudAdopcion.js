@@ -11,11 +11,11 @@ let options = {useNewUrlParser: true, useUnifiedTopology: true};
 mongoose.connect(mongoDB,options);
 
 let solicitudSchema = mongoose.Schema({
-    usuarioAdoptante:{
+    idAdoptante:{
         type: String,
         required: true
     },
-    nombreMascota:{
+    idMascota:{
         type:String,
         required: true
     }

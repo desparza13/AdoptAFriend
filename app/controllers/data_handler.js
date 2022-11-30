@@ -173,9 +173,13 @@ function createSolicitud(req,res){
     let solicitud = Solicitud(req.body);
     solicitud.save()
         .then((solicitud)=>{
-            console.log(solicitud._id);
-            res.set('Content-Type', 'text/plain; charset=utf-8');
-            res.status(201).send(`Se creo la solicitud de ${solicitud.nombreMascota}`);
+            Pet.findOne({_id:`${solicitud.idMascota}`})
+                .then(pet=>{
+                    
+                    res.set('Content-Type', 'text/plain; charset=utf-8');
+                    res.status(201).send(`Se creo la solicitud de ${pet.nombre}`);
+                })
+            
         })
         .catch(err=> res.status(400).send(err));
 
@@ -241,18 +245,27 @@ function deleteRescatista(req, res) {
     });
 }
 function deleteSolicitud(req,res){
-    let usuarioA = req.params.usuarioA;
-    let nombrePet = req.params.nombrePet;
+    let idSolicitud = req.params.idSolicitud
     
-    console.log(usuarioA);
-    console.log(nombrePet);
-    Solicitud.findOne({usuarioAdoptante: `${usuarioA}`},{nombreMascota: `${nombrePet}`})
+    Solicitud.findOne({_id: `${idSolicitud}`})
         .then(solicitud=>{
-            console.log(solicitud);
-            Solicitud.findOneAndDelete({_id : `${solicitud._id}`}).then(solicitud=>{
+            if(solicitud!=undefined){
+                Pet.findOne({_id: `${solicitud.idMascota}`})
+                .then(pet=>{
+                    console.log(pet);
+                    console.log(solicitud);
+                    Solicitud.findOneAndDelete({ _id: `${idSolicitud}` }).then(solicitud => {
+                        res.type('text/plain; charset=utf-8');
+                        res.status(200).send( `La solicitud de ${pet.nombre} fue eliminada` );
+                    });
+                })
+            }
+            else{
                 res.type('text/plain; charset=utf-8');
-                res.send(solicitud._id != undefined ? `La solicitud de ${nombrePet} fue eliminada` : `No hay solicitud `);
-            })
+                res.status(404).send( `No hay solicitud con el id ${idSolicitud}` );
+            }
+            
+            
         })
     
 }

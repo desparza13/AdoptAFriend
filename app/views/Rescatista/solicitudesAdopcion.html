@@ -75,14 +75,22 @@
     </div>
 </nav>
   <body>
-    <div class="col-12" id="petsSection">
-        <div class="row" id="title">
+    <div class=" col-12" id="petsSection">
+        <div class="row " id="title">
             <div class="col-6 align-self-center">
                 <h1 style="color:white;">Solicitudes de adopción</h1>
             </div>
         </div>
-        <div class="row solicitud">
-            <div class="col-sm-6 col-md-4 col-lg-3  align-center">
+    </div>
+    <hr>
+    <div class="container">
+        <div class="row mt-4" id="Solicitudes"></div>
+
+    </div>
+    
+    
+        
+            <!-- <div class="col-sm-6 col-md-4 col-lg-3  align-center">
                 <div class="abs-center">
                 <img class="card-img-top petImg" src="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg" alt="">
                 </div>
@@ -102,10 +110,11 @@
                     <button type="button" class="btn btn-lg btn-success btnCentrado"><i class="fa fa-check" aria-hidden="true"></i> Aceptar</button><br><br>
                     <button type="button" class="btn btn-lg btn-danger btnCentrado"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                 </div>
-            </div>
-        </div>
-        <hr>
-      </div>
+            </div> -->
+        <!-- </div> -->
+        
+
+      
       <!-- Modal Add Pet -->
     <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -215,6 +224,9 @@
         </div>
     </div>
     <!-- Optional JavaScript -->
+    <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
+    <script src="/AdoptAFriend/app/utils/solicitudes_utils.js"></script>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
