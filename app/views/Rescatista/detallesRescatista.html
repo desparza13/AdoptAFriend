@@ -35,7 +35,7 @@
             margin-top: 50px;
         }
     </style>
-  <head>
+    <head>
     <title>Detalles</title>
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -43,9 +43,9 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">  
-  </head>
-  <!--Navigation bar para rescatista-->
-  <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #669ec6;">
+    </head>
+    <!--Navigation bar para rescatista-->
+    <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #669ec6;">
     <a class="navbar-brand" href="./homeRescatista.html"> <i class="fa fa-paw" aria-hidden="true"></i> Adopt a Friend</a>
     <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
         aria-expanded="false" aria-label="Toggle navigation"></button>
@@ -74,7 +74,7 @@
         </ul>
     </div>
 </nav>
-  <body>
+    <body>
     <div class="col-12" id="petsSection">
         <div class="row" id="title">
             <div class="col-6 align-self-center">
@@ -93,7 +93,7 @@
                 </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-5 ">
-               <div class="card margenSuperior">
+                <div class="card margenSuperior">
                 <div class="card-body">
                     <h2 id="nombreMascota" class="card-title"></h2>
                     <h5 id="tipoDetalles"></h5>
@@ -135,11 +135,11 @@
                         </div>
                     </div>
                 </div>
-               </div>
-               <div class="btnCentrado">
+                </div>
+                <div class="btnCentrado">
                 <button type="button" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Adóptame</button><br>
                 <button type="button" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-heart" aria-hidden="true"></i> Quitar favorito</button>
-               </div>
+                </div>
             </div>
             <div class="col-sm-6 col-md-4 col-lg-4 ">
                 <div class="card margenSuperior">
@@ -186,9 +186,9 @@
                 </div>
             </div>
         </div>
-      </div>
+        </div>
 
-      <!-- Modal Add Pet -->
+    <!-- Modal Add Pet -->
     <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
             <div class="modal-content">
@@ -213,25 +213,16 @@
                                     <label for="tipoToAdd">Tipo de mascota</label>
                                     <select class="form-control" name="tipo" id="tipoToAdd" required>
                                         <option>Perro</option>
-                                        <option>Gatos</option>
+                                        <option>Gato</option>
                                     </select>
                                 </div>
                                 
                             </div>
-                            <div class="col-6">
-                                <div class="form-group">
-                                    <label for="imagenToAdd">Subir Imagen</label>
-                                    <input type="file" class="form-control-file" name="imagen" id="imagenToAdd" placeholder="" aria-describedby="fileHelpId" required>
-                                    <small id="fileHelpId" class="form-text text-muted"> </small>
-                                </div>
-                            </div>
-
-                        </div>
-                        
+                        </div>  
                         <div class="form-group">
                             <label for="razaToAdd">Raza</label>
-                            <select class="form-control" name="razo" id="razaToAdd" required>
-                                <option>Mestizo/criollo</option>
+                            <select class="form-control" name="raza" id="razaToAdd" required>
+                                <option>Mestizo/Criollo</option>
                                 <option>Dalmata</option>
                                 <option>Pug</option>
                                 <option>Chihuahua</option>
@@ -244,30 +235,20 @@
                             <label for="edadToAdd">Edad</label>
                             <select class="form-control" name="edad" id="edadToAdd" required>
                                 <option>Cachorro</option>
-                                <option>Jóven</option>
+                                <option>Joven</option>
                                 <option>Adulto</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="generoToAdd">Género</label>
                             <select class="form-control" name="genero" id="generoToAdd" required>
-                                <option>Mestizo/criollo</option>
-                                <option>Dalmata</option>
-                                <option>Pug</option>
-                                <option>Chihuahua</option>
-                                <option>Gran danés</option>
-                                <option>Corgi</option>
-                                <option>Golden retriever</option>
+                                <option>Hembra</option>
+                                <option>Macho</option>
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="colorToAdd">Color</label>
-                            <input type="text" name="nombre" id="colorToAdd" class="form-control"
-                            placeholder="Color" aria-describedby="helpId" required>
-                        </div>
-                        <div class="form-group">
                             <label for="tamañoToAdd">Tamaño</label>
-                            <select class="form-control" name="tamaño" id="tamañoToAdd" required>
+                            <select class="form-control" name="talla" id="tallaToAdd" required>
                                 <option selected>Pequeño</option>
                                 <option>Mediano</option>
                                 <option>Grande</option>
@@ -276,22 +257,32 @@
                         <div class="form-group">
                             <label for="perronalidadToAdd">Perronalidad</label>
                             <select class="form-control" name="perronalidad" id="perronalidadToAdd">
-                              <option selected>Fiestero</option>
-                              <option>Independiente</option>
-                              <option>Dinámico</option>
-                              <option>Divertido</option>
-                              <option>Timido</option>
-                              <option>Juguetón</option>
-                              <option>Faldero</option>
-                              <option>Tapete</option>
-                              <option>Inteligente</option>
+                                <option selected>Fiestero</option>
+                                <option>Independiente</option>
+                                <option>Dinámico</option>
+                                <option>Divertido</option>
+                                <option>Tímido</option>
+                                <option>Juguetón</option>
+                                <option>Faldero</option>
+                                <option>Tapete</option>
+                                <option>Inteligente</option>
                             </select>
-                          </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudad">Ciudad o municipio:</label>
+                            <input type="text"
+                            class="form-control" name="ciudad" id="ciudadToAdd" aria-describedby="helpId" placeholder="Ejemplo: Guadalajara">
+                        </div>
+                        <div class="form-group">
+                            <label for="ciudad">Link a imagen:</label>
+                            <input type="text"
+                            class="form-control" name="img" id="imagenToAdd" aria-describedby="helpId" placeholder="Ingrese un link">
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" >Save</button>
+                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="uploadPet()">Save</button>
                 </div>
             </div>
         </div>
