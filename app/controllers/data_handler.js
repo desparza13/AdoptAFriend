@@ -210,9 +210,9 @@ function updateAdoptante(req, res) {
     Adoptante.findOneAndUpdate({ _id: `${id}` }, newAdoptante, { new : true })
         .then(adoptante => {
             res.type('text/plain; charset=utf-8');
-            res.send(`Adoptante ${adoptante.usuario} fue actualizado!`);
+            res.send(adoptante);
          })
-        .catch(err=> res.status(400).send(err));
+        .catch(err=> res.status(400));
 }
 function updateRescatista(req, res) {
     let id = req.params.id;
