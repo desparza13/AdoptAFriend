@@ -1,8 +1,11 @@
 "use strict";
 
+const adoptame = document.getElementById('Adoptame');
+const cuerpo = document.getElementById('cuerpo')
 const petsUrl = 'http://localhost:3000/pet'
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
 const postSolicitudUrl = 'http://localhost:3000/solicitud/post/solicitud'
+const adoptanteUrl = 'http://localhost:3000/adoptante/'
 
 function validateToken(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
@@ -135,4 +138,33 @@ function favorito(){
 function verAdoptables(){
     window.location.href="/AdoptAFriend/app/views/Adoptante/rescatistaVistaAdoptante.html"
 }
+
+function botonAdoptame(nombreMascota,correoRescatista){
+    return `    
+        <form enctype="text/plain" method="post" action="mailto:${correoRescatista}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend">
+            <button type="submit" class="btn btn-lg btn-primary btnCentrado" onclick="uploadSolicitud()"><i class="fa fa-paw" aria-hidden="true" ></i> Adóptame</button><br>
+        </form>
+    `
+}
 validateToken();
+
+function adoptameF(){
+    let idPet = sessionStorage.getItem('petDetails');
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    console.log(rescatistaUrl+loginUser.id);
+  
+    console.log(loginUser.id);
+    loadPet(petsUrl+'/'+idPet)
+        .then(pet=>{
+            console.log(pet);
+            loadRescatista(rescatistaUrl+pet.idRescatista)
+                .then(rescatista=>{
+                    
+                    console.log(rescatista);
+                    
+                    adoptame.innerHTML = botonAdoptame(pet.nombre,rescatista.correo);
+
+                })
+        })
+}
+adoptameF();

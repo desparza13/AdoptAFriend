@@ -79,7 +79,7 @@ function writePetSolicitud(pet){
 }
 function writeAdoptanteSolicitud(adoptante){
     let nombreAdoptante = document.getElementById("nombreAdoptante"+"/"+adoptante._id);
-    nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: ${adoptante.nombre}</h5>`
+    nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: </h5><h5>${adoptante.nombre}</h5>`
     
 }
 
@@ -104,8 +104,11 @@ function aceptarSolicitud(idSolicitud,idPet,idAdoptante){
 }
 
 function removeSolicitud(idSolicitud){
+    console.log("REMOVE");
+    console.log()
     borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
         console.log(solicitud);
+        console.log("AAAAAAAAA");
         loadSolicitudes(solicitudesUrl+'get').then(
             solicitudes=>{
                 console.log(solicitudes);

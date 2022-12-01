@@ -4,7 +4,6 @@ const router = express.Router();
 const dataHandler = require('./../controllers/data_handler');
 const tokenUtils = require('../utils/token_utils');
 
-//POST /admin/adoptante
 router.use('/post/solicitud',tokenUtils.verifyTokenA);
 
 router.use('/get',tokenUtils.verifyTokenR);
@@ -15,6 +14,7 @@ router.route('/get')
     });
 
 
+//POST /post/solicitud
 
 router.route('/post/solicitud')
   .post((req, res)=>{
@@ -23,7 +23,7 @@ router.route('/post/solicitud')
     
 
 
-//PUT GET DELETE /admin/adoptante/:usuario
+// DELETE /:idSolicitud
 router.use('/:idSolicitud',tokenUtils.verifyTokenR);
 
 router.route('/:idSolicitud')

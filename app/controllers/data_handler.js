@@ -269,23 +269,17 @@ function deleteRescatista(req, res) {
     });
 }
 function deleteSolicitud(req,res){
-    let idSolicitud = req.params.idSolicitud
-    
-    Solicitud.findOne({_id: `${idSolicitud}`})
-        .then(solicitud=>{
-            if(solicitud!=undefined){
-                Solicitud.findOneAndDelete({ _id: `${idSolicitud}` }).then(solicitud => {
-                    res.type('text/plain; charset=utf-8');
-                    res.status(200).send(solicitud);
-                });
-            }
-            else{
-                res.type('text/plain; charset=utf-8');
-                res.status(404).send( `No hay solicitud con el id ${idSolicitud}` );
-            }
-            
-            
-        })
+    let idSolicitud = req.params.idSolicitud;
+    Solicitud.findOneAndDelete({ _id: `${idSolicitud}` }).then(solicitud => {
+        if(idSolicitud!=undefined){
+            res.type('text/plain; charset=utf-8');
+            res.status(200).send(`Se elimino la mascota solicitud`);
+        }
+        else{
+            res.type('text/plain; charset=utf-8');
+            res.status(404).send( `No hay solicitud con el id ${idSolicitud}` );
+        }
+    });
     
 }
 //EXPORTS

@@ -130,8 +130,8 @@ async function borrarSolicitud(url){
             'x-auth':loginUser.token
         }
     })
-    if(response.status != 200) return [];
-    return await response.json();
+    //if(response.status != 200) return [];
+    //return await response.json();
 }
 // !PUT rescatista
 //* Actualizar el rescatista 
