@@ -1,7 +1,7 @@
 "use strict";
 
 let petsContainer = document.getElementById('adopcionesSection');
-let noResultsContainer = document.getElementById('noResultsAdopciones');
+let noResultsContainer = document.getElementById('noResultsAdopcionesA');
 const petsUrl = 'http://localhost:3000/pet';
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
@@ -25,7 +25,6 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a id="mascotaClick" onclick="showDetails('${pet._id}')" class="btn stretched-link"></a>
 </div>`
 }
 function petsList(pets){
@@ -36,20 +35,19 @@ function petsList(pets){
     }
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
-
-//Mostrar todas las mascotas disponibles (noAdoptadas)
-loadPets(petsUrl).then(pets =>{
+function getAdoptedPets(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser.id);
-    let availablePets = pets.filter(function (pet) {
-        return (pet.status == 'adoptado') &&
-                (pet.idRescatista == loginUser.id);
+    loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(adoptante =>{
+        loadPets(petsUrl).then(pets =>{
+            let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+            console.log(loginUser.id);
+            let availablePets = pets.filter(function (pet) {
+                return(adoptante.misAdopciones.includes(pet._id));
+            });
+            petsList(availablePets);
+        });
     });
-    petsList(availablePets);
-});
-//Mostrar mascota especifica
-function showDetails(id){
-    sessionStorage.removeItem("petDetails");
-    sessionStorage.setItem("petDetails",id);
-    window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
 }
+getAdoptedPets();
+

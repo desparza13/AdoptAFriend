@@ -19,6 +19,19 @@
             max-height: 200px;
             width: auto;
         }
+        #noResultsAdopcionesA {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            text-align: center;
+            align-items: center;
+            color:#1580cd
+        }
+        #lupaA {
+            margin:auto;
+            width: 70%;
+            padding-left: 5%;
+        }
     </style>
   <head>
     <title>Adopciones adoptante</title>
@@ -62,36 +75,27 @@
     </div>
 </nav>
   <body>
-    <div class="col-12" id="petsSection">
-        <div class="row" id="title">
-            <div class="col-12 align-self-center">
-                <h1 style="color:white;">Mis adopciones</h1>
-            </div>
+    <div class="row" id="title">
+        <div class="col-12 align-self-center">
+            <h1 style="color:white;">Mis adopciones</h1>
         </div>
-        <div class="row">
-            <div class="card col-sm-6 col-md-4 col-lg-3 mascota">
-                <div class="row" id="petBanner">
-                    <div class="col-10 align-self-center">
-                        <h4 style="color:white;"> Chiquis</h4>
-                    </div>
-                    <div class="col-2 align-self-center align-items-left">
-                        <div class="d-flex flex-column align-items-end">
-                            <a class="nav-link" href="#"><i class="fa fa-heart" style="color:white;"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <img class="card-img-top petImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZNQZI9chyqtlvn6KNfid_ACsf4O-NiKn9Cw&usqp=CAU" alt="">
-                <div class="card-body">
-                    <p class="card-text">Mestizo/Criollo</p>
-                    <hr>
-                    <p class="card-text">Compañero</p>
-                    <hr>
-                    <p class="card-text">Hembra</p>
-                </div>
+    </div>
+    <div class="col-12" id="adopcionesSection">
+        <div class="container" id="noResultsAdopcionesA">
+            <div class="container" id="lupaA">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
             </div>
+            <h1 id="textNoResults">Ninguna de tus mascotas ha sido adoptada</h1>
         </div>
-      </div>
+        <div class="container" id="cardsSection">
+        </div>
+    </div>
     <!-- Optional JavaScript -->
+    <script src="/AdoptAFriend/app/controllers/utils.js"></script>
+    <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
+    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>
+    <script src="/AdoptAFriend/app/utils/misAdopcionesAdoptante_utils.js"></script>      
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
