@@ -28,6 +28,6 @@ function uploadPet(){
     console.log(JSON.stringify(newPet))
     loadNewPet('http://localhost:3000/admin/pet',newPet, pets=>{
         console.log(newPet);
-        window.location.href = 'homeAdoptante.html';
     },(error)=>console.log(error));
+    window.location.href = 'homeRescatista.html';
 }

@@ -32,10 +32,11 @@ function writePetDetails(petDetail){
 }
 function erasePet(){
     let pet = sessionStorage.getItem('petDetails');
-    deletePet('http://localhost:3000/admin/pet/'+pet, mascota =>{
+    borrarPet('http://localhost:3000/admin/pet/'+pet, mascota =>{
         console.log(mascota);
-        window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
+        exito=true;
     },(error)=>console.log(error));
+    window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
 }
 function cancelEdit(){
     window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';

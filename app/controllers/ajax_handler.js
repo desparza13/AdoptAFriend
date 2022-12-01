@@ -43,13 +43,18 @@ function updatePet(url,newPet,onSuccess,onError){
 }
 //! DELETE mascota
 //* Elimina una mascota de acuerdo a su id
-function deletePet(url,onSuccess,onError){
-    let xhr = new XMLHttpRequest(); //Hace el request
-    xhr.open('DELETE',url)
-    xhr.setRequestHeader('Content-Type','application/json');
+async function borrarPet(url){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    xhr.setRequestHeader('x-auth',loginUser.token);
-    xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
+    console.log(loginUser);
+    console.log(loginUser.token);
+    let response = await fetch(url,{
+        method:'DELETE',
+        headers:{
+            'x-auth':loginUser.token
+        }
+    })
+    //if(response.status != 200) return [];
+    //return await response.json();
 }
 //-------------------------------------------------------------------------------------
 //? RESCATISTAS
