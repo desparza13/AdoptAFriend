@@ -3,6 +3,15 @@
 const petsUrl = 'http://localhost:3000/pet'
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
 const postSolicitudUrl = 'http://localhost:3000/solicitud/post/solicitud'
+
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        loadPetDetails();
+    }
+}
 //Cargar los detalles de una mascota
 function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
@@ -92,4 +101,4 @@ function uploadSolicitud(){
 function editDetails(){
     window.location.href = "/AdoptAFriend/app/views/Rescatista/edicionDetallesRescatista.html";
 }
-loadPetDetails();
+validateToken();

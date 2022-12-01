@@ -3,6 +3,14 @@
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
 const rescatistaPostUrl = 'http://localhost:3000/admin/rescatista/';
 
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        getData();
+    }
+}
 function getData(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser.id);
@@ -91,4 +99,4 @@ function saveEdit(){
     });
 }
 
-getData();
+validateToken();

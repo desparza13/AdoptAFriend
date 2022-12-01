@@ -3,6 +3,14 @@
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 const adoptantePostUrl = 'http://localhost:3000/admin/adoptante/';
 
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        getIdeal();
+    }
+}
 function getIdeal(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser.id);
@@ -121,4 +129,4 @@ function saveEdit(){
     });
 }
 
-getIdeal();
+validateToken();

@@ -5,6 +5,14 @@ let noResultsContainer = document.getElementById('noResults');
 const petsUrl = 'http://localhost:3000/pet';
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        getHomeFeed();
+    }
+}
 function petToHTML(pet){
     return `<div class="card col-sm-6 col-md-4 col-lg-3 mascota">
     <div class="row" id="petBanner">
@@ -93,16 +101,19 @@ function filterPetsIdeal(filters){
         petsList(filteredPets);
     });
 }
-//Mostrar todas las mascotas disponibles (noAdoptadas)
-loadPets(petsUrl).then(pets =>{
-    let availablePets = pets.filter(function (pet) {
-        return (pet.status == 'noAdoptado');
+function getHomeFeed(){
+    //Mostrar todas las mascotas disponibles (noAdoptadas)
+    loadPets(petsUrl).then(pets =>{
+        let availablePets = pets.filter(function (pet) {
+            return (pet.status == 'noAdoptado');
+        });
+        petsList(availablePets);
     });
-    petsList(availablePets);
-});
+}
 //Mostrar mascota especifica
 function showDetails(id){
     sessionStorage.removeItem("petDetails");
     sessionStorage.setItem("petDetails",id);
     window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
 }
+validateToken()

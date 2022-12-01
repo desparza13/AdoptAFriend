@@ -9,6 +9,14 @@ const adminPetUrl = 'http://localhost:3000/admin/pet'
 const adminAdoptanteUrl = 'http://localhost:3000/admin/adoptante/';
 const adoptanteUrl ='http://localhost:3000/adoptante/';
 
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        getSolicitudes();
+    }
+}
 function solicitudToHTML(solicitud) {
     console.log(solicitud);
     return `
@@ -138,15 +146,17 @@ function actualizarAdoptante(adoptante,petId){
     },(error)=>console.log(error));
 }
 
-loadSolicitudes(solicitudesUrl+'get').then(
-    solicitudes=>{
-        let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-        console.log(loginUser);
-        console.log(loginUser.token);
-        let availableSolicitudes = solicitudes.filter(function (solicitud) {
-            return  (solicitud.idRescatista == loginUser.id);
-        });
-        preloadSolicitudes(availableSolicitudes);
-    }
-)
-
+function getSolicitudes(){
+    loadSolicitudes(solicitudesUrl+'get').then(
+        solicitudes=>{
+            let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+            console.log(loginUser);
+            console.log(loginUser.token);
+            let availableSolicitudes = solicitudes.filter(function (solicitud) {
+                return  (solicitud.idRescatista == loginUser.id);
+            });
+            preloadSolicitudes(availableSolicitudes);
+        }
+    )
+}
+validateToken();

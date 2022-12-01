@@ -1,5 +1,12 @@
 "use strict";
-
+function validateToken(){
+    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    if (loginUser==undefined){
+        window.location.href="/AdoptAFriend/app/views/error.html";
+    }else{
+        loadPetDetails();
+    }
+}
 //Cargar los detalles de una mascota
 function loadPetDetails(){
     let pet = sessionStorage.getItem('petDetails');
@@ -67,4 +74,4 @@ function saveEdit(){
         window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
     },(error)=>console.log(error));
 }
-loadPetDetails();
+validateToken();
