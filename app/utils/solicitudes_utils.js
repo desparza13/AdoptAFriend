@@ -1,6 +1,5 @@
 "use strict";
 
-
 let solicitudContainer = document.getElementById('Solicitudes');
 const solicitudesUrl = 'http://localhost:3000/solicitud/';
 
@@ -31,7 +30,7 @@ function solicitudToHTML(solicitud) {
                         <h2 class="card-title" id="nombreMascota/${solicitud.idMascota}"></h2>
                         <div id="nombreAdoptante/${solicitud.idAdoptante}"></div>
                         <br>
-                        <button type="button" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Contactar</button><br>
+                        <p id="contactar"></p>
                     </div>
                     <div class="media-right ml-3 mr-3 ">
                         <div class="abs-center">
@@ -46,9 +45,17 @@ function solicitudToHTML(solicitud) {
     
     `
 }
+function botonContactar(nombreMascota,correoAdoptante){
+    return `    
+    <form enctype="text/plain" method="post" action='mailto:${correoAdoptante}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend&body=%0D%0A'>
+        <button type="submit" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Contactar</button><br>
+    </form>
+    `
+}
 
 
 function preloadSolicitudes(solicitudes){
+    
     solicitudContainer.innerHTML = solicitudes.map(solicitudToHTML).join("\n");
     for (const key in solicitudes) {
         loadSolicitudDetails(solicitudes[key]);
@@ -56,12 +63,17 @@ function preloadSolicitudes(solicitudes){
 }
 
 function loadSolicitudDetails(solicitud){
+    const contactar = document.getElementById('contactar');
+
     loadPet(petUrl+solicitud.idMascota)
     .then(pet=>{
         console.log(pet);
         writePetSolicitud(pet);
         loadAdoptante(adoptanteUrl+solicitud.idAdoptante)
             .then(adoptante=>{
+                console.log(adoptante);
+                console.log(contactar);
+                contactar.innerHTML = botonContactar(pet.nombre,adoptante.correo);
                 writeAdoptanteSolicitud(adoptante);
                 }
             )
