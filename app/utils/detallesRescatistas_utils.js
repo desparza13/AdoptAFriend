@@ -28,7 +28,6 @@ function writePetDetails(petDetail){
     let ciudadDetalles = document.getElementById("ciudadDetalles");
     let perronalidad = document.getElementById("perronalidad");
     let perronalidadDetalles = document.getElementById("perronalidadDetalles");
-    let botonFavorito = document.getElementById('favorito');
     nombreDetalles.innerText = petDetail.nombre;
     imgDetalles.src = petDetail.petImg;
     nombreMascota.innerText = petDetail.nombre;
@@ -40,15 +39,6 @@ function writePetDetails(petDetail){
     ciudadDetalles.innerText = petDetail.ciudad;
     perronalidad.innerText = petDetail.perronalidad;
     perronalidadDetalles.innerText = perronalidadDetails(petDetail.perronalidad);
-    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    let idPet = sessionStorage.getItem('petDetails');
-    loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(newAdoptante =>{
-            if (newAdoptante.petFavorite.includes(idPet)){
-                botonFavorito.innerText='Quitar favorito'
-            }else{
-                botonFavorito.innerText='Añadir favorito'
-            }
-    });
 }
 function writeRescatistaDetails(rescatista){
     //Rescatista
@@ -101,26 +91,5 @@ function uploadSolicitud(){
 
 function editDetails(){
     window.location.href = "/AdoptAFriend/app/views/Rescatista/edicionDetallesRescatista.html";
-}
-function favorito(){
-    let btnFavorito = document.getElementById('favorito');
-    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    let idPet = sessionStorage.getItem('petDetails');
-    if(btnFavorito.innerText=='Añadir favorito'){
-        loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(newAdoptante =>{
-            newAdoptante.petFavorite.push(idPet);
-            updateAdoptante('http://localhost:3000/admin/adoptante/'+loginUser.id, newAdoptante, adoptante =>{
-                loadPetDetails();
-            },(error)=>console.log(error));
-        });
-    }else{
-        loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(newAdoptante =>{
-            const index = newAdoptante.petFavorite.indexOf(idPet);
-            newAdoptante.petFavorite.splice(index, 1);
-            updateAdoptante('http://localhost:3000/admin/adoptante/'+loginUser.id, newAdoptante, adoptante =>{
-                loadPetDetails();
-            },(error)=>console.log(error));
-        });     
-    }
 }
 loadPetDetails();
