@@ -132,4 +132,7 @@ function favorito(){
         });     
     }
 }
+function verAdoptables(){
+    window.location.href="/AdoptAFriend/app/views/Adoptante/rescatistaVistaAdoptante.html"
+}
 validateToken();
