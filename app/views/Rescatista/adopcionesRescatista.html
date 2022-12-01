@@ -14,10 +14,26 @@
         .mascota{
             margin-top: 30px;
             margin-bottom: 10px;
+            margin-left: 20px;
+            margin-right:10px;
+
         }
         .petImg{
             max-height: 200px;
             width: auto;
+        }
+        #noResultsAdopciones {
+            margin: auto;
+            width: 50%;
+            padding: 10px;
+            text-align: center;
+            align-items: center;
+            color:#1580cd
+        }
+        #lupa {
+            margin:auto;
+            width: 70%;
+            padding-left: 5%;
         }
     </style>
   <head>
@@ -60,55 +76,23 @@
     </div>
 </nav>
   <body>
-    <div class="col-12" id="petsSection">
-        <div class="row" id="title">
-            <div class="col-12 align-self-center">
-                <h1 style="color:white;">Mascotas a las que les encontraste hogar</h1>
-            </div>
+    <div class="row" id="title">
+        <div class="col-8 align-self-center">
+            <h1 style="color:white;">Mascotas a las que le encontraste hogar</h1>
         </div>
-        <div class="row">
-            <div class="card col-sm-6 col-md-4 col-lg-3 mascota">
-                <div class="row" id="petBanner">
-                    <div class="col-10 align-self-center">
-                        <h4 style="color:white;"> Chiquis</h4>
-                    </div>
-                    <div class="col-2 align-self-center align-items-left">
-                        <div class="d-flex flex-column align-items-end">
-                            <a class="nav-link" href="#"><i class="fa fa-heart" style="color:white;"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <img class="card-img-top petImg" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZNQZI9chyqtlvn6KNfid_ACsf4O-NiKn9Cw&usqp=CAU" alt="">
-                <div class="card-body">
-                    <p class="card-text">Mestizo/Criollo</p>
-                    <hr>
-                    <p class="card-text">Compañero</p>
-                    <hr>
-                    <p class="card-text">Hembra</p>
-                </div>
+    </div>
+    <div class="col-12" id="adopcionesSection">
+        <div class="container" id="noResultsAdopciones">
+            <div class="container" id="lupa">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
             </div>
-            <div class="card col-sm-6 col-md-4 col-lg-3 mascota">
-                <div class="row" id="petBanner">
-                    <div class="col-10 align-self-center">
-                        <h4 style="color:white;"> Pompeya</h4>
-                    </div>
-                    <div class="col-2 align-self-center align-items-left">
-                        <div class="d-flex flex-column align-items-end">
-                            <a class="nav-link" href="#"><i class="fa fa-heart" style="color:white;"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <img class="card-img-top petImg" src="data:image/jpeg;base64,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" alt="">
-                <div class="card-body">
-                    <p class="card-text">Mestizo/Criollo</p>
-                    <hr>
-                    <p class="card-text">Juguetón</p>
-                    <hr>
-                    <p class="card-text">Hembra</p>
-                </div>
-            </div>
+            <h1 id="textNoResults">Ninguna de tus mascotas ha sido adoptada</h1>
         </div>
-      </div>
+        <div class="container" id="cardsSection">
+
+        </div>
+    </div>
     
         <!-- Modal Add Pet -->
         <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
@@ -212,7 +196,8 @@
     <!-- Optional JavaScript -->
     <script src="/AdoptAFriend/app/controllers/utils.js"></script>
     <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
-    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>   
+    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>
+    <script src="/AdoptAFriend/app/utils/misAdopciones_utils.js"></script>      
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
