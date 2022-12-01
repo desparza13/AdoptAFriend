@@ -28,7 +28,7 @@ function solicitudToHTML(solicitud) {
                     <div class="media-right ml-3 mr-3 ">
                         <div class="abs-center">
                             <button type="button" class="btn btn-lg btn-success btnCentrado " onclick="aceptarSolicitud('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')"><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
-                            <button type="button" class="btn btn-lg btn-danger btnCentrado" onclick="rechazarSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
+                            <button type="button" class="btn btn-lg btn-danger btnCentrado" href="#" onclick="removeSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                         </div>
                     </div>
                 </div>
@@ -95,11 +95,25 @@ function aceptarSolicitud(idSolicitud,idPet,idAdoptante){
     
 }
 
-function rechazarSolicitud(idSolicitud){
+function removeSolicitud(idSolicitud){
     borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
         console.log(solicitud);
-        window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html';
+        loadSolicitudes(solicitudesUrl+'get').then(
+            solicitudes=>{
+                console.log(solicitudes);
+                let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+                console.log(loginUser);
+                console.log(loginUser.token);
+                let availableSolicitudes = solicitudes.filter(function (solicitud) {
+                    return  (solicitud.idRescatista == loginUser.id);
+                });
+                preloadSolicitudes(availableSolicitudes);
+            }
+        )
     })
+
+    
+    
 }
 
 function actualizarMascota(pet){
@@ -130,13 +144,9 @@ loadSolicitudes(solicitudesUrl+'get').then(
         console.log(loginUser);
         console.log(loginUser.token);
         let availableSolicitudes = solicitudes.filter(function (solicitud) {
-            
             return  (solicitud.idRescatista == loginUser.id);
         });
-        
-        
         preloadSolicitudes(availableSolicitudes);
-        
     }
 )
 
