@@ -7,6 +7,7 @@ const loginAdoptanteUrl = 'http://localhost:3000/login/adoptante'
 let newAdoptante = new Object();
 
 function uploadAdoptante(){
+    console.log("form")
     let usuario = document.getElementById('usuario').value;
     let nombre = document.getElementById('nombre').value;
     let email = document.getElementById('email').value;
