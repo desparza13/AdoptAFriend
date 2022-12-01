@@ -29,6 +29,7 @@ function petToHTML(pet){
 </div>`
 }
 function petsList(pets){
+    console.log(pets.length);
     if(pets.length==0){
         noResultsContainer.removeAttribute('hidden');
     }else{
