@@ -116,12 +116,7 @@ function getAdoptanteById(req, res) {
     let id = req.params.id;
     Adoptante.findOne({ _id: `${id}` })
     .then(adoptante => {
-        if(adoptante!=null){
-            res.status(200).json(adoptante);
-        }
-        else{
-            res.status(400).send(`No hay adoptante con id ${id}`);
-        }
+        res.status(200).json(adoptante);
     });
     
 }

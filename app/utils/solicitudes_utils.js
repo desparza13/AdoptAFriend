@@ -107,6 +107,10 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
             actualizarMascota(pet);
         });
 
+    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
+        console.log("Solicitud eliminada");
+        console.log(solicitud);
+    }, (error) => console.log(error));
     loadAdoptante(adoptanteUrl + idAdoptante).then(adoptante => {
         let newAdoptante = new Object();
         newAdoptante.misAdopciones = adoptante.misAdopciones;
@@ -115,10 +119,8 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
             console.log(newAdoptante);
         }, (error) => console.log(error));
     });
-    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
-        console.log("Solicitud eliminada");
-        console.log(solicitud);
-    }, (error) => console.log(error));
+
+
 }
 
 function removeSolicitud(idSolicitud) {
