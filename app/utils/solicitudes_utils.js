@@ -119,7 +119,7 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
             console.log(newAdoptante);
         }, (error) => console.log(error));
     });
-
+    window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
 
 }
 

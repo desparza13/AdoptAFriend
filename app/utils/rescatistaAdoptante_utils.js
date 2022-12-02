@@ -39,19 +39,13 @@ function petsList(pets){
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
 function getMorePets(){
-    let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    console.log(loginUser.id);
     let pet = sessionStorage.getItem('petDetails');
-    console.log(pet);
     loadPet(petsUrl+'/'+pet).then(petDetail =>{
-        console.log(JSON.stringify(petDetail))
         loadRescatista('http://localhost:3000/rescatista/'+petDetail.idRescatista).then(rescatista =>{
             let titulo = document.getElementById("titulo");
             titulo.innerText = "Mas adoptantes de @" + rescatista.usuario;
         });
         loadPets(petsUrl).then(pets =>{
-            console.log(pets)
-            console.log(petDetail);
             let availablePets = pets.filter(function (pet) {
                 return (pet.idRescatista==petDetail.idRescatista);
             });
