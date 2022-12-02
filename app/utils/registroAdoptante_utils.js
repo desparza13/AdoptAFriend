@@ -1,13 +1,18 @@
 "use strict";
 
+//ELEMENTOS CONTENEDORES O DIRECCIONES 
 let noResultsContainer = document.getElementById('noResults');
+let loginErrorContainer = document.getElementById('contraseñaMal');
+
 const adoptanteUrl = 'http://localhost:3000/admin/adoptante'
 const loginAdoptanteUrl = 'http://localhost:3000/login/adoptante'
 
 let newAdoptante = new Object();
 
+
+ //* GUARDA EN SESSION STORAGE LA INFORMACIÓN DE REGISTRO DEL ADOPTANTE
+ 
 function uploadAdoptante(){
-   
     console.log("form")
     let usuario = document.getElementById('usuario').value;
     let nombre = document.getElementById('nombre').value;
@@ -22,6 +27,8 @@ function uploadAdoptante(){
     console.log(newAdoptante);
     sessionStorage.setItem('newAdoptante',JSON.stringify(newAdoptante));
 }
+
+//*DESPUÉS DE REGISTRAR INFORMACIÓN PERSONAL SE PREGUNTA POR LA MASCOTA IDEAL Y SE GUARDA EN LA BD
 function uploadMascotaIdeal(){
     let tipo = document.getElementById('tipo').value;
     let raza = document.getElementById('razaToAdd').value;
@@ -37,19 +44,23 @@ function uploadMascotaIdeal(){
     newAdoptante.tallaIdeal = talla;
     newAdoptante.perronalidadIdeal = perronalidad;
     console.log(JSON.stringify(newAdoptante));
+
+    //? Crear un nuevo adoptante 
     loadNewAdoptante(adoptanteUrl,newAdoptante,adoptante=>{
         console.log(JSON.stringify(newAdoptante));
     },(error)=>console.log(error));
     let newLogin = new Object();
     newLogin.correo = newAdoptante.correo;
     newLogin.password = newAdoptante.password;
+
+    //?Se hace el login para que se genere el token para el usuario
     loadLoginAdoptante(loginAdoptanteUrl,newLogin, login=>{
         sessionStorage.setItem('loginUser',login);
         window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>console.log(error));
 }
 
-let loginErrorContainer = document.getElementById('contraseñaMal');
+//*INICIO DE SESIÓN CON CORREO GUARDADO EN LA BD
 function loginAdoptante(){
     let loginCorreo = document.getElementById('email').value;
     let loginPassword = document.getElementById('password').value;
@@ -66,6 +77,7 @@ function loginAdoptante(){
         });
 }
 
+//* SI HAY ERROR AL HACER LOGIN SE MUESTRA EL MENSAJE DE ERROR
 function loginError(){
     return `<a  style="color:red">Contraseña o Correo incorrectos</a>`
 }
