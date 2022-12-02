@@ -114,6 +114,7 @@ function uploadSolicitud(){
                 console.log(err);
             });
         })
+    validateToken();
 }
 
 
