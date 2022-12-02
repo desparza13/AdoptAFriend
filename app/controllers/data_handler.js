@@ -117,14 +117,13 @@ function getAdoptanteById(req, res) {
     Adoptante.findOne({ _id: `${id}` })
     .then(adoptante => {
         if(adoptante!=null){
-            res.status(200).json(adoptante)
-
+            res.status(200).json(adoptante);
         }
         else{
             res.status(400).send(`No hay adoptante con id ${id}`);
         }
-    })
-    .catch(err=> res.status(400).send(`No hay adoptante con id ${id}`))
+    });
+    
 }
 function getRescatistaById(req, res) {
     let id = req.params.id;
@@ -211,10 +210,9 @@ function updateAdoptante(req, res) {
     console.log(id);
     Adoptante.findOneAndUpdate({ _id: `${id}` }, newAdoptante, { new : true })
         .then(adoptante => {
-            res.type('text/plain; charset=utf-8');
-            res.send(adoptante);
-         })
-        .catch(err=> res.status(400).send(err));
+            
+         });
+       
 }
 function updateRescatista(req, res) {
     let id = req.params.id;

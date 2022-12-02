@@ -97,6 +97,7 @@ function writeAdoptanteSolicitud(adoptante) {
 
 }
 
+
 function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
     console.log(idSolicitud);
     console.log(idPet);
@@ -106,11 +107,14 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
             actualizarMascota(pet);
         });
 
-    loadAdoptante(adoptanteUrl + idAdoptante)
-        .then(adoptante => {
-            actualizarAdoptante(adoptante,idPet);
-        });
-
+    loadAdoptante(adoptanteUrl + idAdoptante).then(adoptante => {
+        let newAdoptante = new Object();
+        newAdoptante.misAdopciones = adoptante.misAdopciones;
+        newAdoptante.misAdopciones.push(idPet);
+        updateAdoptante(adminAdoptanteUrl + idAdoptante, newAdoptante, adoptante => {
+            console.log(newAdoptante);
+        }, (error) => console.log(error));
+    });
     borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
         console.log("Solicitud eliminada");
         console.log(solicitud);
@@ -151,17 +155,16 @@ function actualizarMascota(pet) {
     }, (error) => console.log(error));
 }
 
-function actualizarAdoptante(adoptante, petId) {
+function actualizarAdoptante(petId) {
     console.log(adoptante);
     console.log(petId);
     adoptante.misAdopciones.push(petId);
-    let newAdoptante= new Object();
-    newAdoptante.misAdopciones = adoptante.misAdopciones;
+    let newAdoptante = new Object();
     console.log("ADOPTANTE")
     console.log(adoptante);
     console.log(adoptante._id);
     console.log(adminAdoptanteUrl + adoptante._id);
-    updateAdoptante(adminAdoptanteUrl+'/' + adoptante._id, adoptante, adoptante => {
+    updateAdoptante(adminAdoptanteUrl + adoptante._id, adoptante, adoptante => {
         console.log("Adoptante actualizado");
         console.log(adoptante);
     }, (error) => console.log(error));

@@ -177,12 +177,12 @@ function loadLoginAdoptante(url,login,onSuccess,onError){
 // !PUT adoptante
 //* Actualizar el adoptante 
 function updateAdoptante(url,newAdoptante,onSuccess,onError){
-    let xhr = new XMLHttpRequest(); //Hace el request
-    xhr.open('PUT',url)
-    xhr.setRequestHeader('Content-Type','application/json');
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser);
     console.log(loginUser.token);
+    let xhr = new XMLHttpRequest(); //Hace el request
+    xhr.open('PUT',url)
+    xhr.setRequestHeader('Content-Type','application/json');
     xhr.setRequestHeader('x-auth',loginUser.token);
     xhr.send(JSON.stringify(newAdoptante));
     xhr.onload = () => getXhrResponse(xhr,onSuccess,onError);
