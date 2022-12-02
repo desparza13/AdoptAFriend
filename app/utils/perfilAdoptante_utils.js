@@ -1,7 +1,7 @@
 "use strict";
 
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
-const adoptantePostUrl = 'http://localhost:3000/admin/adoptante/';
+const adoptantePostUrl = 'http://localhost:3000/admin/adoptante/put/';
 
 function validateToken(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));

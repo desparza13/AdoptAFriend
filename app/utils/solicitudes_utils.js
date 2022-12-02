@@ -6,16 +6,17 @@ const solicitudesUrl = 'http://localhost:3000/solicitud/';
 const petUrl = 'http://localhost:3000/pet/'
 const adminPetUrl = 'http://localhost:3000/admin/pet'
 const adminAdoptanteUrl = 'http://localhost:3000/admin/adoptante/';
-const adoptanteUrl ='http://localhost:3000/adoptante/';
+const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
-function validateToken(){
+function validateToken() {
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    if (loginUser==undefined){
-        window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{
+    if (loginUser == undefined) {
+        window.location.href = "/AdoptAFriend/app/views/error.html";
+    } else {
         getSolicitudes();
     }
 }
+
 function solicitudToHTML(solicitud) {
     console.log(solicitud);
     return `
@@ -45,7 +46,8 @@ function solicitudToHTML(solicitud) {
     
     `
 }
-function botonContactar(nombreMascota,correoAdoptante){
+
+function botonContactar(nombreMascota, correoAdoptante) {
     return `    
     <form enctype="text/plain" method="post" action='mailto:${correoAdoptante}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend&body=%0D%0A'>
         <button type="submit" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Contactar</button><br>
@@ -54,133 +56,125 @@ function botonContactar(nombreMascota,correoAdoptante){
 }
 
 
-function preloadSolicitudes(solicitudes){
-    
+function preloadSolicitudes(solicitudes) {
+
     solicitudContainer.innerHTML = solicitudes.map(solicitudToHTML).join("\n");
     for (const key in solicitudes) {
         loadSolicitudDetails(solicitudes[key]);
     }
 }
 
-function loadSolicitudDetails(solicitud){
+function loadSolicitudDetails(solicitud) {
     const contactar = document.getElementById('contactar');
 
-    loadPet(petUrl+solicitud.idMascota)
-    .then(pet=>{
-        console.log(pet);
-        writePetSolicitud(pet);
-        loadAdoptante(adoptanteUrl+solicitud.idAdoptante)
-            .then(adoptante=>{
-                console.log(adoptante);
-                console.log(contactar);
-                contactar.innerHTML = botonContactar(pet.nombre,adoptante.correo);
-                writeAdoptanteSolicitud(adoptante);
-                }
-            )
-    })
+    loadPet(petUrl + solicitud.idMascota)
+        .then(pet => {
+            console.log(pet);
+            writePetSolicitud(pet);
+            loadAdoptante(adoptanteUrl + solicitud.idAdoptante)
+                .then(adoptante => {
+                    console.log(adoptante);
+                    console.log(contactar);
+                    contactar.innerHTML = botonContactar(pet.nombre, adoptante.correo);
+                    writeAdoptanteSolicitud(adoptante);
+                })
+        })
 }
 
-function writePetSolicitud(pet){
+function writePetSolicitud(pet) {
     console.log("pet");
     console.log(pet);
-    let nombrePet = document.getElementById("nombreMascota"+"/"+pet._id);
-    let imgPet = document.getElementById("imgPet"+"/"+pet._id);
+    let nombrePet = document.getElementById("nombreMascota" + "/" + pet._id);
+    let imgPet = document.getElementById("imgPet" + "/" + pet._id);
     console.log(pet.nombre);
     nombrePet.innerText = pet.nombre;
-    imgPet.innerHTML= `<img class="petImg" src="${pet.petImg}" alt="Generic placeholder image">`;
-}
-function writeAdoptanteSolicitud(adoptante){
-    let nombreAdoptante = document.getElementById("nombreAdoptante"+"/"+adoptante._id);
-    nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: </h5><h5>${adoptante.nombre}</h5>`
-    
+    imgPet.innerHTML = `<img class="petImg" src="${pet.petImg}" alt="Generic placeholder image">`;
 }
 
-function aceptarSolicitud(idSolicitud,idPet,idAdoptante){
+function writeAdoptanteSolicitud(adoptante) {
+    let nombreAdoptante = document.getElementById("nombreAdoptante" + "/" + adoptante._id);
+    nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: </h5><h5>${adoptante.nombre}</h5>`
+
+}
+
+function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
     console.log(idSolicitud);
     console.log(idPet);
     console.log(idAdoptante);
-    loadPet(petUrl+idPet)
-        .then(pet=>{
+    loadPet(petUrl + idPet)
+        .then(pet => {
             actualizarMascota(pet);
-            loadAdoptante(adoptanteUrl+idAdoptante)
-            .then(adoptante=>{
-                
-                adoptante.misAdopciones.push(pet._id);
-                let newAdoptante = new Object();
-                newAdoptante.misAdopciones = adoptante.misAdopciones;
-                console.log("ADOPTANTE")
-                console.log(newAdoptante);
-                console.log(adoptante._id);
-                console.log(adminAdoptanteUrl+adoptante._id);
-                updateAdoptante(adminAdoptanteUrl+adoptante._id,newAdoptante,adoptante=>{
-                    console.log("Adoptante actualizado");
-                    console.log(adoptante);
-                },(error)=>console.log(error));
-            });
-
-            borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
-                console.log("Solicitud eliminada");
-                console.log(solicitud);
-            },(error)=>console.log(error));
         });
-    
+
+    loadAdoptante(adoptanteUrl + idAdoptante)
+        .then(adoptante => {
+            actualizarAdoptante(adoptante,idPet);
+        });
+
+    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
+        console.log("Solicitud eliminada");
+        console.log(solicitud);
+    }, (error) => console.log(error));
 }
 
-function removeSolicitud(idSolicitud){
+function removeSolicitud(idSolicitud) {
     console.log("REMOVE");
     console.log()
-    borrarSolicitud(solicitudesUrl+idSolicitud,solicitud=>{
+    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
         console.log(solicitud);
         console.log("AAAAAAAAA");
-        loadSolicitudes(solicitudesUrl+'get').then(
-            solicitudes=>{
+        loadSolicitudes(solicitudesUrl + 'get').then(
+            solicitudes => {
                 console.log(solicitudes);
                 let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
                 console.log(loginUser);
                 console.log(loginUser.token);
                 let availableSolicitudes = solicitudes.filter(function (solicitud) {
-                    return  (solicitud.idRescatista == loginUser.id);
+                    return (solicitud.idRescatista == loginUser.id);
                 });
                 preloadSolicitudes(availableSolicitudes);
             }
         )
     })
 
-    
-    
+
+
 }
 
-function actualizarMascota(pet){
+function actualizarMascota(pet) {
     console.log(pet);
     pet.status = 'adoptado';
     console.log(pet);
-    updatePet(adminPetUrl+'/'+pet._id,pet,pet=>{
+    updatePet(adminPetUrl + '/' + pet._id, pet, pet => {
         console.log("Mascota actualizada");
         console.log(pet);
-    },(error)=>console.log(error));
+    }, (error) => console.log(error));
 }
-function actualizarAdoptante(adoptante,petId){
+
+function actualizarAdoptante(adoptante, petId) {
     console.log(adoptante);
     console.log(petId);
     adoptante.misAdopciones.push(petId);
+    let newAdoptante= new Object();
+    newAdoptante.misAdopciones = adoptante.misAdopciones;
     console.log("ADOPTANTE")
     console.log(adoptante);
     console.log(adoptante._id);
-    console.log(adminAdoptanteUrl+adoptante._id);
-    updateAdoptante(adminAdoptanteUrl+adoptante._id,adoptante,adoptante=>{
+    console.log(adminAdoptanteUrl + adoptante._id);
+    updateAdoptante(adminAdoptanteUrl+'put/' + adoptante._id, adoptante, adoptante => {
         console.log("Adoptante actualizado");
         console.log(adoptante);
-    },(error)=>console.log(error));
+    }, (error) => console.log(error));
 }
 
-function getSolicitudes(){
-    loadSolicitudes(solicitudesUrl+'get').then(
-        solicitudes=>{
+function getSolicitudes() {
+    loadSolicitudes(solicitudesUrl + 'get').then(
+        solicitudes => {
             let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
             console.log(loginUser);
             console.log(loginUser.token);
             let availableSolicitudes = solicitudes.filter(function (solicitud) {
-                return  (solicitud.idRescatista == loginUser.id);
+                return (solicitud.idRescatista == loginUser.id);
             });
             preloadSolicitudes(availableSolicitudes);
         }

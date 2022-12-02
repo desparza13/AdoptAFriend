@@ -200,6 +200,8 @@ function updatePet(req, res) {
 function updateAdoptante(req, res) {
     let id = req.params.id;
     let newAdoptante = req.body;
+    console.log("NUEVO ADOPTANTE");
+    console.log(newAdoptante);
     for (let property in newAdoptante) {
         if (['nombre','correo','usuario','ciudad','tipoIdeal','razaIdeal','edadIdeal','generoIdeal','tallaIdeal','perronalidadIdeal','petFavorite','misAdopciones','password','token'].includes(property)) continue;
         delete newAdoptante[property];
@@ -212,7 +214,7 @@ function updateAdoptante(req, res) {
             res.type('text/plain; charset=utf-8');
             res.send(adoptante);
          })
-        .catch(err=> res.status(400));
+        .catch(err=> res.status(400).send(err));
 }
 function updateRescatista(req, res) {
     let id = req.params.id;
