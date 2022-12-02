@@ -41,15 +41,19 @@ function petsList(pets){
 function getMorePets(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser.id);
-    loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(adoptante =>{
-        let title = document.getElementById("titulo");
-        title.innerText = "Más adoptables de @"+adoptante.usuario;
+    let pet = sessionStorage.getItem('petDetails');
+    console.log(pet);
+    loadPet(petsUrl+'/'+pet).then(petDetail =>{
+        console.log(JSON.stringify(petDetail))
+        loadRescatista('http://localhost:3000/rescatista/'+petDetail.idRescatista).then(rescatista =>{
+            let titulo = document.getElementById("titulo");
+            titulo.innerText = "Mas adoptantes de @" + rescatista.usuario;
+        });
         loadPets(petsUrl).then(pets =>{
-            let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-            console.log(loginUser.id);
+            console.log(pets)
+            console.log(petDetail);
             let availablePets = pets.filter(function (pet) {
-                return(pet.idRescatista=adoptante._id) &&
-                        (pet.status=='noAdoptado');
+                return (pet.idRescatista==petDetail.idRescatista);
             });
             petsList(availablePets);
         });
