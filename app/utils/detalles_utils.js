@@ -54,14 +54,20 @@ function writePetDetails(petDetail){
     perronalidadDetalles.innerText = perronalidadDetails(petDetail.perronalidad);
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     let idPet = sessionStorage.getItem('petDetails');
+    console.log("BOTON");
     loadAdoptante('http://localhost:3000/adoptante/'+loginUser.id).then(newAdoptante =>{
             if (newAdoptante.petFavorite.includes(idPet)){
-                botonFavorito.innerText='Quitar favorito'
+                console.log("A");
+                botonFavorito.innerText='Quitar favorito';
+                validateToken();
             }else{
-                botonFavorito.innerText='Añadir favorito'
+                console.log("E");
+                botonFavorito.innerText='Añadir favorito';
+                validateToken();
             }
     });
 }
+
 function writeRescatistaDetails(rescatista){
     //Rescatista
     let nombreRescatista = document.getElementById("nombreRescatista");
@@ -121,6 +127,10 @@ function uploadSolicitud(){
 function editDetails(){
     window.location.href = "/AdoptAFriend/app/views/Rescatista/edicionDetallesRescatista.html";
 }
+
+function recargar(){
+    window.location.href = "/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html";
+}
 function favorito(){
     let btnFavorito = document.getElementById('favorito');
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
@@ -141,6 +151,7 @@ function favorito(){
             },(error)=>console.log(error));
         });     
     }
+
 }
 function verAdoptables(){
     window.location.href="/AdoptAFriend/app/views/Adoptante/rescatistaVistaAdoptante.html"

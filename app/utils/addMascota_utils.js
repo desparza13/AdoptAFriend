@@ -29,7 +29,6 @@ function uploadPet() {
     console.log(JSON.stringify(newPet))
     loadNewPet('http://localhost:3000/admin/pet', newPet, pets => {
         console.log(newPet);
-        window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
         notifyMeSaveEdit();
     }, (error) => {
         notifyMeErrorEdit();

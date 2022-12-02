@@ -1,7 +1,6 @@
 "use strict";
-
-let solicitudContainer = document.getElementById('Solicitudes');
 const solicitudesUrl = 'http://localhost:3000/solicitud/';
+let solicitudContainer = document.getElementById('Solicitudes');
 
 const petUrl = 'http://localhost:3000/pet/'
 const adminPetUrl = 'http://localhost:3000/admin/pet'
@@ -25,17 +24,17 @@ function solicitudToHTML(solicitud) {
             <div class="media-body">
                 <div class="media col-16 mt-2">
                         <div class="media  mr-5 ml-5 mt-3 mb-3">
-                            <div class="align-self-center " id="imgPet/${solicitud.idMascota}"></div>
+                            <div class="align-self-center " id="imgPet/${solicitud._id}"></div>
                         </div>
                     <div class="media-body">
-                        <h2 class="card-title" id="nombreMascota/${solicitud.idMascota}"></h2>
-                        <div id="nombreAdoptante/${solicitud.idAdoptante}"></div>
+                        <h2 class="card-title" id="nombreMascota/${solicitud._id}"></h2>
+                        <div id="nombreAdoptante/${solicitud._id}"></div>
                         <br>
-                        <p id="contactar"></p>
+                        <p id="contactar/${solicitud._id}"></p>
                     </div>
                     <div class="media-right ml-3 mr-3 ">
                         <div class="abs-center">
-                            <button type="button" class="btn btn-lg btn-success btnCentrado " data-toggle="modal" data-target="#aceptar" onclick="aceptarSolicitud('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')"><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
+                            <button type="button" class="btn btn-lg btn-success btnCentrado " onclick="botonUpload('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')" ><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
                             <button type="button" class="btn btn-lg btn-danger btnCentrado" data-toggle="modal" data-target="#rechazar" onclick="removeSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                         </div>
                     </div>
@@ -47,6 +46,34 @@ function solicitudToHTML(solicitud) {
     `
 }
 
+function preloadSolicitudes(solicitudes) {
+    console.log(solicitudes);
+    solicitudContainer.innerHTML = solicitudes.map(solicitudToHTML).join("\n");
+    for (const key in solicitudes) {
+        console.log("KEY");
+        console.log(key);
+        loadSolicitudDetails(solicitudes[key]);
+    }
+}
+
+function loadSolicitudDetails(solicitud) {
+    const contactar = document.getElementById('contactar'+'/'+solicitud._id);
+
+    loadPet(petUrl + solicitud.idMascota)
+        .then(pet => {
+            console.log(pet);
+            writePetSolicitud(pet,solicitud._id);
+            loadAdoptante(adoptanteUrl+'/' + solicitud.idAdoptante)
+                .then(adoptante => {
+                    console.log(adoptante);
+                    console.log(contactar);
+
+                    contactar.innerHTML = botonContactar(pet.nombre, adoptante.correo);
+                    writeAdoptanteSolicitud(adoptante,solicitud._id);
+                })
+        })
+}
+
 function botonContactar(nombreMascota, correoAdoptante) {
     return `    
     <form enctype="text/plain" method="post" action='mailto:${correoAdoptante}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend&body=%0D%0A'>
@@ -54,76 +81,80 @@ function botonContactar(nombreMascota, correoAdoptante) {
     </form>
     `
 }
-
-
-function preloadSolicitudes(solicitudes) {
-
-    solicitudContainer.innerHTML = solicitudes.map(solicitudToHTML).join("\n");
-    for (const key in solicitudes) {
-        loadSolicitudDetails(solicitudes[key]);
-    }
-}
-
-function loadSolicitudDetails(solicitud) {
-    const contactar = document.getElementById('contactar');
-
-    loadPet(petUrl + solicitud.idMascota)
-        .then(pet => {
-            console.log(pet);
-            writePetSolicitud(pet);
-            loadAdoptante(adoptanteUrl + solicitud.idAdoptante)
-                .then(adoptante => {
-                    console.log(adoptante);
-                    console.log(contactar);
-                    contactar.innerHTML = botonContactar(pet.nombre, adoptante.correo);
-                    writeAdoptanteSolicitud(adoptante);
-                })
-        })
-}
-
-function writePetSolicitud(pet) {
+function writePetSolicitud(pet,idSolicitud) {
     console.log("pet");
     console.log(pet);
-    let nombrePet = document.getElementById("nombreMascota" + "/" + pet._id);
-    let imgPet = document.getElementById("imgPet" + "/" + pet._id);
+    let nombrePet = document.getElementById("nombreMascota" + "/" + idSolicitud);
+    let imgPet = document.getElementById("imgPet" + "/" + idSolicitud);
     console.log(pet.nombre);
     nombrePet.innerText = pet.nombre;
     imgPet.innerHTML = `<img class="petImg" src="${pet.petImg}" alt="Generic placeholder image">`;
 }
 
-function writeAdoptanteSolicitud(adoptante) {
-    let nombreAdoptante = document.getElementById("nombreAdoptante" + "/" + adoptante._id);
+function writeAdoptanteSolicitud(adoptante,idSolicitud) {
+    let nombreAdoptante = document.getElementById("nombreAdoptante" + "/" + idSolicitud);
     nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: </h5><h5>${adoptante.nombre}</h5>`
 
 }
 
+function botonAceptar(idSolicitud,idMascota,idAdoptante){
+    return `                         
+    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="aceptarSolicitud('${idSolicitud}','${idMascota}','${idAdoptante}')">Aceptar</button>
+
+    `
+}
+
+let botonAceptarContainer = document.getElementById('aceptar');
+
+function botonUpload(idSolicitud,idMascota,idAdoptante){
+    console.log("AA");
+    console.log(idSolicitud);
+    console.log(idMascota);
+    console.log(idAdoptante);
+    $("#adoptar").modal({backdrop: 'static', keyboard: false,show:true});
+    botonAceptarContainer.innerHTML=botonAceptar(idSolicitud,idMascota,idAdoptante);
+    
+}
 
 function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
-    console.log(idSolicitud);
-    console.log(idPet);
-    console.log(idAdoptante);
+    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
+        console.log("Solicitud eliminada");
+        console.log(solicitud);
+    }, (error) => console.log(error));
+
     loadPet(petUrl + idPet)
         .then(pet => {
             actualizarMascota(pet);
         });
 
-    borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
-        console.log("Solicitud eliminada");
-        console.log(solicitud);
-    }, (error) => console.log(error));
+    
     loadAdoptante(adoptanteUrl + idAdoptante).then(adoptante => {
         let newAdoptante = new Object();
         newAdoptante.misAdopciones = adoptante.misAdopciones;
         newAdoptante.misAdopciones.push(idPet);
         updateAdoptante(adminAdoptanteUrl + idAdoptante, newAdoptante, adoptante => {
             console.log(newAdoptante);
-            window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
 
         }, (error) => console.log(error));
     });
-    window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
+
+    $("#adopcion").modal({backdrop: 'static', keyboard: false,show:true});
+
+
+    console.log(idSolicitud);
+    console.log(idPet);
+    console.log(idAdoptante);
+    
+    
 }
 
+
+
+function recargar(){
+    
+    window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
+
+}
 function removeSolicitud(idSolicitud) {
     console.log("REMOVE");
     console.log()
@@ -158,21 +189,6 @@ function actualizarMascota(pet) {
     }, (error) => console.log(error));
 }
 
-function actualizarAdoptante(petId) {
-    console.log(adoptante);
-    console.log(petId);
-    adoptante.misAdopciones.push(petId);
-    let newAdoptante = new Object();
-    console.log("ADOPTANTE")
-    console.log(adoptante);
-    console.log(adoptante._id);
-    console.log(adminAdoptanteUrl + adoptante._id);
-    updateAdoptante(adminAdoptanteUrl + adoptante._id, adoptante, adoptante => {
-        console.log("Adoptante actualizado");
-        console.log(adoptante);
-    }, (error) => console.log(error));
-}
-
 function getSolicitudes() {
     loadSolicitudes(solicitudesUrl + 'get').then(
         solicitudes => {
@@ -185,5 +201,9 @@ function getSolicitudes() {
             preloadSolicitudes(availableSolicitudes);
         }
     )
+}
+function recargar(){
+    window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
+
 }
 validateToken();
