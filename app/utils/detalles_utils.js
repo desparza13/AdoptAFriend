@@ -1,6 +1,6 @@
 "use strict";
 
-const adoptame = document.getElementById('Adoptame');
+const adoptame = document.getElementById('correo');
 const cuerpo = document.getElementById('cuerpo')
 const petsUrl = 'http://localhost:3000/pet'
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
@@ -145,10 +145,10 @@ function verAdoptables(){
     window.location.href="/AdoptAFriend/app/views/Adoptante/rescatistaVistaAdoptante.html"
 }
 
-function botonAdoptame(nombreMascota,correoRescatista){
+function correo(nombreMascota,correoRescatista){
     return `    
         <form enctype="text/plain" method="post" action="mailto:${correoRescatista}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend">
-            <button type="submit" class="btn btn-lg btn-primary btnCentrado" onclick="uploadSolicitud()" data-toggle="modal" data-target="#adoptar"><i class="fa fa-paw" aria-hidden="true" ></i> Adóptame</button><br>
+            <button type="submit" class="btn btn-primary">Enviar correo al rescatista</button>
         </form>
     `
 }
@@ -168,7 +168,7 @@ function adoptameF(){
                     
                     console.log(rescatista);
                     
-                    adoptame.innerHTML = botonAdoptame(pet.nombre,rescatista.correo);
+                    adoptame.innerHTML = correo(pet.nombre,rescatista.correo);
 
                 })
         })

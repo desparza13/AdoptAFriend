@@ -137,7 +137,7 @@
                </div>
                <div class="btnCentrado" >
                 <div class="btnCentrado" id="Adoptame">                    
-
+                    <button type="submit" class="btn btn-lg btn-primary btnCentrado" onclick="uploadSolicitud()" data-toggle="modal" data-target="#adoptar"><i class="fa fa-paw" aria-hidden="true" ></i> Adóptame</button><br>
                 </div>
                 <button type="button" id="favorito" onclick="favorito()" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-heart" aria-hidden="true"></i></button>
                </div>
@@ -203,7 +203,9 @@
                     La solicitud de adopción se ha enviado con éxito!
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">¿Deseas enviarle correo al rescatista?</button>
+                    <div id="correo">
+
+                    </div>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
                 </div>
             </div>
