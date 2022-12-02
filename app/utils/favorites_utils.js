@@ -10,6 +10,7 @@ function validateToken(){
     if (loginUser==undefined){
         window.location.href="/AdoptAFriend/app/views/error.html";
     }else{
+
         getFavoritePets();
     }
 }
@@ -39,9 +40,13 @@ function petToHTML(pet){
 function petsList(pets){
     console.log(pets.length);
     if(pets.length==0){
-        noResultsContainer.removeAttribute('hidden');
+        noResultsContainer.removeAttribute('hidden',"");
+        
+
     }else{
         noResultsContainer.setAttribute('hidden',"");
+        console.log(noResultsContainer);
+
     }
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }

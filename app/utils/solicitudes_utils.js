@@ -161,7 +161,7 @@ function actualizarAdoptante(adoptante, petId) {
     console.log(adoptante);
     console.log(adoptante._id);
     console.log(adminAdoptanteUrl + adoptante._id);
-    updateAdoptante(adminAdoptanteUrl+'put/' + adoptante._id, adoptante, adoptante => {
+    updateAdoptante(adminAdoptanteUrl+'/' + adoptante._id, adoptante, adoptante => {
         console.log("Adoptante actualizado");
         console.log(adoptante);
     }, (error) => console.log(error));
