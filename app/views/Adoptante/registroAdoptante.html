@@ -41,35 +41,37 @@
             <div class="card mt-5" style="background-color: #669ec6;">
                 <div class="card-body justify-content-center">
                     <h4 class="card-title">Regístrate</h4>
+                    <form action="./registroMascotaIdeal.html" >
                         <div class="form-group">
                             <label for="color">Usuario</label>
-                            <input type="text" name="usuario" id="usuario" class="form-control"
+                            <input type="text"  id="usuario" class="form-control"
                             placeholder="Usuario" required/>
                         </div>
                         <div class="form-group">
                             <label for="color">Nombre Completo</label>
-                            <input type="text" name="nombre" id="nombre" class="form-control"
+                            <input type="text"  id="nombre" class="form-control"
                             placeholder="Nombre Completo" required/>
                         </div>
                         <div class="form-group">
                             <label for="email">E-mail</label>
                             <input type="email" class="form-control" id="email"
-                                    placeholder="Ingresa tu correo" name="email" required/>
+                                    placeholder="Ingresa tu correo"  required/>
                         </div>
 
                         <div class="form-group">
                             <label for="password">Password</label>
-                            <input type="password" class="form-control" name="password" id="password"
-                                    aria-describedby="helpId" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" required/>
+                            <input type="password" class="form-control" id="password"
+                                    aria-describedby="helpId" placeholder="Ingresa tu contraseña" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}" 
+                                    title="Mayúsculas y minúsculas. Tamaño mínimo: 6. Tamaño máximo: 40" required/>
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Ciudad</label>
-                            <input type="text" class="form-control" name="ciudad" id="ciudad"
+                            <input type="text" class="form-control"  id="ciudad"
                                     aria-describedby="helpId" placeholder="Ciudad"required />
                         </div>
                         <div class="form-group">
                             <div class="d-flex justify-content-center">
-                                <button type="submit" class="btnFilter btn btn-light" onclick="uploadAdoptante()">Siguiente</button>                                
+                                <button type="submit" class="btnFilter btn btn-light"  onclick="uploadAdoptante()">Siguiente</button>                                
                             </div>
                         </div>
                         <div class="form-group">
@@ -86,7 +88,7 @@
                                 </div>
                             </div>
                         </div>
-
+                    </form>
                 </div>
             </div>
             

@@ -7,6 +7,7 @@ const loginAdoptanteUrl = 'http://localhost:3000/login/adoptante'
 let newAdoptante = new Object();
 
 function uploadAdoptante(){
+   
     console.log("form")
     let usuario = document.getElementById('usuario').value;
     let nombre = document.getElementById('nombre').value;
@@ -20,7 +21,6 @@ function uploadAdoptante(){
     newAdoptante.ciudad=ciudad;
     console.log(newAdoptante);
     sessionStorage.setItem('newAdoptante',JSON.stringify(newAdoptante));
-    window.location.href='/AdoptAFriend/app/views/Adoptante/registroMascotaIdeal.html';
 }
 function uploadMascotaIdeal(){
     let tipo = document.getElementById('tipo').value;
@@ -63,29 +63,9 @@ function loginAdoptante(){
         window.location.href='/AdoptAFriend/app/views/Adoptante/homeAdoptante.html';
     },(error)=>{
         loginErrorContainer.innerHTML=loginError();
-        notifyMe();
         });
 }
 
 function loginError(){
     return `<a  style="color:red">Contraseña o Correo incorrectos</a>`
 }
-function notifyMe() {
-    if (!("Notification" in window)) {
-      // Check if the browser supports notifications
-      alert("This browser does not support desktop notification");
-    } else if (Notification.permission === "granted") {
-      // Check whether notification permissions have already been granted;
-      // if so, create a notification
-      const notification = new Notification("Contraseña o Correo incorrectos");
-      // …
-    } else if (Notification.permission !== "denied") {
-      // We need to ask the user for permission
-      Notification.requestPermission().then((permission) => {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          const notification = new Notification("Contraseña o Correo incorrectos");
-          // …
-        }
-      });
-    }}

@@ -48,6 +48,8 @@ function petsList(pets){
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
 function filterPets(){
+
+    window.alert('Okay, si estas seguro.');
     let ciudad = document.getElementById('ciudad').value;
     let tipo = document.getElementById('tipoMascota').value;
     let raza = document.getElementById('raza').value;
