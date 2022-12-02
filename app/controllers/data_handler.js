@@ -167,15 +167,11 @@ function createSolicitud(req,res){
     let solicitud = Solicitud(req.body);
     solicitud.save()
         .then((solicitud)=>{
-            Pet.findOne({_id:`${solicitud.idMascota}`})
-                .then(pet=>{
-                    
-                    res.set('Content-Type', 'text/plain; charset=utf-8');
-                    res.status(201).send(`Se creo la solicitud de ${pet.nombre}`);
-                })
+            res.set('Content-Type', 'text/plain; charset=utf-8');
+            res.status(201).send(`Se creo la solicitud`);
             
-        })
-        .catch(err=> res.status(400).send(err));
+        });
+        
 
 }
 //Update

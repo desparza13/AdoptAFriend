@@ -35,8 +35,8 @@ function solicitudToHTML(solicitud) {
                     </div>
                     <div class="media-right ml-3 mr-3 ">
                         <div class="abs-center">
-                            <button type="button" class="btn btn-lg btn-success btnCentrado " onclick="aceptarSolicitud('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')"><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
-                            <button type="button" class="btn btn-lg btn-danger btnCentrado" href="#" onclick="removeSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
+                            <button type="button" class="btn btn-lg btn-success btnCentrado " data-toggle="modal" data-target="#aceptar" onclick="aceptarSolicitud('${solicitud._id}','${solicitud.idMascota}','${solicitud.idAdoptante}')"><i class="fa fa-check" aria-hidden="true" ></i> Aceptar</button><br><br>
+                            <button type="button" class="btn btn-lg btn-danger btnCentrado" data-toggle="modal" data-target="#rechazar" onclick="removeSolicitud('${solicitud._id}')"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                         </div>
                     </div>
                 </div>
@@ -50,7 +50,7 @@ function solicitudToHTML(solicitud) {
 function botonContactar(nombreMascota, correoAdoptante) {
     return `    
     <form enctype="text/plain" method="post" action='mailto:${correoAdoptante}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend&body=%0D%0A'>
-        <button type="submit" class="btn btn-lg btn-primary btnCentrado"><i class="fa fa-paw" aria-hidden="true"></i> Contactar</button><br>
+        <button type="submit" class="btn btn-lg btn-primary btnCentrado" ><i class="fa fa-paw" aria-hidden="true"></i> Contactar</button><br>
     </form>
     `
 }
@@ -117,9 +117,10 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
         newAdoptante.misAdopciones.push(idPet);
         updateAdoptante(adminAdoptanteUrl + idAdoptante, newAdoptante, adoptante => {
             console.log(newAdoptante);
+            window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
+
         }, (error) => console.log(error));
     });
-    window.location.href='/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
 
 }
 

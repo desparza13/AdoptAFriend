@@ -42,7 +42,9 @@ function erasePet(){
     borrarPet('http://localhost:3000/admin/pet/'+pet, mascota =>{
         console.log(mascota);
         exito=true;
-    },(error)=>console.log(error));
+        notifyMeSaveErase();
+    },(error)=> {
+        notifyMeErrorErase();});
     window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
 }
 function cancelEdit(){
@@ -72,6 +74,95 @@ function saveEdit(){
     updateAdoptante('http://localhost:3000/admin/pet/'+pet, newPet, pet =>{
         console.log(pet);
         window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
-    },(error)=>console.log(error));
+        notifyMeSave();
+    },(error)=>{
+        notifyMeError();
+    });
 }
 validateToken();
+
+function notifyMeError() {
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('No se actualizó correctamente la mascota!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("No se actualizó correctamente la mascota!");
+                // …
+            }
+        });
+    }
+}
+
+function notifyMeSave() {
+    console.log("AAAA");
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('Se actualizó correctamente la mascota!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Se actualizó correctamente la mascota!");
+                // …
+            }
+        });
+    }
+}
+
+function notifyMeErrorErase() {
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('No se eliminó correctamente la mascota!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("No se eliminó correctamente la mascota!");
+                // …
+            }
+        });
+    }
+}
+
+function notifyMeSaveErase() {
+    console.log("AAAA");
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('Se eliminó correctamente la mascota!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Se eliminó correctamente la mascota!");
+                // …
+            }
+        });
+    }
+}

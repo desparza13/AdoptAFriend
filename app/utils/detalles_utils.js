@@ -94,6 +94,7 @@ function perronalidadDetails(perronalidad){
 }
 
 function uploadSolicitud(){
+    notifyMeSave();
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     let idPet = sessionStorage.getItem('petDetails');
     let solicitud=new Object();
@@ -107,9 +108,14 @@ function uploadSolicitud(){
             console.log(solicitud);
             loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
                 console.log(solicitud);
-            },(error)=>console.log(error))
+                
+            },(err)=>{
+                // notifyMeError();
+                console.log(err);
+            });
         })
 }
+
 
 function editDetails(){
     window.location.href = "/AdoptAFriend/app/views/Rescatista/edicionDetallesRescatista.html";
@@ -142,7 +148,7 @@ function verAdoptables(){
 function botonAdoptame(nombreMascota,correoRescatista){
     return `    
         <form enctype="text/plain" method="post" action="mailto:${correoRescatista}?subject=Adopción%20de%20${nombreMascota}%20a%20través%20de%20Adopt%20a%20Friend">
-            <button type="submit" class="btn btn-lg btn-primary btnCentrado" onclick="uploadSolicitud()"><i class="fa fa-paw" aria-hidden="true" ></i> Adóptame</button><br>
+            <button type="submit" class="btn btn-lg btn-primary btnCentrado" onclick="uploadSolicitud()" data-toggle="modal" data-target="#adoptar"><i class="fa fa-paw" aria-hidden="true" ></i> Adóptame</button><br>
         </form>
     `
 }
@@ -167,4 +173,48 @@ function adoptameF(){
                 })
         })
 }
+
+function notifyMeError() {
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('No se envió correctamente la solicitud!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("No se envió correctamente la solicitud!");
+                // …
+            }
+        });
+    }
+}
+
+function notifyMeSave() {
+    console.log("AAAA");
+    if (!("Notification" in window)) {
+        // Check if the browser supports notifications
+        alert("This browser does not support desktop notification");
+    } else if (Notification.permission === "granted") {
+        // Check whether notification permissions have already been granted;
+        // if so, create a notification
+
+        const notification = new Notification('Se mando correctamente la solicitud!'); // …
+    } else if (Notification.permission !== "denied") {
+        // We need to ask the user for permission
+        Notification.requestPermission().then((permission) => {
+            // If the user accepts, let's create a notification
+            if (permission === "granted") {
+                const notification = new Notification("Se mando correctamente la solicitud!");
+                // …
+            }
+        });
+    }
+}
 adoptameF();
+
