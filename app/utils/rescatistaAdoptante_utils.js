@@ -20,7 +20,6 @@ function petToHTML(pet){
         </div>
         <div class="col-2 align-self-center align-items-left">
             <div class="d-flex flex-column align-items-end">
-                <a class="nav-link" href="#"><i class="fa fa-heart" style="color:white;"></i></a>
             </div>
         </div>
     </div>
@@ -32,7 +31,6 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a id="mascotaClick" onclick="showDetails('${pet._id}')" class="btn stretched-link"></a>
 </div>`
 }
 function petsList(pets){

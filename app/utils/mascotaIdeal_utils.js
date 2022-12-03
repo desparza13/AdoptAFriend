@@ -105,6 +105,7 @@ function cancelEdit(){
 
 function saveEdit(){
     disableEdit();
+    
     //Obtener formulario
     let tipo = document.getElementById("tipoMascota");
     let raza = document.getElementById("raza");
@@ -124,9 +125,12 @@ function saveEdit(){
         newAdoptante.perronalidadIdeal = perronalidad.value;
         updateAdoptante(adoptantePostUrl+loginUser.id, newAdoptante, adoptante =>{
             console.log(newAdoptante);
+
             getIdeal();
         },(error)=>console.log(error));
     });
+    alert("Se editó correctamente tu mascota ideal")
+
 }
 
 validateToken();

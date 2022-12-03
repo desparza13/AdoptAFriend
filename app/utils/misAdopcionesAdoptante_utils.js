@@ -21,7 +21,6 @@ function petToHTML(pet){
         </div>
         <div class="col-2 align-self-center align-items-left">
             <div class="d-flex flex-column align-items-end">
-                <a class="nav-link" href="#"><i class="fa fa-heart" style="color:white;"></i></a>
             </div>
         </div>
     </div>
@@ -40,8 +39,9 @@ function petsList(pets){
         noResultsContainer.removeAttribute('hidden');
     }else{
         noResultsContainer.setAttribute('hidden',"");
+        petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
+
     }
-    petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
 function getAdoptedPets(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));

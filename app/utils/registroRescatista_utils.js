@@ -4,15 +4,34 @@ let noResultsContainer = document.getElementById('noResults');
 const rescatistaUrl = 'http://localhost:3000/admin/rescatista'
 const loginRescatistaUrl = 'http://localhost:3000/login/rescatista'
 
-function validateForm(){
+// document.addEventListener("DOMContentLoaded", function() {
+//   document.getElementById("formulario").addEventListener('submit', validarFormulario); 
+// });
 
-}
+// function validarFormulario(evento) {
+//   let usuario = document.getElementById('usuario').value;
+//   let nombre = document.getElementById('nombre').value;
+//   let email = document.getElementById('email');
+//   let password = document.getElementById('password').value;
+//   let ciudad = document.getElementById('ciudad').value;
+//   evento.preventDefault();
+//   if(usuario.length == 0) {
+//     alert('Completa el campo de usuario');
+//     return;
+//   }
+//   if (nombre.length ==0) {
+//     alert('Completa el cambo de nombre');
+//     return;
+//   }
+
+//   if(email.validity.typeMismatch){
+//     alert('Correo incorrecto');
+//   }
+//   this.submit();
+// }
+
 function uploadRescatista(){
-    let usuario = document.getElementById('usuario').value;
-    let nombre = document.getElementById('nombre').value;
-    let email = document.getElementById('email').value;
-    let password = document.getElementById('password').value;
-    let ciudad = document.getElementById('ciudad').value;
+    
     let newRescatista = new Object();
     newRescatista.usuario=usuario;
     newRescatista.nombre=nombre;

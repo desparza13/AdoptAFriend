@@ -3,6 +3,7 @@
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 const adoptantePostUrl = 'http://localhost:3000/admin/adoptante/';
 
+//* Validar que exista un inicio de sesió de usuario
 function validateToken(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     if (loginUser==undefined){
@@ -11,6 +12,8 @@ function validateToken(){
         getData();
     }
 }
+
+
 function getData(){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser.id);
@@ -30,6 +33,7 @@ function displayIdeal(adoptante){
     ciudad.value = adoptante.ciudad;
 }
 
+//*Habilitar la edición, botones de confirmar y cancelar, y deshabilitar el de editat
 function enableEdit() {
     //obtener botones
     let botonEditar = document.getElementById("editar");
@@ -51,6 +55,8 @@ function enableEdit() {
     //Ocultar editar
     botonEditar.setAttribute('hidden',"");
 }
+
+//* Deshabilitar la edición y esconder los botones de confirmar y cancelar
 function disableEdit(){
     //obtener botones
     let botonEditar = document.getElementById("editar");
@@ -77,8 +83,10 @@ function cancelEdit(){
     disableEdit();
 }
 
+//*Actualizar en la BD la información que se ingreso
 function saveEdit(){
     disableEdit();
+    alert("Se edito correctamente la información de tu perfil")
     //Obtener formulario
     let nombre = document.getElementById("aName");
     let email = document.getElementById("aEmail");
