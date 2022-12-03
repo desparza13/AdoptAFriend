@@ -88,12 +88,7 @@ function cancelEdit(){
 //*Actualizar en la BD la información que se ingreso
 function saveEdit(){
     disableEdit();
-    console.log("A")
-    $("#perfilA").modal({
-        backdrop: 'static',
-        keyboard: false,
-        show: true
-    });
+    
     //Obtener formulario
     let nombre = document.getElementById("aName");
     let email = document.getElementById("aEmail");
@@ -109,7 +104,11 @@ function saveEdit(){
         newAdoptante.ciudad = ciudad.value;
         updateAdoptante(adoptantePostUrl+loginUser.id, newAdoptante, adoptante =>{
             console.log(newAdoptante);
-            
+            $("#perfilA").modal({
+                backdrop: 'static',
+                keyboard: false,
+                show: true
+            });
             getData();
         },(error)=>console.log(error));
     });

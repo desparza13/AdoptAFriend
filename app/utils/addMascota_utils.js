@@ -30,10 +30,10 @@ function uploadPet() {
     //Subir la mascota a la base de datos
     loadNewPet('http://localhost:3000/admin/pet', newPet, pet => {
         console.log(pet);
+        
     }, (error) => {
         window.alert('Falta por llenar algun campo de la mascota');
     });
     //Enviar a home Rescatista
-    // window.location.href = '/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
 }
 

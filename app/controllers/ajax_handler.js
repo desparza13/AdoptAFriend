@@ -187,7 +187,7 @@ function updateAdoptante(url,newAdoptante,onSuccess,onError){
 //-------------------------------------------------------------------------------------
 //Esperar y obtener la respuesta de Xhr
 function getXhrResponse(xhr, onSuccess, onError) {
-    if (xhr.status == 200) {
+    if (xhr.status == 200 || xhr.status==201) {
         onSuccess(xhr.responseText);
     } else {
         onError(xhr.status + ': ' + xhr.statusText);

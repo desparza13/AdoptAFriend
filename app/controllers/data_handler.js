@@ -159,12 +159,14 @@ function createAdoptante(req,res){
 //Crear un rescatista nuevo
 function createRescatista(req,res){
     let rescatista= Rescatista(req.body);
+    console.log(rescatista);
     rescatista.save()
         .then((rescatista)=>{
-            res.set('Content-Type', 'text/plain; charset=utf-8');
-            res.status(201).send(`Se creo el rescatista ${rescatista.nombre} `);
+            res.status(201).send(rescatista);
         })
-        .catch(err=> res.status(400).send(err));
+        .catch(err=>{
+            res.status(400).send(err);
+        });
 }
 //Crear una solicitud de adopción
 function createSolicitud(req,res){
@@ -203,7 +205,7 @@ function updateAdoptante(req, res) {
     }
     Adoptante.findOneAndUpdate({ _id: `${id}` }, newAdoptante, { new : true })
     .then(adoptante => {
-        
+        res.status(200).send(adoptante);
     });
 }
 //Actualizar rescatista
