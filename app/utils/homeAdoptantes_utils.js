@@ -5,14 +5,18 @@ let noResultsContainer = document.getElementById('noResults');
 const petsUrl = 'http://localhost:3000/pet';
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
+//Validar que el adoptante haya iniciado sesión y tenga una sesión válida
 function validateToken(){
+    //Obtener inicio de sesión de SessionStorage
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    //Si no hay sesión valida redirigir a la página de error
     if (loginUser==undefined){
         window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{
+    }else{ //Si hay sesión válida mostrar las mascotas favoritas
         getHomeFeed();
     }
 }
+//Convertir una mascota a su card de HTML con sus datos correspondientes
 function petToHTML(pet){
     return `<div class="card col-sm-6 col-md-4 col-lg-3 mascota">
     <div class="row" id="petBanner">
@@ -33,21 +37,22 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a id="mascotaClick" onclick="showDetails('${pet._id}')" class="btn stretched-link"></a>
+    <a id="mascotaClick" class="btn stretched-link"></a>
 </div>`
 }
-function addFavorite(petId){
-    console.log("PET FAVORITE"+petId);
-}
+//Mostrar todas las mascotas de la lista y desplegar su card
 function petsList(pets){
     if(pets.length==0){
-        noResultsContainer.removeAttribute('hidden');
+        noResultsContainer.removeAttribute('hidden');//Si no hay ninguna mascota en adopción en la BD, mostrar aviso al usuario
     }else{
-        noResultsContainer.setAttribute('hidden',"");
+        noResultsContainer.setAttribute('hidden',"");//Si hay mascotas en la BD, esconder aviso al usuario
     }
+    //Mapear y crear una card de HTML para cada una de las mascotas en la BD y mostrarlas
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
+//Filtrar las mascotas de acuerdo a los filtros que ponga el usuario en la parte izquierda
 function filterPets(){
+    //Obtener elementos del HTML y sus valores
     let ciudad = document.getElementById('ciudad').value;
     let tipo = document.getElementById('tipoMascota').value;
     let raza = document.getElementById('raza').value;
@@ -55,7 +60,9 @@ function filterPets(){
     let talla = document.getElementById('size').value;
     let edad = document.getElementById('edad').value;
     let perronalidad = document.getElementById('perronalidad').value;
+    //Cargar todas las mascotas de la base de datos
     loadPets(petsUrl).then(pets =>{
+        //Obtener el listado de las mascotas que cumplan con todas las características de los filtros
         let filteredPets = pets.filter(function (pet) {
             return  (pet.status == 'noAdoptado') &&
                     (pet.ciudad == ciudad || ciudad=='')&&
@@ -66,6 +73,7 @@ function filterPets(){
                     (pet.edad == edad || edad=='Todos') &&
                     (pet.perronalidad == perronalidad || perronalidad == 'Todos');
         });
+        
         petsList(filteredPets);
     });
 }

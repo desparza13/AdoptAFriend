@@ -24,8 +24,7 @@ function petToHTML(pet){
             <h4 style="color:white;">${pet.nombre}</h4>
         </div>
         <div class="col-2 align-self-center align-items-left">
-            <div class="d-flex flex-column align-items-end">
-                
+            <div class="d-flex flex-column align-items-end">     
             </div>
         </div>
     </div>
@@ -69,9 +68,10 @@ function getFavoritePets(){
 }
 //Mostrar mascota especifica
 function showDetails(id){
-    //Volver a recargar 
+    //Guardar el id de la mascota a mostrar detalles
     sessionStorage.removeItem("petDetails");
     sessionStorage.setItem("petDetails",id);
+    //Redirigir los detalles de la mascota a la que se hizo click
     window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
 }
 validateToken();
