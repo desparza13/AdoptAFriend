@@ -8,7 +8,7 @@ async function loadPets(url){
     return await response.json();
 }
 //! GET mascota nombre
-//* Carga una mascota en específico
+//* Carga una mascota en específico en base al id
 async function loadPet(url){
     let response = await fetch(url);
     if(response.status != 200) return [];
@@ -29,7 +29,7 @@ function loadNewPet(url,newPet,onSuccess,onError){
 }
 
 //!PUT mascota
-//* Actualizar mascota
+//* Actualizar mascota en base al id
 function updatePet(url,newPet,onSuccess,onError){
     let xhr = new XMLHttpRequest(); //Hace el request
     xhr.open('PUT',url)
@@ -59,7 +59,7 @@ async function borrarPet(url){
 //-------------------------------------------------------------------------------------
 //? RESCATISTAS
 //! GET rescatista/:id
-//* Obtener perfil rescatista especifico
+//* Obtener perfil rescatista especifico según el id
 async function loadRescatista(url){
     let response = await fetch(url);
     if(response.status != 200) return [];
@@ -87,7 +87,6 @@ function loadLoginRescatista(url,login,onSuccess,onError){
 
 //-------------------------------------------------------------------------------------
 //? SOLICITUDES
-
 //! GET solicitudes
 //* Carga todas las solicitudes 
 async function loadSolicitudes(url){
@@ -119,7 +118,7 @@ function loadNewSolicitud(url,login,onSuccess,onError){
 }
 
 //! DELETE solicitudes
-//* Crea nueva solicitud de adopción
+//* Elimina nueva solicitud de adopción
 async function borrarSolicitud(url){
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     console.log(loginUser);
@@ -130,8 +129,6 @@ async function borrarSolicitud(url){
             'x-auth':loginUser.token
         }
     })
-    //if(response.status != 200) return [];
-    //return await response.json();
 }
 // !PUT rescatista
 //* Actualizar el rescatista 

@@ -15,19 +15,15 @@ const adoptante = require('../routes/adoptante');
 const adminRescatista = require('../routes/admin_rescatista')
 const rescatista = require('../routes/rescatista');
 
-//Rutas directas a home y shopping cart
-// router.use(express.static('app/views'));
-// router.use('/home',express.static('./app/views/home.html'));
-// router.use('/shopping_cart',express.static('./app/views/shopping_cart.html'));
-
-// router.use('/admin/products',validateAdmin,adminProductRouter);
-
+//Mascotas
 router.use('/admin/pet',adminPet);
 router.use('/pet',pet);
 
+//Adoptante
 router.use('/admin/adoptante',adminAdoptante);
 router.use('/adoptante',adoptante);
 
+//Rescatista
 router.use('/admin/rescatista',adminRescatista);
 router.use('/rescatista',rescatista);
 
@@ -35,7 +31,7 @@ const path = require('path');
 
 router.get('/', function (req, res) {
     res.sendFile(path.join(__dirname,'..', 'views', 'home.html'));
-  });
+});
 
 
 function validateAdmin(req,res,next){   //Autenticador
