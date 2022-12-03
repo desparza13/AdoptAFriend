@@ -45,8 +45,9 @@ function petsList(pets){
         noResultsContainer.removeAttribute('hidden');//Si no hay ninguna mascota en adopción en la BD, mostrar aviso al usuario
     }else{
         noResultsContainer.setAttribute('hidden',"");//Si hay mascotas en la BD, esconder aviso al usuario
+        petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
+
     }
-    petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
 //Obtener las mascotas adoptadas y mostrarlas
 function loadAdopciones(){
