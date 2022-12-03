@@ -134,10 +134,15 @@ function saveEdit(){
         newAdoptante.perronalidadIdeal = perronalidad.value;
         //Actualizar la información del adoptante
         updateAdoptante(adoptantePostUrl+loginUser.id, newAdoptante, adoptante =>{
+            
             getIdeal();
         },(error)=>console.log(error));
     });
-    alert("Se editó correctamente tu mascota ideal")
+    $("#mascotaIdeal").modal({
+        backdrop: 'static',
+        keyboard: false,
+        show: true
+    });
 }
 
 validateToken();

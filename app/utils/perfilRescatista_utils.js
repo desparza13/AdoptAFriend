@@ -94,6 +94,11 @@ function saveEdit(){
         newRescatista.ciudad = ciudad.value;
         updateRescatista(rescatistaPostUrl+loginUser.id, newRescatista, rescatista =>{
             console.log(newRescatista);
+            $("#perfilR").modal({
+                backdrop: 'static',
+                keyboard: false,
+                show: true
+            });
             getData();
         },(error)=>console.log(error));
     });
