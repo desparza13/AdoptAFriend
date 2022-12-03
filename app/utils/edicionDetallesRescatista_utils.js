@@ -1,23 +1,26 @@
 "use strict";
+//Validar inicio de sesión válido del rescatista
 function validateToken(){
+    //Obtener inicio de sesión del Session Storage
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    if (loginUser==undefined){
+    if (loginUser==undefined){ //Si no se ha iniciado sesión redirigir a la página de error
         window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{
+    }else{ //Si hay sesión válida cargar la página con los detalles del rescatista
         loadPetDetails();
     }
 }
 //Cargar los detalles de una mascota
 function loadPetDetails(){
-    let pet = sessionStorage.getItem('petDetails');
-    console.log(pet);
-    loadPet('http://localhost:3000/pet'+'/'+pet).then(petDetail =>{
-        console.log(JSON.stringify(petDetail))
-        writePetDetails(petDetail);
+    //Obtener el id de la mascota de la cual se quieren mostrar los detalles
+    let idPet = sessionStorage.getItem('petDetails');
+    //Obtener lo detalles de la mascota con ese id de la base de datos
+    loadPet('http://localhost:3000/pet'+'/'+idPet).then(petDetail =>{
+        writePetDetails(petDetail); //Escribir los detalles de la mascota en el HTML
     });
 };
+//Escribir los detalles de la mascota en el HTML
 function writePetDetails(petDetail){
-    //Mascota
+    //Obtener elementos del HTML
     let titulo = document.getElementById("nombreTitulo");
     let nombre = document.getElementById("nombre");
     let ciudad = document.getElementById("ciudad");
@@ -27,6 +30,7 @@ function writePetDetails(petDetail){
     let talla = document.getElementById("size");
     let edad = document.getElementById("edad");
     let perronalidad = document.getElementById("perronalidad");
+    //Colocar los detalles de la mascota en los elementos de HTML correspondientes
     titulo.innerText = petDetail.nombre;
     nombre.value = petDetail.nombre;
     ciudad.value = petDetail.ciudad;
@@ -37,19 +41,24 @@ function writePetDetails(petDetail){
     edad.value = petDetail.edad;
     perronalidad.value = petDetail.perronalidad;
 }
+//Borrar mascota de la cual se muestran los detalles
 function erasePet(){
+    //Obtener el id de la mascota a eliminar
     let pet = sessionStorage.getItem('petDetails');
+    //Eliminar la mascota de la base de datos
     borrarPet('http://localhost:3000/admin/pet/'+pet, mascota =>{
-        console.log(mascota);
-        exito=true;
-        notifyMeSaveErase();
+        notifyMeSaveErase(); //Notificar que la mascota se eliminó exitosamente
     },(error)=> {
-        notifyMeErrorErase();});
+        notifyMeErrorErase();}); //Notificar que hubo un error al eliminar la mascota
+    //Redirigir a la pantalla principal
     window.location.href='/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
 }
+//Cancelar edición de la mascota
 function cancelEdit(){
+    //Volver a la pantalla principal
     window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
 }
+//Guardar cambios de la mascota
 function saveEdit(){
     //Obtener formulario
     let nombre = document.getElementById("nombre");
@@ -61,7 +70,7 @@ function saveEdit(){
     let edad = document.getElementById("edad");
     let perronalidad = document.getElementById("perronalidad");
     let pet = sessionStorage.getItem('petDetails');
-    console.log(pet);
+    //Crear nuevo objeto con los datos "nuevos" de la mascota a editar
     let newPet = new Object();
     newPet.nombre = nombre.value;
     newPet.ciudad = ciudad.value;
@@ -71,94 +80,81 @@ function saveEdit(){
     newPet.talla = talla.value;
     newPet.edad = edad.value;
     newPet.perronalidad = perronalidad.value;
-    updateAdoptante('http://localhost:3000/admin/pet/'+pet, newPet, pet =>{
-        console.log(pet);
+    //Actualizar mascota en la base de datos
+    updatePet('http://localhost:3000/admin/pet/'+pet, newPet, pet =>{
+        //Volver a la vista de detalles de esa mascota, dando por finalizada la edición
         window.location.href='/AdoptAFriend/app/views/Rescatista/detallesRescatista.html';
-        notifyMeSave();
+        notifyMeSave(); //Notificar que los cambios a la mascota fueron guardados exitosamente
     },(error)=>{
-        notifyMeError();
+        notifyMeError(); //Notificar que hubo un error al guardar los cambios a los detalles de la mascota
     });
 }
-validateToken();
-
+//Notificar error al guardar cambios de edición
 function notifyMeError() {
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
-        alert("This browser does not support desktop notification");
+        // Revisar si el navegador soporta notificaciones
+        alert("El navegador no soporta notificaciones en el escritorio");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        // Si se cuenta con permiso en el navegador
         const notification = new Notification('No se actualizó correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso de desplegar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se otorga el permiso mostrar notificación
             if (permission === "granted") {
                 const notification = new Notification("No se actualizó correctamente la mascota!");
-                // …
             }
         });
     }
 }
-
+//Notificar que se guardaron los cambios de edición
 function notifyMeSave() {
-    console.log("AAAA");
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
+        // Revisar si el navegador soporta notificaciones
         alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        // Si se cuenta con permiso en el navegador
         const notification = new Notification('Se actualizó correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso de desplegar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se otorga el permiso mostrar notificación
             if (permission === "granted") {
                 const notification = new Notification("Se actualizó correctamente la mascota!");
-                // …
             }
         });
     }
 }
-
+//Notificar error al borrar mascota
 function notifyMeErrorErase() {
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
+        // Revisar si el navegador soporta notificaciones
         alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        // Si se cuenta con permiso en el navegador
         const notification = new Notification('No se eliminó correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso de desplegar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se otorga el permiso mostrar notificación
             if (permission === "granted") {
                 const notification = new Notification("No se eliminó correctamente la mascota!");
-                // …
             }
         });
     }
 }
-
+//Notificar que se borró correctamente la mascota
 function notifyMeSaveErase() {
-    console.log("AAAA");
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
+        // Revisar si el navegador soporta notificaciones
         alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        // Si se cuenta con permiso en el navegador
         const notification = new Notification('Se eliminó correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso de desplegar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se otorga el permiso mostrar notificación
             if (permission === "granted") {
                 const notification = new Notification("Se eliminó correctamente la mascota!");
                 // …
@@ -166,3 +162,4 @@ function notifyMeSaveErase() {
         });
     }
 }
+validateToken();
