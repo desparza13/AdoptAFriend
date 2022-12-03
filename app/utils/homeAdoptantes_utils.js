@@ -37,7 +37,7 @@ function petToHTML(pet){
         <hr>
         <p class="card-text">${pet.genero}</p>
     </div>
-    <a id="mascotaClick" class="btn stretched-link"></a>
+    <a id="mascotaClick" onclick="showDetails('${pet._id}')"class="btn stretched-link"></a>
 </div>`
 }
 //Mostrar todas las mascotas de la lista y desplegar su card

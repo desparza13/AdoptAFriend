@@ -45,7 +45,6 @@ function solicitudToHTML(solicitud) {
             </div>
         </div>
     </div>
-    
     `
 }
 
@@ -62,7 +61,6 @@ function preloadSolicitudes(solicitudes) {
             loadSolicitudDetails(solicitudes[key]);
         }
     }
-
 }
 
 function loadSolicitudDetails(solicitud) {
@@ -76,7 +74,6 @@ function loadSolicitudDetails(solicitud) {
                 .then(adoptante => {
                     console.log(adoptante);
                     console.log(contactar);
-
                     contactar.innerHTML = botonContactar(pet.nombre, adoptante.correo);
                     writeAdoptanteSolicitud(adoptante, solicitud._id);
                 })
@@ -104,7 +101,6 @@ function writePetSolicitud(pet, idSolicitud) {
 function writeAdoptanteSolicitud(adoptante, idSolicitud) {
     let nombreAdoptante = document.getElementById("nombreAdoptante" + "/" + idSolicitud);
     nombreAdoptante.innerHTML = `<h5 >Busca ser adoptado por: ${adoptante.nombre}</h5>`
-
 }
 
 function botonAceptar(idSolicitud, idMascota, idAdoptante) {
@@ -113,7 +109,6 @@ function botonAceptar(idSolicitud, idMascota, idAdoptante) {
 
     `
 }
-
 
 function botonUpload(idSolicitud, idMascota, idAdoptante) {
     console.log("AA");
@@ -132,7 +127,6 @@ function botonUpload(idSolicitud, idMascota, idAdoptante) {
 function botonRechazar(idSolicitud) {
     return `                         
     <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="removeSolicitud('${idSolicitud}')">Aceptar</button>
-
     `
 }
 
@@ -152,37 +146,36 @@ function aceptarSolicitud(idSolicitud, idPet, idAdoptante) {
     borrarSolicitud(solicitudesUrl + idSolicitud, solicitud => {
         console.log("Solicitud eliminada");
         console.log(solicitud);
-    }, (error) => console.log(error));
-
-    loadPet(petUrl + idPet)
+        loadPet(petUrl + idPet)
         .then(pet => {
             actualizarMascota(pet);
+            loadAdoptante(adoptanteUrl + idAdoptante).then(adoptante => {
+                let newAdoptante = new Object();
+                newAdoptante.misAdopciones = adoptante.misAdopciones;
+                newAdoptante.misAdopciones.push(idPet);
+                updateAdoptante(adminAdoptanteUrl + idAdoptante, newAdoptante, adoptante => {
+                    console.log(newAdoptante);
+                    $("#adopcion").modal({
+                        backdrop: 'static',
+                        keyboard: false,
+                        show: true
+                    });
+                }, (error) => console.log(error));
+            });
         });
+    }, (error) => console.log(error));
+
+    
 
 
-    loadAdoptante(adoptanteUrl + idAdoptante).then(adoptante => {
-        let newAdoptante = new Object();
-        newAdoptante.misAdopciones = adoptante.misAdopciones;
-        newAdoptante.misAdopciones.push(idPet);
-        updateAdoptante(adminAdoptanteUrl + idAdoptante, newAdoptante, adoptante => {
-            console.log(newAdoptante);
+    
 
-        }, (error) => console.log(error));
-    });
-
-    $("#adopcion").modal({
-        backdrop: 'static',
-        keyboard: false,
-        show: true
-    });
-
+   
 
     console.log(idSolicitud);
     console.log(idPet);
     console.log(idAdoptante);
 }
-
-
 
 function recargar() {
     window.location.href = '/AdoptAFriend/app/views/Rescatista/solicitudesAdopcion.html'
