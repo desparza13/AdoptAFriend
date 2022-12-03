@@ -12,7 +12,7 @@ function validateToken(){
     //Si no hay sesión valida redirigir a la página de error
     if (loginUser==undefined){
         window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{ //Si hay sesión válida mostrar las mascotas favoritas
+    }else{ //Si hay sesión válida mostrar las mascotas adoptables
         getHomeFeed();
     }
 }
@@ -73,13 +73,15 @@ function filterPets(){
                     (pet.edad == edad || edad=='Todos') &&
                     (pet.perronalidad == perronalidad || perronalidad == 'Todos');
         });
-        
+        //Mostrar mascotas en el html
         petsList(filteredPets);
     });
 }
+//Obtener los filtros de la mascota ideal del adoptante que inició sesión
 function getIdealFilters(){
+    //Obtener quien es el adoptante conectado
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-    console.log(loginUser.id);
+    //Obtener los datos del adoptante a partir del id
     loadAdoptante(adoptanteUrl+loginUser.id).then(adoptante =>{
         let filters = new Object();
         filters.ciudad = adoptante.ciudad;
@@ -89,13 +91,14 @@ function getIdealFilters(){
         filters.talla = adoptante.tallaIdeal;
         filters.edad = adoptante.edadIdeal;
         filters.perronalidad = adoptante.perronalidadIdeal;
-        filterPetsIdeal(filters);
+        filterPetsIdeal(filters); //Filtrar con las características de la mascota ideal
     });
 }
+//Filtrar mascotas a aquellas que cumplan con las caracteristicas de la mascota ideal del adoptante
 function filterPetsIdeal(filters){
-    console.log(filters);
+    //Cargar todas las mascotas de la base de datos
     loadPets(petsUrl).then(pets =>{
-        console.log(pets)
+        //Filtrar las mascotas a aquellas que cumplan con las características que se recibieron
         let filteredPets = pets.filter(function (pet) {
             return  (pet.status == 'noAdoptado') &&
                     (pet.ciudad == filters.ciudad || filters.ciudad=='')&&
@@ -106,22 +109,28 @@ function filterPetsIdeal(filters){
                     (pet.edad == filters.edad) &&
                     (pet.perronalidad == filters.perronalidad);
         });
+        //Mostrar las mascotas en el HTML
         petsList(filteredPets);
     });
 }
+//Cargar y obtener el home feed (mascotas adoptables)
 function getHomeFeed(){
     //Mostrar todas las mascotas disponibles (noAdoptadas)
     loadPets(petsUrl).then(pets =>{
+        //Filtrar para dejar solo las mascotas adoptables
         let availablePets = pets.filter(function (pet) {
             return (pet.status == 'noAdoptado');
         });
+        //Mostrar las mascotas en el html
         petsList(availablePets);
     });
 }
 //Mostrar mascota especifica
 function showDetails(id){
+    //Guardar el id
     sessionStorage.removeItem("petDetails");
     sessionStorage.setItem("petDetails",id);
+    //Redirigir a mostrar los detalles de la mascota
     window.location.href='/AdoptAFriend/app/views/Adoptante/detallesAdoptante.html';
 }
 validateToken()

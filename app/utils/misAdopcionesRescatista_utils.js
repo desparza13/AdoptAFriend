@@ -5,14 +5,18 @@ let noResultsContainer = document.getElementById('noResultsAdopciones');
 const petsUrl = 'http://localhost:3000/pet';
 const adoptanteUrl = 'http://localhost:3000/adoptante/';
 
+//Validar que el rescatista haya iniciado sesión y tenga una sesión válida
 function validateToken(){
+    //Obtener inicio de sesión de SessionStorage
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    //Si no hay sesión valida redirigir a la página de error
     if (loginUser==undefined){
         window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{
+    }else{ //Si hay sesión válida mostrar las mascotas adoptadas
         loadAdopciones();
     }
 }
+//Convertir una mascota a su card de HTML con sus datos correspondientes
 function petToHTML(pet){
     return `<div class="card col-sm-6 col-md-4 col-lg-3 mascota">
     <div class="row" id="petBanner">
@@ -35,11 +39,12 @@ function petToHTML(pet){
     </div>
 </div>`
 }
+//Mostrar todas las mascotas de la lista y desplegar su card
 function petsList(pets){
     if(pets.length==0){
-        noResultsContainer.removeAttribute('hidden');
+        noResultsContainer.removeAttribute('hidden');//Si no hay ninguna mascota en adopción en la BD, mostrar aviso al usuario
     }else{
-        noResultsContainer.setAttribute('hidden',"");
+        noResultsContainer.setAttribute('hidden',"");//Si hay mascotas en la BD, esconder aviso al usuario
     }
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
