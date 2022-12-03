@@ -48,15 +48,17 @@ function petsList(pets){
     }
     petsContainer.innerHTML = '<div class="row">' + pets.map(petToHTML).join("\n") + '\n</div>';
 }
+//Obtener las mascotas adoptadas y mostrarlas
 function loadAdopciones(){
-    //Mostrar todas las mascotas disponibles (noAdoptadas)
+    //Mostrar todas las mascotas
     loadPets(petsUrl).then(pets =>{
         let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
-        console.log(loginUser.id);
+        //Filtrar las mascotas a aquellas ya adoptadas que hayan sido publicadas por el rescatista que inició sesion
         let availablePets = pets.filter(function (pet) {
             return (pet.status == 'adoptado') &&
                     (pet.idRescatista == loginUser.id);
         });
+        //Mostrar las mascotas en el html
         petsList(availablePets);
     });
 }

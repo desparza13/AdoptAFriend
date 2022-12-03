@@ -5,10 +5,12 @@ const adoptantePostUrl = 'http://localhost:3000/admin/adoptante/';
 
 //* Validar que exista un inicio de sesió de usuario
 function validateToken(){
+    //Obtener inicio de sesión de SessionStorage
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
+    //Si no hay sesión valida redirigir a la página de error
     if (loginUser==undefined){
         window.location.href="/AdoptAFriend/app/views/error.html";
-    }else{
+    }else{ //Si hay sesión válida mostrar las mascotas adoptadas
         getData();
     }
 }
