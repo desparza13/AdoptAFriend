@@ -1,7 +1,8 @@
 "use strict";
 
-
+//Subir mascota
 function uploadPet() {
+    //Obtener elemento del HTML (modales en rescatistas)
     let nombre = document.getElementById('nombreToAdd').value;
     let tipo = document.getElementById('tipoToAdd').value;
     let petImg = document.getElementById('imagenToAdd').value;
@@ -11,6 +12,7 @@ function uploadPet() {
     let talla = document.getElementById('tallaToAdd').value;
     let perronalidad = document.getElementById('perronalidadToAdd').value;
     let ciudad = document.getElementById('ciudadToAdd').value;
+    //Crear nuevo objeto y asignarle los valores que puso el rescatista en el modal
     let newPet = new Object();
     newPet.nombre = nombre;
     newPet.tipo = tipo;
@@ -22,62 +24,52 @@ function uploadPet() {
     newPet.perronalidad = perronalidad;
     newPet.status = 'noAdoptado';
     newPet.ciudad = ciudad;
-
+    //Obtener qué rescatista está subiendo la mascota
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     newPet.idRescatista = loginUser.id; //Modificar cuando este autentificado
-
-    console.log(JSON.stringify(newPet))
+    //Subir la mascota a la base de datos
     loadNewPet('http://localhost:3000/admin/pet', newPet, pets => {
-        console.log(newPet);
-        notifyMeSaveEdit();
+        notifyMeSaveEdit(); //Enviar notificación de que se añadió exitosamente la mascota
     }, (error) => {
-        notifyMeErrorEdit();
+        notifyMeErrorEdit(); //Enviar notificación de que hubo un error al añadir la mascota
     });
-
+    //Enviar a home Rescatista
     window.location.href = '/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
-
-
-
 }
 
+//Enviar notificación de error al postear la mascota
 function notifyMeErrorEdit() {
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
-        alert("This browser does not support desktop notification");
+        // Revisar que el navegador soporte notificaciones
+        alert("El navegador no soporta notificaciones");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        //Si hay permisos de notificación en el navegador enviar notificación
         const notification = new Notification('No se creo correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso para enviar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se da permiso
             if (permission === "granted") {
                 const notification = new Notification("No se creo correctamente la mascota!");
-                // …
             }
         });
     }
 }
 
+//Enviar notificación de exito al postear la mascota
 function notifyMeSaveEdit() {
-    console.log("AAAA");
     if (!("Notification" in window)) {
-        // Check if the browser supports notifications
+        // Revisar que el navegador soporte notificaciones
         alert("This browser does not support desktop notification");
     } else if (Notification.permission === "granted") {
-        // Check whether notification permissions have already been granted;
-        // if so, create a notification
-
+        //Si hay permisos de notificación en el navegador enviar notificación
         const notification = new Notification('Se creo correctamente la mascota!'); // …
     } else if (Notification.permission !== "denied") {
-        // We need to ask the user for permission
+        // Pedir permiso para enviar notificaciones
         Notification.requestPermission().then((permission) => {
-            // If the user accepts, let's create a notification
+            // Si se da permiso
             if (permission === "granted") {
                 const notification = new Notification("Se creo correctamente la mascota!");
-                // …
             }
         });
     }
