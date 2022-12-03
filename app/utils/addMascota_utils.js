@@ -28,49 +28,12 @@ function uploadPet() {
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     newPet.idRescatista = loginUser.id; //Modificar cuando este autentificado
     //Subir la mascota a la base de datos
-    loadNewPet('http://localhost:3000/admin/pet', newPet, pets => {
-        notifyMeSaveEdit(); //Enviar notificación de que se añadió exitosamente la mascota
+    loadNewPet('http://localhost:3000/admin/pet', newPet, pet => {
+        console.log(pet);
     }, (error) => {
-        notifyMeErrorEdit(); //Enviar notificación de que hubo un error al añadir la mascota
+        window.alert('Falta por llenar algun campo de la mascota');
     });
     //Enviar a home Rescatista
-    window.location.href = '/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
+    // window.location.href = '/AdoptAFriend/app/views/Rescatista/homeRescatista.html';
 }
 
-//Enviar notificación de error al postear la mascota
-function notifyMeErrorEdit() {
-    if (!("Notification" in window)) {
-        // Revisar que el navegador soporte notificaciones
-        alert("El navegador no soporta notificaciones");
-    } else if (Notification.permission === "granted") {
-        //Si hay permisos de notificación en el navegador enviar notificación
-        const notification = new Notification('No se creo correctamente la mascota!'); // …
-    } else if (Notification.permission !== "denied") {
-        // Pedir permiso para enviar notificaciones
-        Notification.requestPermission().then((permission) => {
-            // Si se da permiso
-            if (permission === "granted") {
-                const notification = new Notification("No se creo correctamente la mascota!");
-            }
-        });
-    }
-}
-
-//Enviar notificación de exito al postear la mascota
-function notifyMeSaveEdit() {
-    if (!("Notification" in window)) {
-        // Revisar que el navegador soporte notificaciones
-        alert("This browser does not support desktop notification");
-    } else if (Notification.permission === "granted") {
-        //Si hay permisos de notificación en el navegador enviar notificación
-        const notification = new Notification('Se creo correctamente la mascota!'); // …
-    } else if (Notification.permission !== "denied") {
-        // Pedir permiso para enviar notificaciones
-        Notification.requestPermission().then((permission) => {
-            // Si se da permiso
-            if (permission === "granted") {
-                const notification = new Notification("Se creo correctamente la mascota!");
-            }
-        });
-    }
-}

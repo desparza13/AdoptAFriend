@@ -23,17 +23,27 @@
         max-height: 200px;
         width: 200px;
     }
+
     #noResults {
-            margin: auto;
-            width: 50%;
-            padding: 10px;
-            text-align: center;
-            color:#1580cd
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+        align-items: center;
+        color: #1580cd
+    }
+
+    #lupaR {
+        margin: auto;
+        width: 70%;
+        padding-left: 5%;
     }
 </style>
 
 <head>
     <title>Home rescatista</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3659/3659348.png">
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -83,11 +93,19 @@
                 <h1 style="color:white;">Tus mascotas en adopción</h1>
             </div>
         </div>
-        <div class="container" id="noResults">
-            <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-            <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"  background="transparent"  speed="1"  style="width: 400px; height: 400px;"  loop  autoplay></lottie-player>
+
+        <div class="container " id="noResults">
+            <div class="container" id="lupaR">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"
+                    background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay>
+                </lottie-player>
+            </div>
+
             <h1 id="textNoResults">No tienes mascotas en adopción</h1>
         </div>
+
+
         <div class="container" id="cardsSection">
 
         </div>
@@ -105,16 +123,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form >
                         <div class="row">
                             <div class="col-5">
-                            
+
                                 <div class="form-group">
                                     <label for="nombreToAdd">Nombre</label>
                                     <input type="text" name="nombre" id="nombreToAdd" class="form-control"
-                                    placeholder="Nombre(s)" aria-describedby="helpId" required>
+                                        placeholder="Nombre(s)" aria-describedby="helpId" required>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="tipoToAdd">Tipo de mascota</label>
                                     <select class="form-control" name="tipo" id="tipoToAdd" required>
@@ -122,13 +140,16 @@
                                         <option>Gato</option>
                                     </select>
                                 </div>
-                                
+
                             </div>
                             <div class="col-3">
-                                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
-                                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_il43ezyd.json"  background="transparent"  speed="1"  style="width: 200px; height: 200px;"  loop  autoplay></lottie-player>
+                                <script
+                                    src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_il43ezyd.json"
+                                    background="transparent" speed="1" style="width: 200px; height: 200px;" loop
+                                    autoplay></lottie-player>
                             </div>
-                        </div>  
+                        </div>
                         <div class="form-group">
                             <label for="razaToAdd">Raza</label>
                             <select class="form-control" name="raza" id="razaToAdd" required>
@@ -180,19 +201,43 @@
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Ciudad o municipio:</label>
-                            <input type="text"
-                            class="form-control" name="ciudad" id="ciudadToAdd" aria-describedby="helpId" placeholder="Ejemplo: Guadalajara">
+                            <input type="text" class="form-control" name="ciudad" id="ciudadToAdd"
+                                aria-describedby="helpId" placeholder="Ejemplo: Guadalajara" required>
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Link a imagen:</label>
-                            <input type="text"
-                            class="form-control" name="img" id="imagenToAdd" aria-describedby="helpId" placeholder="Ingrese un link">
+                            <input type="text" class="form-control" name="img" id="imagenToAdd"
+                                aria-describedby="helpId" placeholder="Ingrese un link" required>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"
+                                onclick="uploadPet()">Save</button>
                         </div>
                     </form>
                 </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- Modal -->
+    <div class="modal fade" id="modelId" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Mascota</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                </div>
+                <div class="modal-body">
+                    Se añadió la mascota
+                </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="uploadPet()">Save</button>
+                    <button type="button" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </div>
@@ -201,17 +246,17 @@
     <script src="/AdoptAFriend/app/controllers/utils.js"></script>
     <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
     <script src="/AdoptAFriend/app/utils/homeRescatista_utils.js"></script>
-    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>   
+    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
         integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
-    </script>
+        </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
-    </script>
+        </script>
 </body>
 
 </html>

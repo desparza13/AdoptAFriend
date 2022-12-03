@@ -1,60 +1,89 @@
 <!doctype html>
 <html lang="en">
-    <style>
-        body{
-            height:100%;
-        }
-        #title{
-            background-color: #1580cd;
-            height:100px;
-        }
-        #petBanner{
-            background-color: #669ec6;
-        }
-        .mascota{
-            margin-top: 30px;
-            margin-bottom: 10px;
-        }
-        .petImg{
-            max-height: 200px;
-            width: 150px;
-    
-        }
-        .abs-center {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 30vh;
-        }
-        .btnCentrado{
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin:10px;
-        }
-        .margenSuperior{
-            margin-top: 50px;
-        }
-    </style>
-  <head>
+<style>
+    body {
+        height: 100%;
+    }
+
+    #title {
+        background-color: #1580cd;
+        height: 100px;
+    }
+
+    #petBanner {
+        background-color: #669ec6;
+    }
+
+    .mascota {
+        margin-top: 30px;
+        margin-bottom: 10px;
+    }
+
+    .petImg {
+        max-height: 200px;
+        width: 200px;
+
+    }
+
+    .abs-center {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 30vh;
+    }
+
+    .btnCentrado {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 10px;
+    }
+
+    .margenSuperior {
+        margin-top: 50px;
+    }
+
+    #noResults {
+        margin: auto;
+        width: 50%;
+        padding: 10px;
+        text-align: center;
+        align-items: center;
+        color: #1580cd
+    }
+
+    #lupaR {
+        margin: auto;
+        width: 70%;
+        padding-left: 5%;
+    }
+</style>
+
+<head>
     <title>Solicitudes de adopción</title>
+    <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/3659/3659348.png">
+
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css" integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">  
-  </head>
-  <!--Navigation bar para rescatista-->
-  <nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #669ec6;">
-    <a class="navbar-brand" href="./homeRescatista.html"> <i class="fa fa-paw" aria-hidden="true"></i> Adopt a Friend</a>
-    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId" aria-controls="collapsibleNavId"
-        aria-expanded="false" aria-label="Toggle navigation"></button>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.1.1/css/all.css"
+        integrity="sha384-O8whS3fhG2OnA5Kas0Y9l3cfpmYjapjI0E4theH4iuMD+pLhbf6JI0jIMfYcK3yZ" crossorigin="anonymous">
+</head>
+<!--Navigation bar para rescatista-->
+<nav class="navbar navbar-expand-sm navbar-dark" style="background-color: #669ec6;">
+    <a class="navbar-brand" href="./homeRescatista.html"> <i class="fa fa-paw" aria-hidden="true"></i> Adopt a
+        Friend</a>
+    <button class="navbar-toggler d-lg-none" type="button" data-toggle="collapse" data-target="#collapsibleNavId"
+        aria-controls="collapsibleNavId" aria-expanded="false" aria-label="Toggle navigation"></button>
     </div>
-    <div class="collapse navbar-collapse" id="collapsibleNavId" >
+    <div class="collapse navbar-collapse" id="collapsibleNavId">
         <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
             <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Mi cuenta</a>
+                <a class="nav-link dropdown-toggle" href="#" id="dropdownId" data-toggle="dropdown" aria-haspopup="true"
+                    aria-expanded="false">Mi cuenta</a>
                 <div class="dropdown-menu" aria-labelledby="dropdownId">
                     <a class="dropdown-item" href="./perfilRescatista.html">Mi perfil</a>
                     <a class="dropdown-item" href="./adopcionesRescatista.html">Mis adopciones</a>
@@ -75,24 +104,34 @@
         </ul>
     </div>
 </nav>
-  <body>
+
+<body>
     <div class=" col-12" id="petsSection">
         <div class="row " id="title">
             <div class="col-6 align-self-center">
                 <h1 style="color:white;">Solicitudes de adopción</h1>
             </div>
         </div>
+        <div class="container " id="noResults">
+            <div class="container" id="lupaR">
+                <script src="https://unpkg.com/@lottiefiles/lottie-player@latest/dist/lottie-player.js"></script>
+                <lottie-player src="https://assets7.lottiefiles.com/packages/lf20_tmsiddoc.json"
+                    background="transparent" speed="1" style="width: 400px; height: 400px;" loop autoplay>
+                </lottie-player>
+            </div>
+
+            <h1 id="textNoResults">No tienes solicitudes de adopción</h1>
+        </div>
+        <div class="container">
+            <div class="mt-4 align-center" id="Solicitudes">
+            </div>
+        </div>
     </div>
     <hr>
 
-    <div class="container" >
-        <div class="row mt-4 align-center" id="Solicitudes">
-
-        </div>
-    </div>
 
 
-            <!-- <div class="col-sm-6 col-md-4 col-lg-3  align-center">
+    <!-- <div class="col-sm-6 col-md-4 col-lg-3  align-center">
                 <div class="abs-center">
                 <img class="card-img-top petImg" src="https://www.fundacion-affinity.org/sites/default/files/los-10-sonidos-principales-del-perro.jpg" alt="">
                 </div>
@@ -113,8 +152,8 @@
                     <button type="button" class="btn btn-lg btn-danger btnCentrado"><i class="fa fa-times" aria-hidden="true"></i> Rechazar</button><br>
                 </div>
             </div> -->
-        <!-- </div> -->
-        
+    <!-- </div> -->
+
     <!-- Modal Add Pet -->
     <div class="modal fade" id="addPet" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog modal-lg" role="document">
@@ -126,16 +165,16 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form action="">
                         <div class="row">
                             <div class="col-5">
-                            
+
                                 <div class="form-group">
                                     <label for="nombreToAdd">Nombre</label>
                                     <input type="text" name="nombre" id="nombreToAdd" class="form-control"
-                                    placeholder="Nombre(s)" aria-describedby="helpId" required>
+                                        placeholder="Nombre(s)" aria-describedby="helpId" required>
                                 </div>
-                                
+
                                 <div class="form-group">
                                     <label for="tipoToAdd">Tipo de mascota</label>
                                     <select class="form-control" name="tipo" id="tipoToAdd" required>
@@ -143,9 +182,9 @@
                                         <option>Gato</option>
                                     </select>
                                 </div>
-                                
+
                             </div>
-                        </div>  
+                        </div>
                         <div class="form-group">
                             <label for="razaToAdd">Raza</label>
                             <select class="form-control" name="raza" id="razaToAdd" required>
@@ -197,32 +236,36 @@
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Ciudad o municipio:</label>
-                            <input type="text"
-                            class="form-control" name="ciudad" id="ciudadToAdd" aria-describedby="helpId" placeholder="Ejemplo: Guadalajara">
+                            <input type="text" class="form-control" name="ciudad" id="ciudadToAdd"
+                                aria-describedby="helpId" placeholder="Ejemplo: Guadalajara">
                         </div>
                         <div class="form-group">
                             <label for="ciudad">Link a imagen:</label>
-                            <input type="text"
-                            class="form-control" name="img" id="imagenToAdd" aria-describedby="helpId" placeholder="Ingrese un link">
+                            <input type="text" class="form-control" name="img" id="imagenToAdd"
+                                aria-describedby="helpId" placeholder="Ingrese un link">
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary"
+                                onsubmit="uploadPet()">Save</button>
                         </div>
                     </form>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" data-dismiss="modal" onclick="uploadPet()">Save</button>
-                </div>
+                
+                
             </div>
         </div>
     </div>
 
-    
+
     <!-- Modal aceptar-->
     <div class="modal fade" id="adoptar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Solicitud</h5>
-                        
+
                 </div>
                 <div class="modal-body">
                     Estás a un paso de encontrarle hogas a un peliduto.
@@ -233,15 +276,16 @@
                     <div id="aceptar">
 
                     </div>
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="recargar()">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
 
-    
+
     <!-- Modal rechazar-->
-    <div data-backdrop="static" data-keyboard="false" class="modal fade" id="rechazar" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
+    <div data-backdrop="static" data-keyboard="false" class="modal fade" id="rechazar" tabindex="-1" role="dialog"
+        aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -251,26 +295,50 @@
                     Se rechazó correctamente la solicitud de la mascota!
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="recargar()">Close</button>
-                    
+                    <button type="button" class="btn btn-primary" data-dismiss="modal"
+                        onclick="recargar()">Close</button>
+
                 </div>
             </div>
         </div>
     </div>
 
+
+    <!-- Modal pregunta de rechazo-->
+    <div class="modal fade" id="rechazarP" tabindex="-1" role="dialog" aria-labelledby="modelTitleId"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Solicitud</h5>
+
+                </div>
+                <div class="modal-body">
+                    ¿Estás seguro de que quieres rechazar la solitud de adopción?.
+                </div>
+                <div class="modal-footer">
+                    <div id="aceptarRechazar">
+
+                    </div>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Modal adopcion-->
     <div class="modal fade" id="adopcion" tabindex="-1" role="dialog" aria-labelledby="modelTitleId" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title">Adopción realizada</h5>
-                        
+
                 </div>
                 <div class="modal-body">
                     Gracias por encontrarle hogar a un peludito!
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="recargar()">Close</button>
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                        onclick="recargar()">Close</button>
                 </div>
             </div>
         </div>
@@ -278,10 +346,17 @@
     <!-- Optional JavaScript -->
     <script src="/AdoptAFriend/app/controllers/ajax_handler.js"></script>
     <script src="/AdoptAFriend/app/utils/solicitudes_utils.js"></script>
-    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>   
+    <script src="/AdoptAFriend/app/utils/addMascota_utils.js"></script>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-  </body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+</body>
+
 </html>
