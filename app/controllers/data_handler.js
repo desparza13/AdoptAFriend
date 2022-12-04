@@ -31,7 +31,7 @@ function loginR(req, res) {
         })
         //No hay un rescatista con esa cuenta
         .catch(err => {
-            res.status(403);            
+            res.status(404);            
             res.set('Content-Type', 'text/plain; charset=utf-8');
             res.send(`Wrong email or password`);
         });
@@ -65,7 +65,7 @@ function loginA(req, res) {
         })
         //No hay un rescatista con esa cuenta
         .catch(err => {
-            res.status(403);            
+            res.status(404);            
             res.set('Content-Type', 'text/plain; charset=utf-8');
             res.send(`Wrong email or password`);
         });
@@ -129,7 +129,7 @@ function getRescatistaById(req, res) {
             res.status(200).json(rescatista) //Enviar el rescatista
 
         }else{
-            res.status(400).send(`No hay rescatista con id ${id}`);
+            res.status(404).send(`No hay rescatista con id ${id}`);
         }
     })
     .catch(err=> res.status(400).send(`No hay rescatista con id ${id}`))
