@@ -26,14 +26,13 @@ function loginR(req, res) {
             } else { //Si el token está incorrecto significa que no se pudo iniciar sesión
                 res.status(403);            
                 res.set('Content-Type', 'text/plain; charset=utf-8');
-                res.send(`Wrong email or password`);a
+                res.send(`Wrong email or password`);
             }
         })
         //No hay un rescatista con esa cuenta
         .catch(err => {
-            res.status(404);            
             res.set('Content-Type', 'text/plain; charset=utf-8');
-            res.send(`Wrong email or password`);
+            res.status(404).send(`Wrong email or password`);
         });
 }
 
