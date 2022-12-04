@@ -4,7 +4,7 @@ const router = express.Router();
 const dataHandler = require('./../controllers/data_handler');
 const tokenUtils = require('../utils/token_utils');
 
-router.use('/post/solicitud',tokenUtils.verifyTokenA);
+router.use('/post',tokenUtils.verifyTokenA);
 
 router.use('/get',tokenUtils.verifyTokenR);
 
@@ -16,7 +16,7 @@ router.route('/get')
 
 //POST /post/solicitud
 
-router.route('/post/solicitud')
+router.route('/post')
   .post((req, res)=>{
     dataHandler.createSolicitud(req,res);
   });

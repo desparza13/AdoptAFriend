@@ -106,7 +106,7 @@ function getPetById(req, res) {
             res.status(200).json(pet) //Enviar la mascota
         }
         else{ //Ninguna mascota en la BD corresponde a ese id
-            res.status(400).send('No hay mascota con ese id');
+            res.status(404).send('No hay mascota con ese id');
         }
     })
     .catch(err=> res.status(400).send(`No hay mascota con id ${id}`))

@@ -4,7 +4,7 @@ const adoptame = document.getElementById('correo');
 const cuerpo = document.getElementById('cuerpo')
 const petsUrl = 'http://localhost:3000/pet'
 const rescatistaUrl = 'http://localhost:3000/rescatista/';
-const postSolicitudUrl = 'http://localhost:3000/solicitud/post/solicitud'
+const postSolicitudUrl = 'http://localhost:3000/solicitud/post'
 const adoptanteUrl = 'http://localhost:3000/adoptante/'
 
 //Validar que el usuario haya iniciado sesión y tenga un token válido
@@ -105,7 +105,6 @@ function perronalidadDetails(perronalidad){
 }
 //Subir a la base de datos la solicitud de adopción
 function uploadSolicitud(){
-    notifyMeSave(); //Enviar notificación
     //obtener información necesaria para crear la solicitud desde Session Storage
     let loginUser = JSON.parse(sessionStorage.getItem('loginUser'));
     let idPet = sessionStorage.getItem('petDetails');
@@ -121,7 +120,6 @@ function uploadSolicitud(){
             loadNewSolicitud(postSolicitudUrl,solicitud,solicitud=>{
                 console.log(solicitud);
             },(err)=>{
-                // notifyMeError();
                 console.log(err);
             });
         })
@@ -188,41 +186,6 @@ function adoptameF(){
                 })
         })
 }
-//Enviar notificación de error
-function notifyMeError() {
-    if (!("Notification" in window)) {
-        //Si el navegador permite notificaciones
-        alert("El navegador no permite notificaciones");
-    } else if (Notification.permission === "granted") {
-        // Si hay permiso de notificaciones
-        const notification = new Notification('No se envió correctamente la solicitud!'); // …
-    } else if (Notification.permission !== "denied") { //Si no hay permiso de notificaciones
-        //Pedir permiso
-        Notification.requestPermission().then((permission) => {
-            // si acepta crear notificaciones
-            if (permission === "granted") {
-                const notification = new Notification("No se envió correctamente la solicitud!");
-            }
-        });
-    }
-}
-//Enviar notificación de éxito
-function notifyMeSave() {
-    if (!("Notification" in window)) {
-        //Si el navegador permite notificaciones
-        alert("El navegador no permite notificaciones");
-    } else if (Notification.permission === "granted") {
-        // Si hay permiso de notificaciones 
-        const notification = new Notification('Se mando correctamente la solicitud!'); // …
-    } else if (Notification.permission !== "denied") { //Si no hay permiso de notificaciones
-        //Pedir permiso
-        Notification.requestPermission().then((permission) => {
-            // si acepta crear notificaciones
-            if (permission === "granted") {
-                const notification = new Notification("Se mando correctamente la solicitud!");
-            }
-        });
-    }
-}
+
 adoptameF();
 
