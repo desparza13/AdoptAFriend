@@ -205,7 +205,7 @@ function updateAdoptante(req, res) {
     }
     Adoptante.findOneAndUpdate({ _id: `${id}` }, newAdoptante, { new : true })
     .then(adoptante => {
-        res.status(200).send(adoptante);
+        res.status(200);
     });
 }
 //Actualizar rescatista
